@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SessionPlayerViewModel>
+﻿@model Session
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,8 +37,8 @@
     </div>
     <div class="control-panel">
         <div class="control-section info-section">
-            <div class="session-name">Session Name</div>
-            <div class="session-id">3402921</div>
+            <div class="session-name">@Model.ProjectName</div>
+            <div class="session-id">586347536D</div>
         </div>
         <div class="control-section action-section">
             <div class="section-description">Message to selected players</div>

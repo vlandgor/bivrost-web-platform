@@ -10,7 +10,7 @@ else
         <div class="menu-icon"></div>
         @foreach (var project in Model)
         {
-            <button id="toggleButton" class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
+            <button class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
         }
         <button class="add-project-button">+</button>
         <button class="user-button">VH</button>
@@ -18,9 +18,9 @@ else
     
     <div class="hidden-menu" id="projectInfoPanel" style="display: none;">
         <div class="project-name">
-            <text id="projectInfo">Project Name</text>
+            <text id="projectName">Project Name</text>
         </div>
-        <a asp-action="Index" asp-controller="Session" asp-route-projectID="">
+        <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-projectName="">
             <div class="menu-item">Session</div>
         </a>
         <a asp-action="" asp-controller="" asp-route-projectID="">
@@ -42,15 +42,17 @@ else
 
 $(document).ready(function() {
         // When the button is clicked
-        $("#toggleButton").click(function() {
+        $(".project-button").click(function() {
             // Toggle the visibility of the hidden menu
             $("#projectInfoPanel").toggle();
             
             // Update the text content of the hidden menu with the project name
-            var projectName = $(this).data('fullname');
+            var projectFullName = $(this).data('fullname');
+            var projectShortName = $(this).data('shortname')
             var projectId = $(this).data('project-id');
-            $("#projectInfo").text(projectName);
-            sessionLink.setAttribute("asp-route-projectId", projectId);
+            $("#projectName").text(projectFullName);
+            
+            $("#sessionLink").attr('href', '/Session?projectId=' + projectId);
         });
     });
 </script>
