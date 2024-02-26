@@ -6,40 +6,60 @@
 
 <div class="session-page">
     <div class="players-panel">
+        <div class="top-control">
+            <div class="top-control-item active-underline">Students</div>
+            <div class="top-control-item">Instructors</div>
+            <div style="flex: 1"></div>
+            <div class="add-participant">+  Add Student</div>
+        </div>
         <table>
             <thead>
             <tr>
-                <th class="empty-th"></th>
+                <th class="center-element" style="width: 42px">*</th>
                 <th class="left-element">NAME</th>
                 <th class="center-element">STATUS</th>
                 <th class="center-element">TIME</th>
                 <th class="center-element">PROGRESS</th>
                 <th class="center-element">OPTIONS</th>
-                <th class="empty-th"></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td class="empty-td"></td>
+                <td class="center-element"></td>
                 <td class="left-element">Student Name</td>
                 <td class="center-element status">Connected</td>
                 <td class="center-element">28 minutes</td>
                 <td class="center-element">15%</td>
                 <td class="center-element more">more</td>
-                <td class="empty-td"></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="control-panel">
-        <div class="control-section session-info">
+        <div class="control-section info-section">
             <div class="session-name">Session Name</div>
             <div class="session-id">3402921</div>
         </div>
-        <div class="control-section session-info">
-            <div class="session-name">Add new player to the session</div>
-            <div class="session-id">3402921</div>
+        <div class="control-section action-section">
+            <div class="section-description">Message to selected players</div>
+            <textarea class="send-message-textarea"></textarea>
+            <div class="button-container">
+                <button class="action-button">Send</button>
+            </div>
         </div>
-        <div></div>
+        <div class="control-section action-section">
+            <div class="section-description">Select action</div>
+            <div class="button-container">
+                <button class="action-button">Action</button>
+            </div>
+        </div>
+        <div class="control-section action-section" style="flex: 1">
+            
+        </div>
+        <div class="control-section action-section">
+            <div class="button-container">
+                <button class="finish-session-button">Finish session</button>
+            </div>
+        </div>
     </div>
 </div>
