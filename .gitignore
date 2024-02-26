@@ -1,0 +1,68 @@
+# Visual Studio 2015/2017/2019 cache/options directory
+.vs/
+# ReSharper folder
+_ReSharper*/
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.pdb
+*.dll
+*.svclog
+*.pml
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.log
+*.vspscc
+*.docstates
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+# Test files
+*.testsettings
+# BizTalk build output
+*.btp.cs
+# OpenCover UI analysis results
+OpenCover/
+# TeamCity coverage report
+_TeamCity*
+# DotCover code coverage results
+*.dotCover
+# TFS 2012 Local Workspace
+$tf/
+# Guidance Automation Toolkit
+*.gpState
+# Exception shield configuration file
+*.esConfig
+# ReSharper 9.x / 10.x / 2015.x / 2016.x / 2017.x / 2018.x / 2019.x
+*.crproj
+# CodeRush
+.cr/
+# IntelliTrace
+*.iTrace
+# UIAutomation Test Projects
+*.testsettings
+# Microsoft Fakes
+FakesAssemblies/
+# Visual Studio 2022
+.vsconfig

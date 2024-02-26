@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Project>
+
+@if (Model == null)
+{
+    <p>The model is null.</p>
+}
+else
+{
+    <div class="side-menu">
+        <div class="menu-icon"></div>
+        @foreach (var project in Model)
+        {
+            <button id="toggleButton" class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
+        }
+        <button class="add-project-button">+</button>
+        <button class="user-button">VH</button>
+    </div>
+    
+    <div class="hidden-menu" id="projectInfoPanel" style="display: none;">
+        <div class="project-name">
+            <text id="projectInfo">Project Name</text>
+        </div>
+        <a asp-action="Index" asp-controller="Session" asp-route-projectID="">
+            <div class="menu-item">Session</div>
+        </a>
+        <a asp-action="" asp-controller="" asp-route-projectID="">
+            <div class="menu-item">Analytics</div>
+        </a>
+        <a asp-action="" asp-controller="" asp-route-projectID="">
+            <div class="menu-item">History</div>
+        </a>
+        <a asp-action="" asp-controller="" asp-route-projectID="">
+            <div class="menu-item">Users</div>
+        </a>
+        <a asp-action="" asp-controller="" asp-route-projectID="">
+            <div class="menu-item">Settings</div>
+        </a>
+    </div>
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+$(document).ready(function() {
+        // When the button is clicked
+        $("#toggleButton").click(function() {
+            // Toggle the visibility of the hidden menu
+            $("#projectInfoPanel").toggle();
+            
+            // Update the text content of the hidden menu with the project name
+            var projectName = $(this).data('fullname');
+            var projectId = $(this).data('project-id');
+            $("#projectInfo").text(projectName);
+            sessionLink.setAttribute("asp-route-projectId", projectId);
+        });
+    });
+</script>
+}

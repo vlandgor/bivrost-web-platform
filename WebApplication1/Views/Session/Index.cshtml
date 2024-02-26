@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SessionPlayerViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="session-page">
+    <div class="players-panel">
+        <table>
+            <thead>
+            <tr>
+                <th class="empty-th"></th>
+                <th class="left-element">NAME</th>
+                <th class="center-element">STATUS</th>
+                <th class="center-element">TIME</th>
+                <th class="center-element">PROGRESS</th>
+                <th class="center-element">OPTIONS</th>
+                <th class="empty-th"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="empty-td"></td>
+                <td class="left-element">Student Name</td>
+                <td class="center-element status">Connected</td>
+                <td class="center-element">28 minutes</td>
+                <td class="center-element">15%</td>
+                <td class="center-element more">more</td>
+                <td class="empty-td"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="control-panel">
+        <div class="control-section session-info">
+            <div class="session-name">Session Name</div>
+            <div class="session-id">3402921</div>
+        </div>
+        <div class="control-section session-info">
+            <div class="session-name">Add new player to the session</div>
+            <div class="session-id">3402921</div>
+        </div>
+        <div></div>
+    </div>
+</div>
