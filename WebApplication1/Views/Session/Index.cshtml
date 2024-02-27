@@ -2,6 +2,8 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    string statusClass = "";
 }
 
 <div class="session-page">
@@ -24,14 +26,29 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td class="center-element"></td>
-                <td class="left-element">Student Name</td>
-                <td class="center-element status">Connected</td>
-                <td class="center-element">28 minutes</td>
-                <td class="center-element">15%</td>
-                <td class="center-element more">more</td>
-            </tr>
+            @foreach (var student in Model.Students)
+            {
+                statusClass = "";
+                switch (student.ConnectionStatus)
+                {
+                    case ConnectionStatus.Connected:
+                        statusClass = "status-connected";
+                        break;
+                    case ConnectionStatus.Disconnected:
+                        statusClass = "status-disconnected";
+                        break;
+                    default:
+                        break;
+                }
+                <tr>
+                    <td class="center-element"></td>
+                    <td class="left-element">@student.Name</td>
+                    <td class="center-element @statusClass">@student.ConnectionStatus</td>
+                    <td class="center-element">@student.Duration</td>
+                    <td class="center-element">@student.Progress</td>
+                    <td class="center-element more">more</td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
