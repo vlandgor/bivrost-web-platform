@@ -8,7 +8,7 @@ public enum ConnectionStatus
 
 public class Student
 {
-    public string Name { get; set; }
+    public int Name { get; set; }
     public ConnectionStatus ConnectionStatus { get; set; }
     public string Duration { get; set; }
     public string Progress { get; set; }

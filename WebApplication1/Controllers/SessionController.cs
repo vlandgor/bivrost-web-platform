@@ -14,8 +14,8 @@ public class SessionController : Controller
 
         List<Student> students = new List<Student>
         {
-            new Student { Name = "Vlad", ConnectionStatus = ConnectionStatus.Connected, Duration = "23 minutes", Progress = "15%" },
-            new Student { Name = "Lyosha", ConnectionStatus = ConnectionStatus.Disconnected, Duration = "43 minutes", Progress = "64%" }
+            new Student { Name = 1, ConnectionStatus = ConnectionStatus.Connected, Duration = "23 minutes", Progress = "15%" },
+            new Student { Name = 2, ConnectionStatus = ConnectionStatus.Disconnected, Duration = "43 minutes", Progress = "64%" }
         };
         
         Session session = new Session(projectId, students);
