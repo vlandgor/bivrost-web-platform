@@ -6,7 +6,7 @@ public enum ConnectionStatus
     Disconnected
 }
 
-public class Student
+public class SessionStudentViewModel
 {
     public string Name { get; set; }
     public ConnectionStatus ConnectionStatus { get; set; }

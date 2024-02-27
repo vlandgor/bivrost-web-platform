@@ -26,7 +26,7 @@ public static class ProjectRepository
                     {
                         var project = new Project
                         {
-                            Id = reader.GetString(0),
+                            Id = reader.GetInt32(0),
                             FullName = reader.GetString(1),
                             ShortName = reader.GetString(2)
                         };
@@ -43,15 +43,15 @@ public static class ProjectRepository
     {
         List<Project> projects = new List<Project>
         {
-            new Project { Id = "1", FullName = "Project 1", ShortName = "P1" },
-            new Project { Id = "2", FullName = "Project 2", ShortName = "P2" },
-            new Project { Id = "3", FullName = "Project 3", ShortName = "P3" }
+            new Project { Id = 1, FullName = "Project 1", ShortName = "P1" },
+            new Project { Id = 2, FullName = "Project 2", ShortName = "P2" },
+            new Project { Id = 3, FullName = "Project 3", ShortName = "P3" }
         };
 
         Projects = projects;
     }
 
-    public static Project? GetProjectById(string id)
+    public static Project? GetProjectById(int id)
     {
         Project? project = Projects.FirstOrDefault(p => p.Id == id);
         

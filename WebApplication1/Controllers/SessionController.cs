@@ -8,17 +8,17 @@ public class SessionController : Controller
 {
     private Project? activeProject;
     
-    public IActionResult Index(string projectId)
+    public IActionResult Index(int projectId)
     {
         activeProject = ProjectRepository.GetProjectById(projectId);
 
-        List<Student> students = new List<Student>
+        List<SessionStudentViewModel> students = new List<SessionStudentViewModel>
         {
-            new Student { Name = "Vlad", ConnectionStatus = ConnectionStatus.Connected, Duration = "23 minutes", Progress = "15%" },
-            new Student { Name = "Lyosha", ConnectionStatus = ConnectionStatus.Disconnected, Duration = "43 minutes", Progress = "64%" }
+            new SessionStudentViewModel { Name = "Vlad", ConnectionStatus = ConnectionStatus.Connected, Duration = "23 minutes", Progress = "15%" },
+            new SessionStudentViewModel { Name = "Lyosha", ConnectionStatus = ConnectionStatus.Disconnected, Duration = "43 minutes", Progress = "64%" }
         };
         
-        Session session = new Session(projectId, students);
-        return View(session);
+        SessionViewModel sessionViewModel = new SessionViewModel(projectId, students);
+        return View(sessionViewModel);
     }
 }
