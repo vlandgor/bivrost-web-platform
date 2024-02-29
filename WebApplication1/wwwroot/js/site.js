@@ -16,3 +16,27 @@ $(document).ready(function() {
         $("#sessionLink").attr('href', '/Session?projectId=' + projectId);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    var studentsBtn = document.getElementById("studentsBtn");
+    var instructorsBtn = document.getElementById("instructorsBtn");
+    var studentsTable = document.getElementById("StudentsSessionTable");
+    var instructorsTable = document.getElementById("InstructorsSessionTable");
+    var addParticipantButton = document.getElementById("addParticipantBtn");
+
+    studentsBtn.addEventListener("click", function() {
+        studentsBtn.classList.add("active-underline");
+        instructorsBtn.classList.remove("active-underline");
+        studentsTable.style.display = "table";
+        instructorsTable.style.display = "none";
+        addParticipantButton.textContent = "+ Add Student";
+    });
+
+    instructorsBtn.addEventListener("click", function() {
+        instructorsBtn.classList.add("active-underline");
+        studentsBtn.classList.remove("active-underline");
+        instructorsTable.style.display = "table";
+        studentsTable.style.display = "none";
+        addParticipantButton.textContent = "+ Add Instructor";
+    });
+});

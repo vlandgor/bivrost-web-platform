@@ -9,12 +9,12 @@
 <div class="session-page">
     <div class="players-panel">
         <div class="top-control">
-            <div class="top-control-item active-underline">Students</div>
-            <div class="top-control-item">Instructors</div>
+            <button id="studentsBtn" class="top-control-item active-underline">Students</button>
+            <button id="instructorsBtn" class="top-control-item">Instructors</button>
             <div style="flex: 1"></div>
-            <div class="add-participant">+  Add Student</div>
+            <button id="addParticipantBtn" class="add-participant">+  Add Student</button>
         </div>
-        <table>
+        <table id="StudentsSessionTable">
             <thead>
             <tr>
                 <th class="center-element" style="width: 42px">*</th>
@@ -27,19 +27,7 @@
             </thead>
             <tbody>
             @foreach (var student in Model.Students)
-            {
-                statusClass = "";
-                switch (student.ConnectionStatus)
-                {
-                    case ConnectionStatus.Connected:
-                        statusClass = "status-connected";
-                        break;
-                    case ConnectionStatus.Disconnected:
-                        statusClass = "status-disconnected";
-                        break;
-                    default:
-                        break;
-                }
+            {   
                 <tr>
                     <td class="center-element"></td>
                     <td class="left-element">@student.Name</td>
@@ -51,7 +39,29 @@
             }
             </tbody>
         </table>
+        <table id="InstructorsSessionTable" style="display: none">
+            <thead>
+            <tr>
+                <th class="center-element" style="width: 42px">*</th>
+                <th class="left-element">NAME</th>
+                <th class="center-element">STATUS</th>
+                <th class="center-element">OPTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var student in Model.Students)
+            {   
+                <tr>
+                    <td class="center-element"></td>
+                    <td class="left-element">@student.Name</td>
+                    <td class="center-element @statusClass">@student.ConnectionStatus</td>
+                    <td class="center-element more">more</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
+    
     <div class="control-panel">
         <div class="control-section info-section">
             <div class="session-name">@Model.ProjectId</div>
