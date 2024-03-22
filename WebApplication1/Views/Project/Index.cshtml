@@ -1,0 +1,41 @@
+﻿@model ProjectViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    string statusClass = "";
+}
+
+<div class="project-page">
+    <table class="tableList">
+        <thead>
+        <tr>
+            <th class="empty-th"></th>
+            <th class="left-element">NAME</th>
+            <th class="center-element regular-cell">DATE</th>
+            <th class="center-element regular-cell">PLAYERS</th>
+            <th class="center-element big-cell">DURATION</th>
+            <th class="center-element regular-cell">OPTIONS</th>
+            <th class="empty-th"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var session in Model.Sessions)
+        {
+            <tr>
+                <td class="empty-td"></td>
+                <td class="left-element">@session.Name</td>
+                <td class="center-element regular-cell">@session.Date</td>
+                <td class="center-element regular-cell">@session.Players</td>
+                <td class="center-element big-cell">@session.Duration</td>
+                <td class="center-element regular-cell">
+                    <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-projectId="">
+                        <div>ENTER</div>
+                    </a>
+                </td>
+                <td class="empty-td"></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

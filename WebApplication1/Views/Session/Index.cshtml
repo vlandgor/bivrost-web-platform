@@ -17,7 +17,6 @@
         <table id="StudentsSessionTable">
             <thead>
             <tr>
-                <th class="center-element" style="width: 42px">*</th>
                 <th class="left-element">NAME</th>
                 <th class="center-element">STATUS</th>
                 <th class="center-element">TIME</th>
@@ -29,7 +28,6 @@
             @foreach (var student in Model.Students)
             {   
                 <tr>
-                    <td class="center-element"></td>
                     <td class="left-element">@student.Name</td>
                     <td class="center-element @statusClass">@student.ConnectionStatus</td>
                     <td class="center-element">@student.Duration</td>
@@ -40,25 +38,23 @@
             </tbody>
         </table>
         <table id="InstructorsSessionTable" style="display: none">
-            <thead>
-            <tr>
-                <th class="center-element" style="width: 42px">*</th>
-                <th class="left-element">NAME</th>
-                <th class="center-element">STATUS</th>
-                <th class="center-element">OPTIONS</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var student in Model.Students)
-            {   
-                <tr>
-                    <td class="center-element"></td>
-                    <td class="left-element">@student.Name</td>
-                    <td class="center-element @statusClass">@student.ConnectionStatus</td>
-                    <td class="center-element more">more</td>
-                </tr>
-            }
-            </tbody>
+            @* <thead> *@
+            @* <tr> *@
+            @*     <th class="left-element">NAME</th> *@
+            @*     <th class="center-element">STATUS</th> *@
+            @*     <th class="center-element">OPTIONS</th> *@
+            @* </tr> *@
+            @* </thead> *@
+            @* <tbody> *@
+            @* @foreach (var student in Model.Students) *@
+            @* {    *@
+            @*     <tr> *@
+            @*         <td class="left-element">@student.Name</td> *@
+            @*         <td class="center-element @statusClass">@student.ConnectionStatus</td> *@
+            @*         <td class="center-element more">more</td> *@
+            @*     </tr> *@
+            @* } *@
+            @* </tbody> *@
         </table>
     </div>
     

@@ -1,0 +1,64 @@
+﻿:root{
+    --color-table-head-text: #aaaaaa;
+    --color-table-body-text: #ffffff;
+    --color-table-body-tr-hover: #242424;
+}
+
+.tableList{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableList table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableList thead{
+    border-bottom: 1px solid var(--color-separator);
+    border-top: 1px solid var(--color-separator);
+    height: 40px;
+    color: var(--color-table-head-text);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.tableList tbody{
+    color: var(--color-table-body-text);
+    align-items: flex-start;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.tableList tbody tr{
+    height: 56px;
+}
+
+.tableList tbody tr:hover{
+    background-color: var(--color-table-body-tr-hover);
+}
+
+.center-element{
+    text-align: center;
+}
+
+.left-element{
+    text-align: left;
+    padding-left: 14px;
+}
+
+.empty-th{
+    width: 56px;
+}
+
+.empty-td{
+    width: 56px;
+}
+
+.regular-cell{
+    width: 140px;
+}
+
+.big-cell{
+    width: 196px;
+}

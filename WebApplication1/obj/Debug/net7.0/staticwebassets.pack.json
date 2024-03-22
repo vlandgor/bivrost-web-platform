@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\WebApplication1.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\project-page.css",
+      "PackagePath": "staticwebassets\\css\\project-page.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\session-page.css",
       "PackagePath": "staticwebassets\\css\\session-page.css"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\tableList.css",
+      "PackagePath": "staticwebassets\\css\\tableList.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\favicon.ico",
