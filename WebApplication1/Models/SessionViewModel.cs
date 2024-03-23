@@ -2,13 +2,14 @@
 
 public class SessionViewModel
 {
-    public int ProjectId { get; }
+    public string SessionId { get; }
+    public string SessionName { get; }
     public List<SessionStudentViewModel> Students { get; }
-    public int StudentsAmount => Students.Count;
     
-    public SessionViewModel(int projectId, List<SessionStudentViewModel> students)
+    public SessionViewModel(string sessionId, string sessionName, List<SessionStudentViewModel> students)
     {
-        ProjectId = projectId;
+        SessionId = sessionId;
+        SessionName = sessionName;
         Students = students;
     }
 }

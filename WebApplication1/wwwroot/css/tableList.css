@@ -38,27 +38,63 @@
     background-color: var(--color-table-body-tr-hover);
 }
 
-.center-element{
+.tableList .center-element{
+    justify-content: center;
     text-align: center;
+    align-items: center;
 }
 
-.left-element{
+.tableList .left-element{
+    justify-content: center;
     text-align: left;
+    align-items: center;
     padding-left: 14px;
 }
 
-.empty-th{
+.tableList .empty-th{
     width: 56px;
 }
 
-.empty-td{
+.tableList .empty-td{
     width: 56px;
 }
 
-.regular-cell{
+.tableList .regular-cell{
     width: 140px;
 }
 
-.big-cell{
+.tableList .big-cell{
     width: 196px;
+}
+
+.tableList .actions-button{
+    width: 94px;
+    height: 31px;
+    background-color: var(--color-background-default);
+    border: 1px solid var(--color-separator);
+    font-size: 12px;
+    text-underline: none;
+    font-weight: 600;
+    color: var(--color-text);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.tableList .actions-button:hover{
+    background-color: var(--color-background-second);
+}
+
+.tableList a{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 12px;
+    text-underline: none;
+    display: flex;
+    font-weight: 600;
+    color: var(--color-text);
 }

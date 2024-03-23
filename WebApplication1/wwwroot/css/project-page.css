@@ -1,7 +1,8 @@
-﻿.project-page{
-    width:100%;
+﻿.project-page {
+    width: 100%;
     height: fit-content;
     background-color: var(--color-background-second);
     flex: 1;
     display: flex;
+    flex-direction: column;
 }

@@ -13,7 +13,7 @@ $(document).ready(function() {
         var projectId = $(this).data('project-id');
         $("#projectName").text(projectFullName);
 
-        $("#sessionLink").attr('href', '/Session?projectId=' + projectId);
+        $("#projectLink").attr('href', '/Project?projectId=' + projectId);
     });
 });
 

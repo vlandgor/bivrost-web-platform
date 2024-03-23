@@ -6,11 +6,11 @@ namespace WebApplication1.Controllers;
 
 public class SessionController : Controller
 {
-    private Project? activeProject;
+    private Session? session;
     
-    public IActionResult Index(int projectId)
+    public IActionResult Index(string sessionId)
     {
-        activeProject = ProjectRepository.GetProjectById(projectId);
+        session = ProjectRepository.GetSessionById(sessionId);
 
         List<SessionStudentViewModel> students = new List<SessionStudentViewModel>
         {
@@ -18,7 +18,7 @@ public class SessionController : Controller
             new SessionStudentViewModel { Name = "Lyosha", ConnectionStatus = ConnectionStatus.Disconnected, Duration = "43 minutes", Progress = "64%" }
         };
         
-        SessionViewModel sessionViewModel = new SessionViewModel(projectId, students);
+        SessionViewModel sessionViewModel = new SessionViewModel(sessionId, session.Name, students);
         return View(sessionViewModel);
     }
 }
