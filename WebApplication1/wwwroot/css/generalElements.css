@@ -35,10 +35,8 @@
     border: 0;
     border-radius: 5px;
     color: var(--color-text);
-    padding-left: 14px;
-    padding-right: 14px;
     font-size: 14px;
-    width: 112px;
+    width: 126px;
     height: 31px;
     font-weight: 600;
     display: flex;

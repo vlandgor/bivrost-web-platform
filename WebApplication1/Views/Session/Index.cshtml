@@ -8,53 +8,49 @@
 
 <div class="session-page">
     <div class="players-panel">
-        <div class="top-control">
-            <button id="studentsBtn" class="top-control-item active-underline">Students</button>
-            <button id="instructorsBtn" class="top-control-item">Instructors</button>
+        <div class="select-segment">
+            <button id="studentsBtn" class="segment-button active-underline">Students</button>
+            <button id="instructorsBtn" class="segment-button">Instructors</button>
             <div style="flex: 1"></div>
-            <button id="addParticipantBtn" class="add-participant">+  Add Student</button>
+            <button id="addParticipantBtn" class="active-colored-button">ADD STUDENT</button>
         </div>
-        <table id="StudentsSessionTable">
+        <table id="StudentsSessionTable" class="tableList">
             <thead>
             <tr>
+                <th class="empty-th"></th>
                 <th class="left-element">NAME</th>
-                <th class="center-element">STATUS</th>
-                <th class="center-element">TIME</th>
-                <th class="center-element">PROGRESS</th>
-                <th class="center-element">OPTIONS</th>
+                <th class="center-element regular-cell">STATUS</th>
+                <th class="center-element regular-cell">TIME</th>
+                <th class="center-element regular-cell">PROGRESS</th>
+                <th class="center-element regular-cell">OPTIONS</th>
+                <th class="empty-th"></th>
             </tr>
             </thead>
             <tbody>
             @foreach (var student in Model.Students)
             {   
+                string studentStatusClass = student.ConnectionStatus ? "player-status-connected" : "player-status-disconnected";
+                
                 <tr>
+                    <td class="empty-td"></td>
                     <td class="left-element">@student.Name</td>
-                    <td class="center-element @statusClass">@student.ConnectionStatus</td>
-                    <td class="center-element">@student.Duration</td>
-                    <td class="center-element">@student.Progress</td>
-                    <td class="center-element more">more</td>
+                    <td class="center-element regular-cell @studentStatusClass">@(student.ConnectionStatus ? "CONNECTED" : "DISCONNECTED")</td>
+                    <td class="center-element regular-cell">@student.Duration</td>
+                    <td class="center-element regular-cell">@student.Progress</td>
+                    <td class="center-element regular-cell">
+                        <a id="sessionLink" asp-action="" asp-controller="">
+                            <div class="actions-button">
+                                MORE
+                            </div>
+                        </a>
+                    </td>
+                    <td class="empty-td"></td>
                 </tr>
             }
             </tbody>
         </table>
         <table id="InstructorsSessionTable" style="display: none">
-            @* <thead> *@
-            @* <tr> *@
-            @*     <th class="left-element">NAME</th> *@
-            @*     <th class="center-element">STATUS</th> *@
-            @*     <th class="center-element">OPTIONS</th> *@
-            @* </tr> *@
-            @* </thead> *@
-            @* <tbody> *@
-            @* @foreach (var student in Model.Students) *@
-            @* {    *@
-            @*     <tr> *@
-            @*         <td class="left-element">@student.Name</td> *@
-            @*         <td class="center-element @statusClass">@student.ConnectionStatus</td> *@
-            @*         <td class="center-element more">more</td> *@
-            @*     </tr> *@
-            @* } *@
-            @* </tbody> *@
+            
         </table>
     </div>
     

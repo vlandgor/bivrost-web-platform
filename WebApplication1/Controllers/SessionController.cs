@@ -14,8 +14,8 @@ public class SessionController : Controller
 
         List<SessionStudentViewModel> students = new List<SessionStudentViewModel>
         {
-            new SessionStudentViewModel { Name = "Vlad", ConnectionStatus = ConnectionStatus.Connected, Duration = "23 minutes", Progress = "15%" },
-            new SessionStudentViewModel { Name = "Lyosha", ConnectionStatus = ConnectionStatus.Disconnected, Duration = "43 minutes", Progress = "64%" }
+            new SessionStudentViewModel { Name = "Vlad", ConnectionStatus = true, Duration = "23 minutes", Progress = "15%" },
+            new SessionStudentViewModel { Name = "Lyosha", ConnectionStatus = false, Duration = "43 minutes", Progress = "64%" }
         };
         
         SessionViewModel sessionViewModel = new SessionViewModel(sessionId, session.Name, students);

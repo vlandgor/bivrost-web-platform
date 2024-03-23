@@ -1,6 +1,6 @@
 ﻿:root{
-    --color-status-connected: #37ED33;
-    --color-status-disconnected: #ED3333;
+    --color-player-status-connected: #37ED33;
+    --color-player-status-disconnected: #ED3333;
 }
 
 .session-page{
@@ -14,106 +14,14 @@
     float: left;
     flex: 1;
     background-color: var(--color-background-second);
-    padding-left: 56px;
-    padding-right: 56px;
 }
 
-.session-page .players-panel .top-control{
-    height: 42px;
-    margin-bottom: 14px;
-    margin-top: 14px;
-    display: flex;
-    border-bottom: 1px solid var(--color-separator);
+.player-status-connected{
+    color: var(--color-player-status-connected);
 }
 
-.session-page .players-panel .top-control-item{
-    background-color: transparent;
-    border: 0;
-    color: var(--color-text);
-    padding-left: 14px;
-    padding-right: 14px;
-    font-size: 16px;
-    font-weight: 500;
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
-.session-page .players-panel .active-underline{
-    border-bottom: 2px solid var(--color-unique);
-}
-
-.session-page .players-panel .add-participant{
-    background-color: transparent;
-    border: 0;
-    color: var(--color-text);
-    padding-left: 14px;
-    padding-right: 14px;
-    font-size: 16px;
-    width: 220px;
-    height: 36px;
-    font-weight: 500;
-    display: flex;
-    justify-content: right;
-    text-align: center;
-    align-items: center;
-}
-
-.session-page .players-panel table{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.session-page .players-panel thead{
-    background-color: var(--color-background-default);
-    border-top: 1px solid var(--color-separator);
-    border-bottom: 1px solid var(--color-separator);
-    height: 28px;
-}
-
-.session-page .players-panel thead th{
-    border-left: 1px solid var(--color-separator);
-    border-right: 1px solid var(--color-separator);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.session-page .players-panel thead .empty-th{
-    width: 56px;
-}
-
-.session-page .players-panel tbody{
-    align-items: flex-start;
-}
-
-.session-page .players-panel tbody tr{
-    height: 42px;
-}
-
-.session-page .players-panel tbody td{
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.center-element{
-    text-align: center;
-}
-
-.left-element{
-    text-align: left;
-    padding-left: 14px;
-}
-
-.more{
-    text-decoration: underline;
-}
-
-.status-connected{
-    color: var(--color-status-connected);
-}
-
-.status-disconnected{
-    color: var(--color-status-disconnected);
+.player-status-disconnected{
+    color: var(--color-player-status-disconnected);
 }
 
 .session-page .control-panel{

@@ -2,8 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    string statusClass = "";
 }
 
 <div class="project-page">
@@ -19,6 +17,7 @@
         <tr>
             <th class="empty-th"></th>
             <th class="left-element">NAME</th>
+            <th class="center-element regular-cell">STATUS</th>
             <th class="center-element regular-cell">DATE</th>
             <th class="center-element regular-cell">PLAYERS</th>
             <th class="center-element big-cell">DURATION</th>
@@ -29,9 +28,12 @@
         <tbody>
         @foreach (var session in Model.Sessions)
         {
+            string sessionStatusClass = session.Status ? "session-status-active" : "session-status-finished";
+            
             <tr>
                 <td class="empty-td"></td>
                 <td class="left-element">@session.Name</td>
+                <td class="center-element regular-cell @sessionStatusClass">@(session.Status ? "ACTIVE" : "FINISHED")</td>
                 <td class="center-element regular-cell">@session.Date</td>
                 <td class="center-element regular-cell">@session.Players</td>
                 <td class="center-element big-cell">@session.Duration</td>

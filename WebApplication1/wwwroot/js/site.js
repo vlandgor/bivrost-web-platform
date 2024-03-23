@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         instructorsBtn.classList.remove("active-underline");
         studentsTable.style.display = "table";
         instructorsTable.style.display = "none";
-        addParticipantButton.textContent = "+ Add Student";
+        addParticipantButton.textContent = "ADD STUDENT";
     });
 
     instructorsBtn.addEventListener("click", function() {
@@ -37,6 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
         studentsBtn.classList.remove("active-underline");
         instructorsTable.style.display = "table";
         studentsTable.style.display = "none";
-        addParticipantButton.textContent = "+ Add Instructor";
+        addParticipantButton.textContent = "ADD INSTRUCTOR";
     });
 });
