@@ -9,7 +9,7 @@
         <button id="studentsBtn" class="segment-button active-underline">Active Sessions</button>
         <button id="instructorsBtn" class="segment-button">Finished Sessions</button>
         <div style="flex: 1"></div>
-        <button id="addParticipantBtn" class="active-colored-button">CREATE</button>
+        <button id="createSessionButton" type="button" class="active-colored-button">CREATE</button>
     </div>
 
     <table class="tableList">
@@ -50,3 +50,42 @@
         </tbody>
     </table>
 </div>
+
+<div class="modal fade" id="createSessionPanel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modalPanel">
+            <div class="modalHeader">
+                <label class="modalTitle" id="modalTitle">Create a new session</label>
+                <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label>
+            </div>
+            <div class="modalBody">
+                <div class="modalBodyContentBlock">
+                    <label>Session ID</label>
+                    @{
+                        // Generate a random ID
+                        string randomID = Guid.NewGuid().ToString();
+                    }
+                    <input type="text" placeholder="@randomID" id="sessionIdInput" name="textInput" class="form-control" readonly="readonly"/>
+                </div>
+                <div class="modalBodyContentBlock">
+                    <label>Session Name</label>
+                    <input type="text" id="sessionNameInput" name="textInput" class="form-control"/>
+                </div>
+            </div>
+            <div class="modalFooter">
+                <button type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</button>
+                <button type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle button click event and show modal
+    document.getElementById('createSessionButton').addEventListener('click', function () {
+        $('#createSessionPanel').modal('show');
+    });
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        $('#createSessionPanel').modal('hide');
+    });
+</script>

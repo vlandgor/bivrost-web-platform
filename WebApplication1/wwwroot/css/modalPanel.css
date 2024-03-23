@@ -1,0 +1,90 @@
+﻿.modalPanel{
+    background-color: var(--color-background-second);
+    border: 1px solid var(--color-separator);
+    border-radius: 5px;
+    width: 420px;
+    height: fit-content;
+    padding: 28px;
+}
+
+.modalHeader{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBody{
+    margin-top: 28px;
+    margin-bottom: 14px;
+}
+
+.modalFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalTitle{
+    font-size: 24px;
+    font-weight: 600;
+    flex: 1;
+    color: var(--color-text);
+    text-align: left;
+}
+
+.modalTitleDescription{
+    font-size: 14px;
+    font-weight: 400;
+    flex: 1;
+    color: var(--color-text-description);
+    text-align: left;
+}
+
+.modalPanel .footerButton{
+    width: 168px;
+    height: 40px;
+    border: 1px solid var(--color-separator);
+    color: var(--color-text);
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.modalPanel .cancelButton{
+    background-color: transparent;
+}
+
+.modalPanel .continueButton{
+    background-color: var(--color-unique);
+}
+
+.modalPanel .modalBodyContentBlock{
+    padding-bottom: 14px;
+}
+
+.modalPanel .modalBodyContentBlock input{
+    background-color: transparent;
+    border-color: var(--color-separator);
+    color: var(--color-text);
+    border-radius: 10px;
+}
+
+.modalPanel .modalBodyContentBlock input:focus{
+    background-color: transparent;
+    border-color: var(--color-separator);
+    color: var(--color-text);
+}
+
+.modalPanel .modalBodyContentBlock input:active{
+    background-color: transparent;
+    border-color: var(--color-separator);
+    color: var(--color-text);
+}
+
+.modalPanel .modalBodyContentBlock label{
+    color: var(--color-text-description);
+    padding-bottom: 7px;
+}

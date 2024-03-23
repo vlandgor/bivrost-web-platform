@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\generalElements.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\modalPanel.css",
+      "PackagePath": "staticwebassets\\css\\modalPanel.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\project-page.css",
       "PackagePath": "staticwebassets\\css\\project-page.css"
     },

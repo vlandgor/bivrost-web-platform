@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ON1o3+TowPmnk5h43fQ3QQZpjmIvC/stZpGg4X4aSLw=",
+  "Hash": "rOfXXMX2YmVtpI0Uoona7Y7qp988ZI+ZQyrw5n+CmTM=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\generalElements.css"
+    },
+    {
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\modalPanel.css",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "css/modalPanel.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\modalPanel.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\project-page.css",
