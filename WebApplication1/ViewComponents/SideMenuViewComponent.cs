@@ -8,6 +8,7 @@ public class SideMenuViewComponent: ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        return View(ProjectRepository.Projects);
+        List<Project> projects = await ServerConnection.ServerConnection.GetProjectsList();
+        return View(projects);
     }
 }

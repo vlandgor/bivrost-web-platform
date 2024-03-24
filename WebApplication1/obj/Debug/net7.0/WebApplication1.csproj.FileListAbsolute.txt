@@ -36,3 +36,4 @@ C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\bin\Debug\net7.0\Np
 C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.csproj.AssemblyReference.cache
 C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.csproj.CopyComplete
 C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.sourcelink.json
+C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\bin\Debug\net7.0\Newtonsoft.Json.dll

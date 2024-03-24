@@ -10,7 +10,7 @@ public class SessionController : Controller
     
     public IActionResult Index(string sessionId)
     {
-        session = ProjectRepository.GetSessionById(sessionId);
+        //session = ProjectRepository.GetSessionById(sessionId);
 
         List<SessionStudentViewModel> students = new List<SessionStudentViewModel>
         {

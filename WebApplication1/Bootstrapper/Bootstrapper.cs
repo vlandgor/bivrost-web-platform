@@ -4,6 +4,6 @@ public class Bootstrapper
 {
     public Bootstrapper()
     {
-        ProjectRepository.LoadTestProjects();
+        //ProjectRepository.LoadTestProjects();
     }
 }
