@@ -103,4 +103,37 @@ public static class ServerConnection
             return false;
         }
     }
+
+    public static async Task<Session> GetSession(string projectId, string sessionId)
+    {
+        string apiUrl = $"https://0se6xxit83.execute-api.us-east-2.amazonaws.com/dev?id={projectId}&s_id={sessionId}";
+    
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize JSON to List<Project>
+                    Session sessions = JsonConvert.DeserializeObject<Session>(json);
+
+                    return sessions;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to retrieve data. Status code: {response.StatusCode}");
+                    return null; // Or throw an exception if necessary
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return null; // Or throw an exception if necessary
+        }
+    }
 }

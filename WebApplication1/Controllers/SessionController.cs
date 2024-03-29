@@ -6,19 +6,11 @@ namespace WebApplication1.Controllers;
 
 public class SessionController : Controller
 {
-    private Session? session;
-    
-    public IActionResult Index(string sessionId)
+    public async Task<IActionResult> Index(string projectId, string sessionId)
     {
-        //session = ProjectRepository.GetSessionById(sessionId);
-
-        List<SessionStudentViewModel> students = new List<SessionStudentViewModel>
-        {
-            new SessionStudentViewModel { Name = "Vlad", ConnectionStatus = true, Duration = "23 minutes", Progress = "15%" },
-            new SessionStudentViewModel { Name = "Lyosha", ConnectionStatus = false, Duration = "43 minutes", Progress = "64%" }
-        };
+        Session session = await ServerConnection.ServerConnection.GetSession(projectId, sessionId);
         
-        SessionViewModel sessionViewModel = new SessionViewModel(sessionId, session.s_name, students);
+        SessionViewModel sessionViewModel = new SessionViewModel(session.s_id, session.s_name, session.s_students);
         return View(sessionViewModel);
     }
 }

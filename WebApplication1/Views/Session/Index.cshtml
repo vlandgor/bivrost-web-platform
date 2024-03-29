@@ -29,14 +29,14 @@
             <tbody>
             @foreach (var student in Model.Students)
             {   
-                string studentStatusClass = student.ConnectionStatus ? "player-status-connected" : "player-status-disconnected";
+                string studentStatusClass = student.st_status ? "player-status-connected" : "player-status-disconnected";
                 
                 <tr>
                     <td class="empty-td"></td>
-                    <td class="left-element">@student.Name</td>
-                    <td class="center-element regular-cell @studentStatusClass">@(student.ConnectionStatus ? "CONNECTED" : "DISCONNECTED")</td>
-                    <td class="center-element regular-cell">@student.Duration</td>
-                    <td class="center-element regular-cell">@student.Progress</td>
+                    <td class="left-element">@student.st_name</td>
+                    <td class="center-element regular-cell @studentStatusClass">@(student.st_status ? "CONNECTED" : "DISCONNECTED")</td>
+                    <td class="center-element regular-cell">"21 minutes</td>
+                    <td class="center-element regular-cell">@student.st_progress</td>
                     <td class="center-element regular-cell">
                         <a id="sessionLink" asp-action="" asp-controller="">
                             <div class="actions-button">

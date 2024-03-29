@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var session in Model.Sessions)
+        @foreach (Session session in Model.Sessions)
         {
             string sessionStatusClass = session.s_status ? "session-status-active" : "session-status-finished";
             
@@ -38,7 +38,7 @@
                 <td class="center-element regular-cell">@session.s_students.Count</td>
                 <td class="center-element big-cell">21 minutes</td>
                 <td class="center-element regular-cell">
-                    <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-sessionId="@session.s_id">
+                    <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-projectId="@Model.Id" asp-route-sessionId="@session.s_id">
                         <div class="actions-button">
                             ENTER
                         </div>
