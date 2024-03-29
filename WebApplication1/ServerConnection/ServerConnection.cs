@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Newtonsoft.Json;
 using WebApplication1.Models;
 
 namespace WebApplication1.ServerConnection;
@@ -68,6 +69,38 @@ public static class ServerConnection
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
             return null; // Or throw an exception if necessary
+        }
+    }
+    
+    public static async Task<bool> AddNewSession(string projectId, Session newSession)
+    {
+        string apiUrl = $"https://2y80gcjdha.execute-api.us-east-2.amazonaws.com/dev/";
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = JsonConvert.SerializeObject(new { projectId, sessionData = newSession });
+                HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to add new session. Status code: {response.StatusCode}");
+                    
+                    return false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return false;
         }
     }
 }

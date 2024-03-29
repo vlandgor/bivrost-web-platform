@@ -6,26 +6,19 @@ namespace WebApplication1.Controllers;
 
 public class ProjectController : Controller
 {
-    private Project? activeProject;
-    
     public async Task<IActionResult> Index(string projectId)
     {
-        //activeProject = ProjectRepository.GetProjectById(projectId);
         List<Session> sessions = await ServerConnection.ServerConnection.GetSessionsList(projectId);
-
-        ProjectViewModel projectViewModel = new ProjectViewModel("p2", "Test name", sessions);
+        ProjectViewModel projectViewModel = new ProjectViewModel(projectId, sessions);
+        
         return View(projectViewModel);
     }
 
-    public IActionResult CreateSession(string sessionId, string sessionName)
+    [HttpPost]
+    public async Task<IActionResult> CreateSession(string projectId, string sessionId, string sessionName)
     {
-        Console.Write(sessionName);
-
-        if (activeProject != null)
-        {
-            return RedirectToAction("Index", new { projectId = "p2" });
-        }
+        await ServerConnection.ServerConnection.AddNewSession(projectId, new Session(sessionId, sessionName, true, new List<Student>()));
         
-        return RedirectToAction("Index", new { projectId = "p1" });
+        return RedirectToAction("Index", new { projectId = projectId });
     }
 }

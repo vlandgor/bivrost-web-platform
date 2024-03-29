@@ -18,7 +18,7 @@ public class SessionController : Controller
             new SessionStudentViewModel { Name = "Lyosha", ConnectionStatus = false, Duration = "43 minutes", Progress = "64%" }
         };
         
-        SessionViewModel sessionViewModel = new SessionViewModel(sessionId, session.Name, students);
+        SessionViewModel sessionViewModel = new SessionViewModel(sessionId, session.s_name, students);
         return View(sessionViewModel);
     }
 }

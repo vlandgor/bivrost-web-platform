@@ -28,17 +28,17 @@
         <tbody>
         @foreach (var session in Model.Sessions)
         {
-            string sessionStatusClass = session.Status ? "session-status-active" : "session-status-finished";
+            string sessionStatusClass = session.s_status ? "session-status-active" : "session-status-finished";
             
             <tr>
                 <td class="empty-td"></td>
-                <td class="left-element">@session.Name</td>
-                <td class="center-element regular-cell @sessionStatusClass">@(session.Status ? "ACTIVE" : "FINISHED")</td>
+                <td class="left-element">@session.s_name</td>
+                <td class="center-element regular-cell @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
                 <td class="center-element regular-cell">21.21.2121</td>
-                <td class="center-element regular-cell">@session.Students</td>
+                <td class="center-element regular-cell">@session.s_students.Count</td>
                 <td class="center-element big-cell">21 minutes</td>
                 <td class="center-element regular-cell">
-                    <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-sessionId="@session.Id">
+                    <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-sessionId="@session.s_id">
                         <div class="actions-button">
                             ENTER
                         </div>
@@ -58,28 +58,30 @@
                 <label class="modalTitle" id="modalTitle">Create a new session</label>
                 <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label>
             </div>
-            <div class="modalBody">
-                <div class="modalBodyContentBlock">
-                    <label>Session ID</label>
-                    @{
-                        // Generate a random ID
-                        string randomID = Guid.NewGuid().ToString();
-                    }
-                    <input type="text" placeholder="@randomID" id="sessionIdInput" name="textInput" class="form-control" readonly="readonly"/>
+            @{
+                // Generate a random ID
+                string randomSessionID = Guid.NewGuid().ToString();
+            }
+            <form asp-controller="Project" asp-action="CreateSession" method="post" asp-route-projectId="@Model.Id" asp-route-sessionId="@randomSessionID">
+                <div class="modalBody">
+                    <div class="modalBodyContentBlock">
+                        <label>Session ID</label>
+                        <input type="text" placeholder="@randomSessionID" id="sessionIdInput" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="modalBodyContentBlock">
+                        <label>Session Name</label>
+                        <input type="text" id="sessionNameInput" name="sessionName" class="form-control"/>
+                    </div>
                 </div>
-                <div class="modalBodyContentBlock">
-                    <label>Session Name</label>
-                    <input type="text" id="sessionNameInput" name="textInput" class="form-control"/>
+                <div class="modalFooter">
+                    <a>
+                        <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
+                    </a>
+                    <button id="createNewSession" type="submit">
+                        <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
+                    </button>
                 </div>
-            </div>
-            <div class="modalFooter">
-                <a>
-                    <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
-                </a>
-                <a asp-action="CreateSession" asp-controller="Project" asp-route-sessionId="" asp-route-sessionName="">
-                    <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
-                </a>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -92,14 +94,4 @@
     document.getElementById('cancelButton').addEventListener('click', function () {
         $('#createSessionPanel').modal('hide');
     });
-    document.getElementById('createButton').addEventListener('click', function () {
-            // Retrieve session ID and name from input fields
-            var sessionId = document.getElementById('sessionIdInput').value;
-            var sessionName = document.getElementById('sessionNameInput').value;
-    
-            // Set the values of asp-route-sessionId and asp-route-sessionName attributes
-            var createSessionLink = document.getElementById('createSessionLink');
-            createSessionLink.setAttribute('asp-route-sessionId', sessionId);
-            createSessionLink.setAttribute('asp-route-sessionName', sessionName);
-        });
 </script>
