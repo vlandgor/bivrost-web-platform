@@ -92,3 +92,7 @@
     color: var(--color-text-description);
     padding-bottom: 7px;
 }
+
+.fullSizeButton{
+    width: 100%;
+}

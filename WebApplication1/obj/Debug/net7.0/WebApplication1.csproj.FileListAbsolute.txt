@@ -37,3 +37,4 @@ C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\We
 C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.csproj.CopyComplete
 C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.sourcelink.json
 C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\RAZER\RiderProjects\WebApplication1\WebApplication1\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout_Login.cshtml.rz.scp.css

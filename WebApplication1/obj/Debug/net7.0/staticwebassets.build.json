@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rOfXXMX2YmVtpI0Uoona7Y7qp988ZI+ZQyrw5n+CmTM=",
+  "Hash": "49yBJRYEyec8drH3Vc6hhmydleceLJcU4Z5+rrlg2yE=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\WebApplication1.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\account-page.css",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "css/account-page.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\account-page.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\generalElements.css",

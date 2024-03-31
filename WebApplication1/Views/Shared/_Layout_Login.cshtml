@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="~/css/tableList.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/generalElements.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/modalPanel.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/account-page.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true"/>
 </head>
 <body>
 
 <main>
-    @await Component.InvokeAsync("SideMenu")
-    <div class="content" style="margin-left: 56px;">
+    <div class="content">
         @RenderBody()
     </div>
 </main>

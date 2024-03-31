@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\WebApplication1.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\account-page.css",
+      "PackagePath": "staticwebassets\\css\\account-page.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\wwwroot\\css\\generalElements.css",
       "PackagePath": "staticwebassets\\css\\generalElements.css"
     },
