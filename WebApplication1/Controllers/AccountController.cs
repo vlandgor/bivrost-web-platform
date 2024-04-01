@@ -54,8 +54,28 @@ public class AccountController : Controller
     }
     
     [HttpPost]
-    public IActionResult SignUp(AccountSignUpViewModel model)
+    public async Task<IActionResult> SignUp(AccountSignUpViewModel model)
     {
-        return View();
+        if (ModelState.IsValid)
+        {
+            var data = new User()
+            {
+                Id = model.Username,
+                Username = model.Username,
+                Email = model.Email,
+                Password = model.Password,
+                Projects_Id = new List<string>()
+            };
+
+            await ServerConnection.ServerConnection.RegisterNewUser(data);
+            
+            TempData["successMessage"] = $"You are eligible to login, Please fill own credential's then login!";
+            return RedirectToAction("Login");
+        }
+        else
+        {
+            TempData["errorMessage"] = "Empty form can't be submitted!";
+            return View(model);
+        }
     }
 }

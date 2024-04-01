@@ -11,7 +11,8 @@
             <label class="modalTitle">Sign Up</label>
             <label class="modalTitleDescription" id="modalTitleDescription">Please enter your details.</label>
         </div>
-        <form method="post" asp-action="LogIn">
+        <span class="text-danger text-center">@TempData["errorMessage"]</span>
+        <form method="post" asp-action="SignUp">
             <div class="modalBody">
                 <div class="modalBodyContentBlock">
                     <label asp-for="Email"></label>
@@ -31,11 +32,8 @@
                 </div>
             </div>
             <div class="modalFooter">
-                <a asp-action="SignUp">
-                    <div type="button" class="footerButton cancelButton">Sign Up</div>
-                </a>
                 <div class="form-group">
-                    <input type="submit" value="Log In" class="footerButton continueButton"/>
+                    <input type="submit" value="Sign Up" class="footerButton continueButton"/>
                 </div>
             </div>
         </form>

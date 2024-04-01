@@ -169,4 +169,36 @@ public static class ServerConnection
             return null; // Or throw an exception if necessary
         }
     }
+    
+    public static async Task<bool> RegisterNewUser(User user)
+    {
+        string apiUrl = "https://baihi7wo9b.execute-api.us-east-2.amazonaws.com/dev/";
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var payload = new { userData = user };  // Wrap user in a userData object
+                string jsonContent = JsonConvert.SerializeObject(payload);
+                HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to add new user. Status code: {response.StatusCode}");
+                    return false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return false;
+        }
+    }
 }

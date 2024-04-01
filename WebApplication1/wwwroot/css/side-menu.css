@@ -56,6 +56,22 @@
     border-radius: 100%;
     font-size: 14px;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.user-button a{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 12px;
+    text-underline: none;
+    display: flex;
+    font-weight: 600;
+    color: var(--color-text);
 }
 
 .hidden-menu{

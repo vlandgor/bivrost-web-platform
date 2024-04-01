@@ -13,7 +13,9 @@ else
             <button class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
         }
         <button class="add-project-button">+</button>
-        <a class="user-button" asp-action="Logout" asp-controller="Account">VH</a>
+        <dev class="user-button">
+            <a asp-action="Logout" asp-controller="Account">VH</a>
+        </dev>
     </div>
     
     // Hidden Menu Panel
