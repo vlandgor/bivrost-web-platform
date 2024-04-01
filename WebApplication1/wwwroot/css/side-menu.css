@@ -74,6 +74,34 @@
     color: var(--color-text);
 }
 
+.add-button{
+    width: 38px;
+    height: 38px;
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid #aaaaaa;
+    margin-top: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.add-button a{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 12px;
+    text-underline: none;
+    display: flex;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
 .hidden-menu{
     height: 100%;
     left: 56px;

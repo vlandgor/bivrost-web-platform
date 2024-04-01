@@ -20,6 +20,15 @@ public class HomeController : Controller
         return View();
     }
 
+    public async Task<IActionResult> CreateProject(string projectId, string fullName, string shortName)
+    {
+        Project project = new Project(projectId, fullName, shortName);
+
+        await ServerConnection.ServerConnection.AddNewProject(project);
+        
+        return RedirectToAction("Index", "Project", new { projectId = projectId });
+    }
+
     public IActionResult Privacy()
     {
         return View();

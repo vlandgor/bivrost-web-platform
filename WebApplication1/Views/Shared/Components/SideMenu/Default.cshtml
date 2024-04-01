@@ -1,40 +1,81 @@
 ﻿@model SideMenuViewModel
 
-@if (Model == null)
-{
-    <p>The model is null.</p>
-}
-else
-{
-    <div class="side-menu">
-        <div class="menu-icon"></div>
-        @foreach (var project in Model.Projects)
-        {
-            <button class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
-        }
-        <button id="createProjectButton" class="add-project-button">+</button>
-        <dev class="user-button">
-            <a asp-action="Logout" asp-controller="Account">VH</a>
-        </dev>
+<div class="side-menu">
+    <div class="menu-icon"></div>
+    @foreach (var project in Model.Projects)
+    {
+        <button class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
+    }
+    <div class="add-button">
+        <a id="createProjectButton">+</a>
     </div>
-    
-    // Hidden Menu Panel
-    <div class="hidden-menu" id="projectInfoPanel" style="display: none;">
-        <div class="project-name">
-            <text id="projectName">Project Name</text>
+    <div class="user-button">
+        <a asp-action="Logout" asp-controller="Account">VH</a>
+    </div>
+</div>
+
+<div class="hidden-menu" id="projectInfoPanel" style="display: none;">
+    <div class="project-name">
+        <text id="projectName">Project Name</text>
+    </div>
+    <a id="projectLink" asp-action="Index" asp-controller="Project" asp-route-projectID="">
+        <div class="menu-item">Sessions</div>
+    </a>
+    <a asp-action="" asp-controller="">
+        <div class="menu-item">Analytics</div>
+    </a>
+    <a asp-action="" asp-controller="">
+        <div class="menu-item">Settings</div>
+    </a>
+</div>
+
+<div class="modal fade" id="createProjectPanel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modalPanel">
+            <div class="modalHeader">
+                <label class="modalTitle" id="modalTitle">Create a new project</label>
+                <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label>
+            </div>
+            @{
+                // Generate a random ID
+                string randomProjectID = Guid.NewGuid().ToString();
+            }
+            <form asp-controller="Home" asp-action="CreateProject" method="post" asp-route-projectId="@randomProjectID">
+                <div class="modalBody">
+                    <div class="modalBodyContentBlock">
+                        <label>Project ID</label>
+                        <input type="text" placeholder="@randomProjectID" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="modalBodyContentBlock">
+                        <label>Project full Name</label>
+                        <input type="text" name="fullName" class="form-control"/>
+                    </div>
+                    <div class="modalBodyContentBlock">
+                        <label>Project short Name</label>
+                        <input type="text" name="shortName" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modalFooter">
+                    <a>
+                        <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
+                    </a>
+                    <button id="createNewProject" type="submit">
+                        <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
+                    </button>
+                </div>
+            </form>
         </div>
-        <a id="projectLink" asp-action="Index" asp-controller="Project" asp-route-projectID="">
-            <div class="menu-item">Sessions</div>
-        </a>
-        <a asp-action="" asp-controller="">
-            <div class="menu-item">Analytics</div>
-        </a>
-        <a asp-action="" asp-controller="">
-            <div class="menu-item">Settings</div>
-        </a>
     </div>
-    
-    // Scripts
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // JavaScript to handle button click event and show modal
+    document.getElementById('createProjectButton').addEventListener('click', function () {
+        $('#createProjectPanel').modal('show');
+    });
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        $('#createProjectPanel').modal('hide');
+    });
+</script>
