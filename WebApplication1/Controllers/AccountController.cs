@@ -14,18 +14,18 @@ public class AccountController : Controller
     }
     
     [HttpPost]
-    public IActionResult LogIn(AccountLoginViewModel model)
+    public async Task<IActionResult> LogIn(AccountLoginViewModel model)
     {
         if (ModelState.IsValid)
         {
-            User data = ServerConnection.ServerConnection.GetUserData(model.Email);
+            User data = await ServerConnection.ServerConnection.GetUserData(model.Email);
             bool isValid = data.Email == model.Email && data.Password == model.Password;
             if (isValid)
             {
                 var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, data.Email) },
                     CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 HttpContext.Session.SetString("Email", data.Email);
                 return RedirectToAction("Index", "Home");
             }

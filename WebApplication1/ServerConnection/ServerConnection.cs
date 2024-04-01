@@ -137,14 +137,36 @@ public static class ServerConnection
         }
     }
 
-    public static User GetUserData(string email)
+    public static async Task<User> GetUserData(string email)
     {
-        return new User
+        string apiUrl = $"https://2ckins4os0.execute-api.us-east-2.amazonaws.com/dev?email={email}";
+    
+        try
         {
-            Id = "q",
-            Username = "q",
-            Email = "q",
-            Password = "q"
-        };
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize JSON to List<Project>
+                    User user = JsonConvert.DeserializeObject<User>(json);
+
+                    return user;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to retrieve data. Status code: {response.StatusCode}");
+                    return null; // Or throw an exception if necessary
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return null; // Or throw an exception if necessary
+        }
     }
 }
