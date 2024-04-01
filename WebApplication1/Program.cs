@@ -1,8 +1,12 @@
+using WebApplication1;
 using WebApplication1.Bootstrapper;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+
+Startup startup = new Startup();
+startup.ConfigureServices(builder.Services);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -21,13 +25,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-Bootstrapper bootstrapper = new Bootstrapper();
 
 app.Run();

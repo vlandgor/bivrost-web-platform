@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers;
@@ -13,7 +16,36 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult LogIn(AccountLoginViewModel model)
     {
-        return View();
+        if (ModelState.IsValid)
+        {
+            User data = ServerConnection.ServerConnection.GetUserData(model.Email);
+            bool isValid = data.Email == model.Email && data.Password == model.Password;
+            if (isValid)
+            {
+                var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, data.Email) },
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                HttpContext.Session.SetString("Email", data.Email);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                TempData["errorPassword"] = "Invalid password!";
+                return View(model);
+            }
+        }
+        else
+        {
+            TempData["errorUsername"] = $"Username not found! {model.Email} : email";
+            return View(model);
+        }
+    }
+
+    public IActionResult LogOut()
+    {
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("LogIn", "Account");
     }
 
     public IActionResult SignUp()

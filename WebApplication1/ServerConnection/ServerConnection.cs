@@ -136,4 +136,15 @@ public static class ServerConnection
             return null; // Or throw an exception if necessary
         }
     }
+
+    public static User GetUserData(string email)
+    {
+        return new User
+        {
+            Id = "q",
+            Username = "q",
+            Email = "q",
+            Password = "q"
+        };
+    }
 }

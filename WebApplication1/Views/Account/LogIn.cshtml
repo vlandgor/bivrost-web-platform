@@ -16,10 +16,12 @@
                 <div class="modalBodyContentBlock">
                     <label asp-for="Email"></label>
                     <input type="text" asp-for="Email" placeholder="Enter email" class="form-control" autocomplete="off"/>
+                    <span class="text-danger">@TempData["errorUsername"]</span>
                 </div>
                 <div class="modalBodyContentBlock">
                     <label asp-for="Password"></label>
                     <input type="text" asp-for="Password" placeholder="Enter password" class="form-control" autocomplete="off"/>
+                    <span class="text-danger">@TempData["errorPassword"]</span>
                 </div>
             </div>
             <div class="modalFooter">
