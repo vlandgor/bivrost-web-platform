@@ -1,5 +1,4 @@
 using WebApplication1;
-using WebApplication1.Bootstrapper;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();

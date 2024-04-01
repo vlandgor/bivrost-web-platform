@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Project>
+﻿@model SideMenuViewModel
 
 @if (Model == null)
 {
@@ -8,11 +8,11 @@ else
 {
     <div class="side-menu">
         <div class="menu-icon"></div>
-        @foreach (var project in Model)
+        @foreach (var project in Model.Projects)
         {
             <button class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
         }
-        <button class="add-project-button">+</button>
+        <button id="createProjectButton" class="add-project-button">+</button>
         <dev class="user-button">
             <a asp-action="Logout" asp-controller="Account">VH</a>
         </dev>
@@ -35,5 +35,6 @@ else
     </div>
     
     // Scripts
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 }
