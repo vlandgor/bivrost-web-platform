@@ -81,3 +81,70 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.2/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/keepAliveHub")
+            .build();
+
+        const timers = {};
+
+        function startTimer(clientId) {
+            const startTime = Date.now();
+            timers[clientId] = setInterval(() => {
+                const elapsedTime = Date.now() - startTime;
+                const seconds = Math.floor((elapsedTime / 1000) % 60);
+                const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+                const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+
+                const formattedTime = [hours, minutes, seconds].map(unit => unit < 10 ? `0${unit}` : unit).join(':');
+                const row = document.getElementById(clientId);
+                if (row && row.cells.length > 2) {
+                    row.cells[2].innerHTML = formattedTime;
+                }
+            }, 1000);
+        }
+
+        function stopTimer(clientId) {
+            clearInterval(timers[clientId]);
+            delete timers[clientId];
+        }
+
+        connection.on("ClientConnected", function (clientId, message) {
+            const table = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
+            const row = table.insertRow();
+            row.setAttribute("id", clientId);
+            row.insertCell(0).innerHTML = message;
+            row.insertCell(1).innerHTML = "Connected";
+            row.insertCell(2).innerHTML = "00:00:00";
+
+            startTimer(clientId);
+        });
+
+        connection.on("UpdateKeepAlive", function (clientId, message) {
+            const row = document.getElementById(clientId);
+            if (row) {
+                row.cells[1].innerHTML = message;
+                if (message === "Connected") {
+                    startTimer(clientId);
+                } else {
+                    stopTimer(clientId);
+                }
+            }
+        });
+
+        connection.on("ClientDisconnected", function (clientId) {
+            const row = document.getElementById(clientId);
+            if (row) {
+                row.cells[1].innerHTML = "Disconnected";
+                stopTimer(clientId);
+            }
+        });
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
+}
