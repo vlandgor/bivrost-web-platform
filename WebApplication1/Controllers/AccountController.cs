@@ -24,9 +24,12 @@ public class AccountController : Controller
             {
                 var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, data.Email) },
                     CookieAuthenticationDefaults.AuthenticationScheme);
+                
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                
                 HttpContext.Session.SetString("Email", data.Email);
+                await HttpContext.Session.CommitAsync();
                 return RedirectToAction("Index", "Home");
             }
             else

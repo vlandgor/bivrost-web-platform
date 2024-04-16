@@ -11,7 +11,7 @@
             <button id="studentsBtn" class="segment-button active-underline">Students</button>
             <button id="instructorsBtn" class="segment-button">Instructors</button>
             <div style="flex: 1"></div>
-            <button id="addParticipantBtn" class="active-colored-button">ADD STUDENT</button>
+            <button id="createStudentButton" type="button" class="active-colored-button">Add Student</button>
         </div>
         <table id="StudentsSessionTable" class="tableList">
             <thead>
@@ -81,6 +81,51 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="createStudentPanel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modalPanel">
+            <div class="modalHeader">
+                <label class="modalTitle" id="modalTitle">Add a new student</label>
+                <label class="modalTitleDescription" id="modalTitleDescription">Add a new student to the session</label>
+            </div>
+            @{
+                // Generate a random ID
+                string randomStudentID = Guid.NewGuid().ToString();
+            }
+            <form asp-controller="Session" asp-action="CreateStudent" method="post" asp-route-projectId="@Model.ProjectId" asp-route-sessionId="@Model.SessionId" asp-route-studentId="@randomStudentID">
+                <div class="modalBody">
+                    <div class="modalBodyContentBlock">
+                        <label>Student ID</label>
+                        <input type="text" placeholder="@randomStudentID" id="studentIdInput" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="modalBodyContentBlock">
+                        <label>Student Name</label>
+                        <input type="text" id="studentNameInput" name="studentName" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modalFooter">
+                    <a>
+                        <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
+                    </a>
+                    <button id="createNewStudent" type="submit">
+                        <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle button click event and show modal
+    document.getElementById('createStudentButton').addEventListener('click', function () {
+        $('#createStudentPanel').modal('show');
+    });
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        $('#createStudentPanel').modal('hide');
+    });
+</script>
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.2/signalr.min.js"></script>

@@ -12,13 +12,21 @@ builder.Services.AddHostedService<TcpListenerService>();
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
-Startup startup = new Startup();
-startup.ConfigureServices(builder.Services);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+Startup startup = new Startup();
+startup.ConfigureServices(builder.Services);
+
 var app = builder.Build();
+
+app.UseRouting();
+app.UseSession();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -27,14 +35,6 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseSession();
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

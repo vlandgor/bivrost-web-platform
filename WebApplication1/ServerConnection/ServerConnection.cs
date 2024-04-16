@@ -6,9 +6,9 @@ namespace WebApplication1.ServerConnection;
 
 public static class ServerConnection
 {
-    public static async Task<List<Project>> GetProjectsList()
+    public static async Task<List<Project>> GetProjectsList(string email)
     {
-        string apiUrl = "https://0wiig3gn2b.execute-api.us-east-2.amazonaws.com/dev";
+        string apiUrl = $"https://0wiig3gn2b.execute-api.us-east-2.amazonaws.com/dev?email={email}";
     
         try
         {
@@ -223,6 +223,38 @@ public static class ServerConnection
                 else
                 {
                     Console.WriteLine($"Failed to add new user. Status code: {response.StatusCode}");
+                    return false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return false;
+        }
+    }
+    
+    public static async Task<bool> AddNewStudent(string sessionId, Student newStudent)
+    {
+        string apiUrl = $"";
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = JsonConvert.SerializeObject(new { sessionId, studentData = newStudent });
+                HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to add new session. Status code: {response.StatusCode}");
+                    
                     return false;
                 }
             }
