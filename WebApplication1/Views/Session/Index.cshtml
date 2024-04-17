@@ -34,8 +34,8 @@
                     <td class="empty-td"></td>
                     <td class="left-element">@student.st_name</td>
                     <td class="center-element regular-cell @studentStatusClass">@student.st_status ? "CONNECTED" : "DISCONNECTED"</td>
-                    <td class="center-element regular-cell">21 minutes</td>  <!-- Placeholder time -->
-                    <td class="center-element regular-cell">@student.st_progress%</td>
+                    <td class="center-element regular-cell">0 minutes</td>  <!-- Placeholder time -->
+                    <td class="center-element regular-cell">@student.st_progress</td>
                     <td class="center-element regular-cell">
                         <a id="sessionLink">
                             <div class="actions-button">
@@ -90,10 +90,9 @@
                 <label class="modalTitleDescription" id="modalTitleDescription">Add a new student to the session</label>
             </div>
             @{
-                // Generate a random ID
                 string randomStudentID = Guid.NewGuid().ToString();
             }
-            <form asp-controller="Session" asp-action="CreateStudent" method="post" asp-route-projectId="@Model.ProjectId" asp-route-sessionId="@Model.SessionId" asp-route-studentId="@randomStudentID">
+            <form>
                 <div class="modalBody">
                     <div class="modalBodyContentBlock">
                         <label>Student ID</label>
@@ -199,7 +198,7 @@
                 event.preventDefault();
                 var studentId = document.getElementById("studentIdInput").value;
                 var studentName = document.getElementById("studentNameInput").value;
-                studentConnection.invoke("CreateStudent", '@Model.SessionId', studentId, studentName).catch(function(err) {
+                studentConnection.invoke("CreateStudent",'@Model.ProjectId', '@Model.SessionId', studentId, studentName).catch(function(err) {
                     console.error(err.toString());
                 });
             });
@@ -208,7 +207,7 @@
                 const tableBody = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
                 const row = tableBody.insertRow();
                 row.insertCell(0).innerHTML = '<td class="empty-td"></td>'; // Empty cell for styling
-                row.insertCell(1).innerHTML = studentName;
+                row.insertCell(1).innerHTML = '<td class="left-element">' + studentName + '</td>';
                 row.insertCell(2).innerHTML = studentStatus ? '<div class="player-status-connected">CONNECTED</div>' : '<div class="player-status-disconnected">DISCONNECTED</div>';
                 row.insertCell(3).innerHTML = '<td class="center-element regular-cell">21 minutes</td>'; // Just added, so set to 'Just now'
                 row.insertCell(4).innerHTML = '100%'; // Assuming progress is passed as an integer

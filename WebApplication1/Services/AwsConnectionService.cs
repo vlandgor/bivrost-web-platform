@@ -234,15 +234,15 @@ public static class AwsConnectionService
         }
     }
     
-    public static async Task<bool> AddNewStudent(string sessionId, Student newStudent)
+    public static async Task<bool> AddNewStudent(string projectId, string sessionId, Student newStudent)
     {
-        string apiUrl = $"";
+        string apiUrl = $"https://qx7t6wk1ze.execute-api.us-east-2.amazonaws.com/dev";
 
         try
         {
             using (HttpClient client = new HttpClient())
             {
-                string jsonContent = JsonConvert.SerializeObject(new { sessionId, studentData = newStudent });
+                string jsonContent = JsonConvert.SerializeObject(new { projectId, sessionId, studentData = newStudent });
                 HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await client.PostAsync(apiUrl, content);
