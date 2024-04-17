@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers;
 
@@ -18,7 +19,7 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            User data = await ServerConnection.ServerConnection.GetUserData(model.Email);
+            User data = await AwsConnectionService.GetUserData(model.Email);
             bool isValid = data.Email == model.Email && data.Password == model.Password;
             if (isValid)
             {
@@ -70,7 +71,7 @@ public class AccountController : Controller
                 Projects_Id = new List<string>()
             };
 
-            await ServerConnection.ServerConnection.RegisterNewUser(data);
+            await AwsConnectionService.RegisterNewUser(data);
             
             TempData["successMessage"] = $"You are eligible to login, Please fill own credential's then login!";
             return RedirectToAction("Login");

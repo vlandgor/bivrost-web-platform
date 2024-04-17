@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers;
 
@@ -24,7 +25,7 @@ public class HomeController : Controller
     {
         Project project = new Project(projectId, fullName, shortName);
 
-        await ServerConnection.ServerConnection.AddNewProject(project);
+        await AwsConnectionService.AddNewProject(project);
         
         return RedirectToAction("Index", "Project", new { projectId = projectId });
     }

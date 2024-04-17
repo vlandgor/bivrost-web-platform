@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using WebApplication1.Models;
 
-namespace WebApplication1.ServerConnection;
+namespace WebApplication1.Services;
 
-public static class ServerConnection
+public static class AwsConnectionService
 {
     public static async Task<List<Project>> GetProjectsList(string email)
     {
