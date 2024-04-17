@@ -44,6 +44,7 @@ app.MapControllerRoute(
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<KeepAliveHub>("/keepAliveHub");
+    endpoints.MapHub<StudentHub>("/studentHub");
     endpoints.MapRazorPages(); // Map Razor Pages or other endpoints as needed
 });
 

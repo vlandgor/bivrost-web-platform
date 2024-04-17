@@ -15,29 +15,29 @@
         </div>
         <table id="StudentsSessionTable" class="tableList">
             <thead>
-            <tr>
-                <th class="empty-th"></th>
-                <th class="left-element">NAME</th>
-                <th class="center-element regular-cell">STATUS</th>
-                <th class="center-element regular-cell">TIME</th>
-                <th class="center-element regular-cell">PROGRESS</th>
-                <th class="center-element regular-cell">OPTIONS</th>
-                <th class="empty-th"></th>
-            </tr>
+                <tr>
+                    <th class="empty-th"></th>
+                    <th class="left-element">NAME</th>
+                    <th class="center-element regular-cell">STATUS</th>
+                    <th class="center-element regular-cell">TIME</th>
+                    <th class="center-element regular-cell">PROGRESS</th>
+                    <th class="center-element regular-cell">OPTIONS</th>
+                    <th class="empty-th"></th>
+                </tr>
             </thead>
             <tbody>
             @foreach (var student in Model.Students)
-            {   
+            {
                 string studentStatusClass = student.st_status ? "player-status-connected" : "player-status-disconnected";
-                
+        
                 <tr>
                     <td class="empty-td"></td>
                     <td class="left-element">@student.st_name</td>
-                    <td class="center-element regular-cell @studentStatusClass">@(student.st_status ? "CONNECTED" : "DISCONNECTED")</td>
-                    <td class="center-element regular-cell">"21 minutes</td>
-                    <td class="center-element regular-cell">@student.st_progress</td>
+                    <td class="center-element regular-cell @studentStatusClass">@student.st_status ? "CONNECTED" : "DISCONNECTED"</td>
+                    <td class="center-element regular-cell">21 minutes</td>  <!-- Placeholder time -->
+                    <td class="center-element regular-cell">@student.st_progress%</td>
                     <td class="center-element regular-cell">
-                        <a id="sessionLink" asp-action="" asp-controller="">
+                        <a id="sessionLink">
                             <div class="actions-button">
                                 MORE
                             </div>
@@ -97,7 +97,7 @@
                 <div class="modalBody">
                     <div class="modalBodyContentBlock">
                         <label>Student ID</label>
-                        <input type="text" placeholder="@randomStudentID" id="studentIdInput" class="form-control" readonly="readonly"/>
+                        <input type="text" value="@randomStudentID" id="studentIdInput" class="form-control" readonly="readonly"/>
                     </div>
                     <div class="modalBodyContentBlock">
                         <label>Student Name</label>
@@ -105,114 +105,122 @@
                     </div>
                 </div>
                 <div class="modalFooter">
-                    <a>
-                        <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
-                    </a>
-                    <button id="createNewStudent" type="submit">
-                        <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
-                    </button>
+                    <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
+                    <button type="button" id="createNewStudent" class="footerButton continueButton">CREATE</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<script>
-    // JavaScript to handle button click event and show modal
-    document.getElementById('createStudentButton').addEventListener('click', function () {
-        $('#createStudentPanel').modal('show');
-    });
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        $('#createStudentPanel').modal('hide');
-    });
-</script>
-
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.2/signalr.min.js"></script>
     <script>
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/keepAliveHub")
-            .build();
+        $(document).ready(function() {
+            // Modal controls
+            $('#createStudentButton').click(function() {
+                $('#createStudentPanel').modal('show');
+            });
 
-        const timers = {};
+            $('#cancelButton').click(function() {
+                $('#createStudentPanel').modal('hide');
+            });
 
-        function startTimer(clientId) {
-            const startTime = Date.now();
-            timers[clientId] = setInterval(() => {
-                const elapsedTime = Date.now() - startTime;
-                const seconds = Math.floor((elapsedTime / 1000) % 60);
-                const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
-                const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+            // Set up the connection to the Keep Alive Hub
+            const keepAliveConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/keepAliveHub")
+                .build();
 
-                const formattedTime = [hours, minutes, seconds].map(unit => unit < 10 ? `0${unit}` : unit).join(':');
+            // Set up the connection to the Student Hub
+            const studentConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/studentHub")
+                .build();
+
+            // Timers for client sessions
+            const timers = {};
+
+            function startTimer(clientId) {
+                const startTime = Date.now();
+                timers[clientId] = setInterval(() => {
+                    const elapsedTime = Date.now() - startTime;
+                    const seconds = Math.floor((elapsedTime / 1000) % 60);
+                    const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+                    const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+                    const formattedTime = [hours, minutes, seconds].map(unit => unit < 10 ? `0${unit}` : unit).join(':');
+                    const row = document.getElementById(clientId);
+                    if (row && row.cells.length > 2) {
+                        row.cells[2].innerHTML = formattedTime;
+                    }
+                }, 1000);
+            }
+
+            function stopTimer(clientId) {
+                clearInterval(timers[clientId]);
+                delete timers[clientId];
+            }
+
+            keepAliveConnection.on("ClientConnected", function(clientId, message) {
+                const table = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
+                const row = table.insertRow();
+                row.setAttribute("id", clientId);
+                row.insertCell(0).innerHTML = message;
+                row.insertCell(1).innerHTML = "Connected";
+                row.insertCell(2).innerHTML = "00:00:00";
+                startTimer(clientId);
+            });
+
+            keepAliveConnection.on("UpdateKeepAlive", function(clientId, message) {
                 const row = document.getElementById(clientId);
-                if (row && row.cells.length > 2) {
-                    row.cells[2].innerHTML = formattedTime;
+                if (row) {
+                    row.cells[1].innerHTML = message;
+                    if (message === "Connected") {
+                        startTimer(clientId);
+                    } else {
+                        stopTimer(clientId);
+                    }
                 }
-            }, 1000);
-        }
+            });
 
-        function stopTimer(clientId) {
-            clearInterval(timers[clientId]);
-            delete timers[clientId];
-        }
-
-        connection.on("ClientConnected", function (clientId, message) {
-            const table = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
-            const row = table.insertRow();
-            row.setAttribute("id", clientId);
-            row.insertCell(0).innerHTML = message;
-            row.insertCell(1).innerHTML = "Connected";
-            row.insertCell(2).innerHTML = "00:00:00";
-
-            startTimer(clientId);
-        });
-
-        connection.on("UpdateKeepAlive", function (clientId, message) {
-            const row = document.getElementById(clientId);
-            if (row) {
-                row.cells[1].innerHTML = message;
-                if (message === "Connected") {
-                    startTimer(clientId);
-                } else {
+            keepAliveConnection.on("ClientDisconnected", function(clientId) {
+                const row = document.getElementById(clientId);
+                if (row) {
+                    row.cells[1].innerHTML = "Disconnected";
                     stopTimer(clientId);
                 }
-            }
-        });
+            });
 
-        connection.on("ClientDisconnected", function (clientId) {
-            const row = document.getElementById(clientId);
-            if (row) {
-                row.cells[1].innerHTML = "Disconnected";
-                stopTimer(clientId);
-            }
-        });
+            keepAliveConnection.start().catch(function(err) {
+                console.error(err.toString());
+            });
 
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
-        });
-    </script>
-    
-    <script src="~/lib/signalr/signalr.js"></script>
-    <script>
-        var connection = new signalR.HubConnectionBuilder().withUrl("/studentHub").build();
-    
-        connection.start().then(function () {
-            document.getElementById("createNewStudent").addEventListener("click", function (event) {
+            // Handle student creation
+            document.getElementById("createNewStudent").addEventListener("click", function(event) {
                 event.preventDefault();
                 var studentId = document.getElementById("studentIdInput").value;
                 var studentName = document.getElementById("studentNameInput").value;
-                connection.invoke("CreateStudent", '@Model.SessionId', studentId, studentName).catch(function (err) {
-                    return console.error(err.toString());
+                studentConnection.invoke("CreateStudent", '@Model.SessionId', studentId, studentName).catch(function(err) {
+                    console.error(err.toString());
                 });
             });
-        }).catch(function (err) {
-            return console.error(err.toString());
-        });
-    
-        connection.on("StudentCreated", function (studentId, studentName) {
-            // Handle new student creation UI update or notification
-            alert("New Student Created: " + studentName);
+
+            studentConnection.on("StudentCreated", function (studentId, studentName, studentStatus, studentProgress) {
+                const tableBody = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
+                const row = tableBody.insertRow();
+                row.insertCell(0).innerHTML = '<td class="empty-td"></td>'; // Empty cell for styling
+                row.insertCell(1).innerHTML = studentName;
+                row.insertCell(2).innerHTML = studentStatus ? '<div class="player-status-connected">CONNECTED</div>' : '<div class="player-status-disconnected">DISCONNECTED</div>';
+                row.insertCell(3).innerHTML = '<td class="center-element regular-cell">21 minutes</td>'; // Just added, so set to 'Just now'
+                row.insertCell(4).innerHTML = '100%'; // Assuming progress is passed as an integer
+                row.insertCell(5).innerHTML = '<a id="sessionLink" asp-action="Details" asp-controller="Student" asp-route-studentId="' + studentId + '"><div class="actions-button">MORE</div></a>';
+                row.insertCell(6).innerHTML = '<td class="empty-td"></td>'; // Empty cell for styling
+                
+                $('#createStudentPanel').modal('hide');
+            });
+
+            studentConnection.start().catch(function(err) {
+                console.error(err.toString());
+            });
         });
     </script>
 }
