@@ -29,13 +29,14 @@
             @foreach (var student in Model.Students)
             {
                 string studentStatusClass = student.st_status ? "player-status-connected" : "player-status-disconnected";
+                string statusText = @student.st_status ? "CONNECTED" : "DISCONNECTED";
         
-                <tr>
+                <tr id="row-@student.st_id">
                     <td class="empty-td"></td>
                     <td class="left-element">@student.st_name</td>
-                    <td class="center-element regular-cell @studentStatusClass">@student.st_status ? "CONNECTED" : "DISCONNECTED"</td>
-                    <td class="center-element regular-cell">0 minutes</td>  <!-- Placeholder time -->
-                    <td class="center-element regular-cell">@student.st_progress</td>
+                    <td class="center-element regular-cell @studentStatusClass status-cell">@statusText</td>
+                    <td class="center-element regular-cell">0 minutes</td>
+                    <td class="center-element regular-cell">@student.st_progress%</td>
                     <td class="center-element regular-cell">
                         <a id="sessionLink">
                             <div class="actions-button">
@@ -117,7 +118,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.2/signalr.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Modal controls
+            // Initialize SignalR connections
+            const keepAliveConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/keepAliveHub")
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            const studentConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/studentHub")
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            // Modal controls for adding new students
             $('#createStudentButton').click(function() {
                 $('#createStudentPanel').modal('show');
             });
@@ -126,74 +138,41 @@
                 $('#createStudentPanel').modal('hide');
             });
 
-            // Set up the connection to the Keep Alive Hub
-            const keepAliveConnection = new signalR.HubConnectionBuilder()
-                .withUrl("/keepAliveHub")
-                .build();
+            // Start KeepAlive Connection
+            keepAliveConnection.start().then(function() {
+                console.log('Connected to KeepAlive Hub');
+            }).catch(function(err) {
+                return console.error(err.toString());
+            });
 
-            // Set up the connection to the Student Hub
-            const studentConnection = new signalR.HubConnectionBuilder()
-                .withUrl("/studentHub")
-                .build();
+            // Start Student Connection
+            studentConnection.start().then(function() {
+                console.log('Connected to Student Hub');
+            }).catch(function(err) {
+                return console.error(err.toString());
+            });
 
-            // Timers for client sessions
-            const timers = {};
-
-            function startTimer(clientId) {
-                const startTime = Date.now();
-                timers[clientId] = setInterval(() => {
-                    const elapsedTime = Date.now() - startTime;
-                    const seconds = Math.floor((elapsedTime / 1000) % 60);
-                    const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
-                    const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
-                    const formattedTime = [hours, minutes, seconds].map(unit => unit < 10 ? `0${unit}` : unit).join(':');
-                    const row = document.getElementById(clientId);
-                    if (row && row.cells.length > 2) {
-                        row.cells[2].innerHTML = formattedTime;
-                    }
-                }, 1000);
-            }
-
-            function stopTimer(clientId) {
-                clearInterval(timers[clientId]);
-                delete timers[clientId];
-            }
-
+            // React to the "ClientConnected" event from the server
             keepAliveConnection.on("ClientConnected", function(clientId, message) {
-                const table = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
-                const row = table.insertRow();
-                row.setAttribute("id", clientId);
-                row.insertCell(0).innerHTML = message;
-                row.insertCell(1).innerHTML = "Connected";
-                row.insertCell(2).innerHTML = "00:00:00";
-                startTimer(clientId);
+                updateOrCreateRow(clientId, message, "00:00:00", "Connected", "0%"); // Initial connection
             });
 
+            // Update student status based on keep alive messages
             keepAliveConnection.on("UpdateKeepAlive", function(clientId, message) {
-                const row = document.getElementById(clientId);
-                if (row) {
-                    row.cells[1].innerHTML = message;
-                    if (message === "Connected") {
-                        startTimer(clientId);
-                    } else {
-                        stopTimer(clientId);
-                    }
+                const row = $('#row-' + clientId);
+                if (row.length) {
+                    row.find('.status-cell').html(message === "Connected" ? '<div class="player-status-connected">CONNECTED</div>' : '<div class="player-status-disconnected">DISCONNECTED</div>');
                 }
             });
 
+            // React to the "ClientDisconnected" event
             keepAliveConnection.on("ClientDisconnected", function(clientId) {
-                const row = document.getElementById(clientId);
-                if (row) {
-                    row.cells[1].innerHTML = "Disconnected";
-                    stopTimer(clientId);
+                const row = $('#row-' + clientId);
+                if (row.length) {
+                    row.find('.status-cell').html('<div class="player-status-disconnected">DISCONNECTED</div>');
                 }
             });
 
-            keepAliveConnection.start().catch(function(err) {
-                console.error(err.toString());
-            });
-
-            // Handle student creation
             document.getElementById("createNewStudent").addEventListener("click", function(event) {
                 event.preventDefault();
                 var studentId = document.getElementById("studentIdInput").value;
@@ -202,24 +181,36 @@
                     console.error(err.toString());
                 });
             });
-
-            studentConnection.on("StudentCreated", function (studentId, studentName, studentStatus, studentProgress) {
-                const tableBody = document.getElementById("StudentsSessionTable").getElementsByTagName('tbody')[0];
-                const row = tableBody.insertRow();
-                row.insertCell(0).innerHTML = '<td class="empty-td"></td>'; // Empty cell for styling
-                row.insertCell(1).innerHTML = '<td class="left-element">' + studentName + '</td>';
-                row.insertCell(2).innerHTML = studentStatus ? '<div class="player-status-connected">CONNECTED</div>' : '<div class="player-status-disconnected">DISCONNECTED</div>';
-                row.insertCell(3).innerHTML = '<td class="center-element regular-cell">21 minutes</td>'; // Just added, so set to 'Just now'
-                row.insertCell(4).innerHTML = '100%'; // Assuming progress is passed as an integer
-                row.insertCell(5).innerHTML = '<a id="sessionLink" asp-action="Details" asp-controller="Student" asp-route-studentId="' + studentId + '"><div class="actions-button">MORE</div></a>';
-                row.insertCell(6).innerHTML = '<td class="empty-td"></td>'; // Empty cell for styling
-                
+            
+            // React to new student creation via Student Hub
+            studentConnection.on("StudentCreated", function(studentId, studentName, studentStatus, studentProgress) {
+                updateOrCreateRow(studentId, studentName, "0 minutes", studentStatus ? "CONNECTED" : "DISCONNECTED", studentProgress + '%');
                 $('#createStudentPanel').modal('hide');
             });
 
-            studentConnection.start().catch(function(err) {
-                console.error(err.toString());
-            });
+            // Helper function to update or create table row
+            function updateOrCreateRow(studentId, studentName, time, status, progress) {                
+                let row = $('#row-' + studentId);                
+                if (row.length === 0) {
+                    $('#StudentsSessionTable tbody').append(
+                        `<tr id="row-${studentId}">
+                            <td class="empty-td"></td>
+                            <td class="left-element">${studentName}</td>
+                            <td class="center-element regular-cell player-status-disconnected status-cell">${status}</td>
+                            <td class="center-element regular-cell">${time}</td>
+                            <td class="center-element regular-cell">${progress}</td>
+                            <td class="center-element regular-cell">
+                                <a id="sessionLink" href="/Student/Details/${studentId}">
+                                    <div class="actions-button">MORE</div>
+                                </a>
+                            </td>
+                            <td class="empty-td"></td>
+                        </tr>`
+                    );
+                } else {
+                    row.find('.status-cell').html(status);
+                }
+            }
         });
     </script>
 }

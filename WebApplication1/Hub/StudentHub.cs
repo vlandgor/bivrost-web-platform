@@ -11,6 +11,6 @@ public class StudentHub : Microsoft.AspNetCore.SignalR.Hub
         await AwsConnectionService.AddNewStudent(projectId, sessionId, new Student(studentId, studentName, 0, false));
         
         // Notify all clients that a new student is added
-        await Clients.All.SendAsync("StudentCreated", studentId, studentName);
+        await Clients.All.SendAsync("StudentCreated", studentId, studentName, false, 0);
     }
 }
