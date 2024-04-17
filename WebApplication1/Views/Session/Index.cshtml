@@ -154,7 +154,7 @@
 
             // React to the "ClientConnected" event from the server
             keepAliveConnection.on("ClientConnected", function(clientId, message) {
-                updateOrCreateRow(clientId, message, "00:00:00", "Connected", "0%"); // Initial connection
+                updateOrCreateRow(clientId, message, "00:00:00", "CONNECTED", "0%"); // Initial connection
             });
 
             // Update student status based on keep alive messages
@@ -208,7 +208,7 @@
                         </tr>`
                     );
                 } else {
-                    row.find('.status-cell').html(status);
+                    row.find('.status-cell').html(status === "CONNECTED" ? '<div class="player-status-connected">CONNECTED</div>' : '<div class="player-status-disconnected">DISCONNECTED</div>');
                 }
             }
         });
