@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj": {}
+    "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostServer\\BivrostServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj": {
+    "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostServer\\BivrostServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj",
-        "projectName": "BivrostWeb",
-        "projectPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj",
+        "projectUniqueName": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostServer\\BivrostServer.csproj",
+        "projectName": "BivrostServer",
+        "projectPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostServer\\BivrostServer.csproj",
         "packagesPath": "C:\\Users\\RAZER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\obj\\",
+        "outputPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,21 +45,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "AWSSDK.Core": {
+            "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
-              "version": "[3.7.302.12, )"
-            },
-            "AWSSDK.RDS": {
-              "target": "Package",
-              "version": "[3.7.306.10, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Npgsql": {
-              "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -74,9 +62,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
