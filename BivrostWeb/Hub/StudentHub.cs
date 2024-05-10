@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using BivrostWeb.Services;
+using Microsoft.AspNetCore.SignalR;
 using WebApplication1.Models;
-using WebApplication1.Services;
 
 namespace WebApplication1.Hub;
 

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using BivrostWeb.Server;
 using WebApplication1.Hub;
 
 public class TcpListenerService : BackgroundService
@@ -14,12 +15,17 @@ public class TcpListenerService : BackgroundService
     private readonly IHubContext<KeepAliveHub> _hubContext;
     private TcpListener _tcpListener;
 
-    private static ConcurrentDictionary<string, TcpClient> _clients = new();
+    public delegate void PacketHandler(string clientId, Packet packet);
+    public static Dictionary<int, PacketHandler> packetHandlers;
+
+    private static ConcurrentDictionary<string, Client> _clients = new();
 
     public TcpListenerService(ILogger<TcpListenerService> logger, IHubContext<KeepAliveHub> hubContext)
     {
         _logger = logger;
         _hubContext = hubContext;
+
+        InitializeServerData();
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -30,14 +36,17 @@ public class TcpListenerService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             TcpClient client = await _tcpListener.AcceptTcpClientAsync();
-            _logger.LogInformation("Client connected.");
-            _ = HandleClient(client, stoppingToken);
+            await HandleClient(client, stoppingToken);
         }
     }
 
-    private async Task HandleClient(TcpClient client, CancellationToken stoppingToken)
+    private async Task HandleClient(TcpClient tcpClient, CancellationToken stoppingToken)
     {
         string clientId = Guid.NewGuid().ToString(); // Generate a unique ID for the client
+        
+        Client client = new Client(clientId);
+        client.tcp.Connect(tcpClient);
+        
         if (_clients.TryAdd(clientId, client))
         {
             _logger.LogInformation($"Client {clientId} added.");
@@ -45,7 +54,7 @@ public class TcpListenerService : BackgroundService
 
         try
         {
-            NetworkStream stream = client.GetStream();
+            NetworkStream stream = tcpClient.GetStream();
             byte[] buffer = new byte[CLIENT_BUFFER];
 
             // Initial read for client identification
@@ -78,5 +87,12 @@ public class TcpListenerService : BackgroundService
                 await _hubContext.Clients.All.SendAsync("ClientDisconnected", clientId);
             }
         }
+    }
+    private void InitializeServerData()
+    {
+        packetHandlers = new Dictionary<int, PacketHandler>()
+        {
+            { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived }
+        };
     }
 }

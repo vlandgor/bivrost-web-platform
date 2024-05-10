@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using WebApplication1.Models;
 
-namespace WebApplication1.Services;
+namespace BivrostWeb.Services;
 
 public static class AwsConnectionService
 {
