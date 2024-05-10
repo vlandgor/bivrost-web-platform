@@ -2997,11 +2997,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj",
+      "projectUniqueName": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\BivrostWeb.csproj",
       "projectName": "BivrostWeb",
-      "projectPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj",
+      "projectPath": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\BivrostWeb.csproj",
       "packagesPath": "C:\\Users\\RAZER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\obj\\",
+      "outputPath": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
