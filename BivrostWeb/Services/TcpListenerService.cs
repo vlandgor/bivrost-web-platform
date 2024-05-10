@@ -7,6 +7,9 @@ using WebApplication1.Hub;
 
 public class TcpListenerService : BackgroundService
 {
+    private const int TCP_PORT = 3000;
+    private const int CLIENT_BUFFER = 1024;
+    
     private readonly ILogger<TcpListenerService> _logger;
     private readonly IHubContext<KeepAliveHub> _hubContext;
     private TcpListener _tcpListener;
@@ -17,13 +20,12 @@ public class TcpListenerService : BackgroundService
     {
         _logger = logger;
         _hubContext = hubContext;
-        _tcpListener = new TcpListener(IPAddress.Any, 5000); // Listening on port 5000
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        _tcpListener = new TcpListener(IPAddress.Any, TCP_PORT);
         _tcpListener.Start();
-        _logger.LogInformation("TCP listener started on port 5000.");
 
         while (!stoppingToken.IsCancellationRequested)
         {
@@ -43,12 +45,11 @@ public class TcpListenerService : BackgroundService
 
         try
         {
-            var stream = client.GetStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
+            NetworkStream stream = client.GetStream();
+            byte[] buffer = new byte[CLIENT_BUFFER];
 
             // Initial read for client identification
-            bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, stoppingToken);
+            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, stoppingToken);
             string initialMessage = Encoding.ASCII.GetString(buffer, 0, bytesRead).Trim();
             clientId = initialMessage; // Use the initial message as client ID
 

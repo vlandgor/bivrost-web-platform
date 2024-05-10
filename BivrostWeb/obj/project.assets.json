@@ -2997,11 +2997,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-      "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj",
+      "projectName": "BivrostWeb",
+      "projectPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\BivrostWeb.csproj",
       "packagesPath": "C:\\Users\\RAZER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\RAZER\\RiderProjects\\WebApplication1\\BivrostWeb\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3100,6 +3100,16 @@
       "warningLevel": 1,
       "message": "Package 'Newtonsoft.Json' 9.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
       "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Npgsql' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
+      "libraryId": "Npgsql",
       "targetGraphs": [
         "net7.0"
       ]

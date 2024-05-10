@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{B9EC610F-2280-48E1-89CF-BBEF360D98EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BivrostWeb", "BivrostWeb\BivrostWeb.csproj", "{B9EC610F-2280-48E1-89CF-BBEF360D98EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
