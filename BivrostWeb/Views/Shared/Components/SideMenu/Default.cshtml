@@ -3,7 +3,7 @@
 <div class="side-projects-menu">
     @foreach (Project project in Model.Projects)
     {
-        <a asp-controller="Project" asp-action="Index" asp-route-projectId="@project.Id" asp-route-projectName="@project.FullName">
+        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@project.Id" asp-route-projectName="@project.Name">
             <button class="project-button">@project.ShortName</button>
         </a>
     }

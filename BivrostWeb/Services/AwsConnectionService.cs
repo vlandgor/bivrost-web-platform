@@ -104,6 +104,38 @@ public static class AwsConnectionService
         }
     }
 
+    public static async Task<Project> GetProject(string projectId)
+    {
+        string apiUrl = $"https://iedvj6v5gc.execute-api.us-east-2.amazonaws.com/dev?id={projectId}";
+    
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize JSON to List<Project>
+                    Project sessions = JsonConvert.DeserializeObject<Project>(json);
+
+                    return sessions;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to retrieve data. Status code: {response.StatusCode}");
+                    return null; // Or throw an exception if necessary
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return null; // Or throw an exception if necessary
+        }
+    }
     public static async Task<Session> GetSession(string projectId, string sessionId)
     {
         string apiUrl = $"https://0se6xxit83.execute-api.us-east-2.amazonaws.com/dev?id={projectId}&s_id={sessionId}";

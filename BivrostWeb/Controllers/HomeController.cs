@@ -27,7 +27,7 @@ public class HomeController : Controller
 
         await AwsConnectionService.AddNewProject(project);
         
-        return RedirectToAction("Index", "Project", new { projectId = projectId });
+        return RedirectToAction("Project", "Project", new { projectId = projectId });
     }
 
     public IActionResult Privacy()

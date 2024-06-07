@@ -2,16 +2,26 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
-namespace WebApplication1.Controllers;
+namespace BivrostWeb.Controllers;
 
 public class ProjectController : Controller
 {
-    public async Task<IActionResult> Index(string projectId, string projectName)
+    public async Task<IActionResult> Project(string projectId)
     {
-        List<Session> sessions = await AwsConnectionService.GetSessionsList(projectId);
-        ProjectViewModel projectViewModel = new ProjectViewModel(projectId, projectName ,sessions);
+        Project project = await AwsConnectionService.GetProject(projectId);
+        
+        ProjectViewModel projectViewModel = new ProjectViewModel(project);
         
         return View(projectViewModel);
+    }
+    
+    public async Task<IActionResult> Session(string projectId, string sessionId)
+    {
+        Project project = await AwsConnectionService.GetProject(projectId);
+        Session session = await AwsConnectionService.GetSession(projectId, sessionId);
+        
+        SessionViewModel sessionViewModel = new SessionViewModel(project, session);
+        return View(sessionViewModel);
     }
 
     [HttpPost]
@@ -19,6 +29,6 @@ public class ProjectController : Controller
     {
         await AwsConnectionService.AddNewSession(projectId, new Session(sessionId, sessionName, true, new List<Student>()));
         
-        return RedirectToAction("Index", new { projectId = projectId });
+        return RedirectToAction("Project", new { projectId = projectId });
     }
 }

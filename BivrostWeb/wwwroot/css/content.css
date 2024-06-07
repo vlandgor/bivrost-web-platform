@@ -54,6 +54,11 @@
     font-weight: 500;
     font-family: Inter;
     color: #444444;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .project-menu-button:hover {
@@ -97,7 +102,6 @@
     border: 0;
     color: #F16436;
     margin-left: 14px;
-
 }
 
 table {
@@ -190,4 +194,15 @@ td {
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.back-button {
+    width:42px;
+    height:42px;
+    background: transparent;
+    border: 1px solid #AAAAAA;
+    border-radius: 0;
+    font-size: 12px;
+    flex-grow: 0;
+    margin-right: 14px;
 }

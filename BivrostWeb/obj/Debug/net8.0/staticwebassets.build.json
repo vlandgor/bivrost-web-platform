@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wWqbRTY5QSqLJlgtwKKfdPxMSBfkSifqxbQZwCdcq8s=",
+  "Hash": "oEq2weNw6JLBqhhXzkeJl6Qyise4kwsArB3oijWGaO4=",
   "Source": "BivrostWeb",
   "BasePath": "_content/BivrostWeb",
   "Mode": "Default",
@@ -91,25 +91,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\modalPanel.css"
-    },
-    {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\session-page.css",
-      "SourceId": "BivrostWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
-      "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/session-page.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\session-page.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\side-menu.css",

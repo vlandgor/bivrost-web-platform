@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="project-page" xmlns="http://www.w3.org/1999/html">
+<div>
     <div class="project-menu-panel">
-        <text class="project-full-name">@Model.FullName</text>
+        <text class="project-full-name">@Model.Project.Name</text>
         <div style="flex-grow: 1;"></div>
-        <a asp-controller="Project" asp-action="Index"><button class="project-menu-button active-menu-button">SESSIONS</button></a>
-        <a><button class="project-menu-button">ANALYTICS</button></a>
-        <a><button class="project-menu-button">SETTINGS</button></a>
+        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
+        <a class="project-menu-button">ANALYTICS</a>
+        <a class="project-menu-button">SETTINGS</a>
     </div>
     
     <div class="block" id="div1">
@@ -22,8 +22,8 @@
             <button class="block-option-button">}{</button>
         </div>
         <div class="project-menu-panel">
-            <button id="activeSessionsBtn" class="project-menu-button active-menu-button" onclick="showActiveSessions()">ACTIVE SESSION</button>
-            <button id="finishedSessionsBtn" class="project-menu-button" onclick="showFinishedSessions()">FINISHED SESSIONS</button>
+            <button class="project-menu-button active-menu-button" data-table="activeSessionsTable" onclick="toggleTable(event)">Active</button>
+            <button class="project-menu-button" data-table="finishedSessionsTable" onclick="toggleTable(event)">Completed</button>
             <div style="flex-grow: 1;"></div>
             <button class="create-button">CREATE SESSION</button>
         </div>
@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Session session in Model.Sessions)
+                @foreach (Session session in Model.Project.Sessions)
                 {
                     if(!session.s_status)
                         return;
@@ -53,15 +53,15 @@
                         <td class="centered-table-element regular-column">@session.s_students.Count</td>
                         <td class="centered-table-element regular-column">21 minutes</td>
                         <td class="centered-table-element regular-column">
-                            <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-projectId="@Model.Id" asp-route-sessionId="@session.s_id">
-                                <button class="table-more-option">Enter</button>
+                            <a id="sessionLink" asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@session.s_id">
+                                <button class="table-more-option">Join</button>
                             </a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        <table id="finishedSessionsTable" style="display: none;">
+        <table id="completedSessionsTable" style="display: none;">
             <thead>
                 <tr>
                     <th class="left-element">NAME</th>
@@ -73,7 +73,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Session session in Model.Sessions)
+                @foreach (Session session in Model.Project.Sessions)
                 {
                     if (session.s_status)
                     {
@@ -89,7 +89,7 @@
                         <td class="centered-table-element regular-column">@session.s_students.Count</td>
                         <td class="centered-table-element regular-column">21 minutes</td>
                         <td class="centered-table-element regular-column">
-                            <button class="table-more-option">Enter</button>
+                            <button class="table-more-option">Join</button>
                         </td>
                     </tr>
                 }

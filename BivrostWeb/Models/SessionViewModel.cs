@@ -1,9 +1,7 @@
 ﻿namespace WebApplication1.Models;
 
-public class SessionViewModel(string projectId, string sessionId, string sessionName, List<Student> students)
+public class SessionViewModel(Project project, Session session)
 {
-    public string ProjectId { get; } = projectId;
-    public string SessionId { get; } = sessionId;
-    public string SessionName { get; } = sessionName;
-    public List<Student> Students { get; } = students;
+    public Project Project { get; } = project;
+    public Session Session { get; } = session;
 }
