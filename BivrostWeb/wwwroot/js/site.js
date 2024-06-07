@@ -19,8 +19,3 @@ function toggleTable(event) {
     document.getElementById(targetTableId).style.display = 'table';
     event.currentTarget.classList.add('active-menu-button');
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Show the default table (activeSessionsTable) on page load
-    document.querySelector('[data-table="activeSessionsTable"]').click();
-});

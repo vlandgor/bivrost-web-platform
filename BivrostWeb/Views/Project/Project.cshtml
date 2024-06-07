@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Project";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool hasSessions = false;
 }
 
 <div>
@@ -23,7 +24,7 @@
         </div>
         <div class="project-menu-panel">
             <button class="project-menu-button active-menu-button" data-table="activeSessionsTable" onclick="toggleTable(event)">Active</button>
-            <button class="project-menu-button" data-table="finishedSessionsTable" onclick="toggleTable(event)">Completed</button>
+            <button class="project-menu-button" data-table="completedSessionsTable" onclick="toggleTable(event)">Completed</button>
             <div style="flex-grow: 1;"></div>
             <button class="create-button">CREATE SESSION</button>
         </div>
@@ -39,13 +40,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Session session in Model.Project.Sessions)
+            @{
+                hasSessions = false;
+                
+                foreach (Session session in Model.Project.Sessions)
                 {
-                    if(!session.s_status)
-                        return;
+                    if (!session.s_status)
+                    {
+                        continue;
+                    }
                     
+                    hasSessions = true;  
+
                     string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
-    
+
                     <tr>
                         <td class="left-element">@session.s_name</td>
                         <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
@@ -59,6 +67,14 @@
                         </td>
                     </tr>
                 }
+                
+                if (!hasSessions)
+                {
+                    <tr style="height: 112px;">
+                        <td class="centered-table-element" colspan="6" style="text-align: center;">No sessions found, please try again!</td>
+                    </tr>
+                }
+            }
             </tbody>
         </table>
         <table id="completedSessionsTable" style="display: none;">
@@ -73,25 +89,38 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Session session in Model.Project.Sessions)
-                {
-                    if (session.s_status)
+                @{
+                    hasSessions = false;
+                    
+                    foreach (Session session in Model.Project.Sessions)
                     {
-                        return;
+                        if (session.s_status)
+                        {
+                            continue;
+                        }
+                        
+                        hasSessions = true;
+
+                        string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
+
+                        <tr>
+                            <td class="left-element">@session.s_name</td>
+                            <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
+                            <td class="centered-table-element regular-column">21.21.2121</td>
+                            <td class="centered-table-element regular-column">@session.s_students.Count</td>
+                            <td class="centered-table-element regular-column">21 minutes</td>
+                            <td class="centered-table-element regular-column">
+                                <button class="table-more-option">Join</button>
+                            </td>
+                        </tr>
                     }
                     
-                    string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
-    
-                    <tr>
-                        <td class="left-element">@session.s_name</td>
-                        <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
-                        <td class="centered-table-element regular-column">21.21.2121</td>
-                        <td class="centered-table-element regular-column">@session.s_students.Count</td>
-                        <td class="centered-table-element regular-column">21 minutes</td>
-                        <td class="centered-table-element regular-column">
-                            <button class="table-more-option">Join</button>
-                        </td>
-                    </tr>
+                    if (!hasSessions)
+                    {
+                        <tr style="height: 112px;">
+                            <td class="centered-table-element" colspan="6" style="text-align: center;">No sessions found, please try again!</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
