@@ -6,10 +6,10 @@ namespace WebApplication1.Controllers;
 
 public class ProjectController : Controller
 {
-    public async Task<IActionResult> Index(string projectId)
+    public async Task<IActionResult> Index(string projectId, string projectName)
     {
         List<Session> sessions = await AwsConnectionService.GetSessionsList(projectId);
-        ProjectViewModel projectViewModel = new ProjectViewModel(projectId, sessions);
+        ProjectViewModel projectViewModel = new ProjectViewModel(projectId, projectName ,sessions);
         
         return View(projectViewModel);
     }

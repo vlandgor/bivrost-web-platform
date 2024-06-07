@@ -1,13 +1,8 @@
 ﻿namespace WebApplication1.Models;
 
-public class ProjectViewModel
+public class ProjectViewModel(string id, string fullName, List<Session> sessions)
 {
-    public string Id { get; private set; }
-    public List<Session> Sessions { get; private set; }
-    
-    public ProjectViewModel(string id, List<Session> sessions)
-    {
-        Id = id;
-        Sessions = sessions;
-    }
+    public string Id { get; private set; } = id;
+    public string FullName { get; private set; } = fullName;
+    public List<Session> Sessions { get; private set; } = sessions;
 }

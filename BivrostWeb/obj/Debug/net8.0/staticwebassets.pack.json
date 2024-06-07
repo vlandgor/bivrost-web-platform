@@ -5,20 +5,12 @@
       "PackagePath": "staticwebassets\\BivrostWeb.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\account-page.css",
-      "PackagePath": "staticwebassets\\css\\account-page.css"
-    },
-    {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\generalElements.css",
-      "PackagePath": "staticwebassets\\css\\generalElements.css"
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\content.css",
+      "PackagePath": "staticwebassets\\css\\content.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\modalPanel.css",
       "PackagePath": "staticwebassets\\css\\modalPanel.css"
-    },
-    {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\project-page.css",
-      "PackagePath": "staticwebassets\\css\\project-page.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\session-page.css",
@@ -31,10 +23,6 @@
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\tableList.css",
-      "PackagePath": "staticwebassets\\css\\tableList.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\favicon.ico",

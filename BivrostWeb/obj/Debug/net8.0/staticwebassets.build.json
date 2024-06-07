@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "N85+NtvpzkFj/bWPhrF4UUhf7d3lfFbQMpttJxR8lbc=",
+  "Hash": "wWqbRTY5QSqLJlgtwKKfdPxMSBfkSifqxbQZwCdcq8s=",
   "Source": "BivrostWeb",
   "BasePath": "_content/BivrostWeb",
   "Mode": "Default",
@@ -55,12 +55,12 @@
       "OriginalItemSpec": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BivrostWeb.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\account-page.css",
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\content.css",
       "SourceId": "BivrostWeb",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
       "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/account-page.css",
+      "RelativePath": "css/content.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -71,26 +71,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\account-page.css"
-    },
-    {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\generalElements.css",
-      "SourceId": "BivrostWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
-      "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/generalElements.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\generalElements.css"
+      "OriginalItemSpec": "wwwroot\\css\\content.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\modalPanel.css",
@@ -110,25 +91,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\modalPanel.css"
-    },
-    {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\project-page.css",
-      "SourceId": "BivrostWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
-      "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/project-page.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\project-page.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\session-page.css",
@@ -186,25 +148,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\tableList.css",
-      "SourceId": "BivrostWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
-      "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/tableList.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\tableList.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\favicon.ico",

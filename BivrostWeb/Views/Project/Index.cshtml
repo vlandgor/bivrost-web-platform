@@ -5,94 +5,131 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="project-page">
-    <div class="select-segment">
-        <button id="studentsBtn" class="segment-button active-underline">Active Sessions</button>
-        <button id="instructorsBtn" class="segment-button">Finished Sessions</button>
-        <div style="flex: 1"></div>
-        <button id="createSessionButton" type="button" class="active-colored-button">CREATE</button>
+<div class="project-page" xmlns="http://www.w3.org/1999/html">
+    <div class="project-menu-panel">
+        <text class="project-full-name">@Model.FullName</text>
+        <div style="flex-grow: 1;"></div>
+        <a asp-controller="Project" asp-action="Index"><button class="project-menu-button active-menu-button">SESSIONS</button></a>
+        <a><button class="project-menu-button">ANALYTICS</button></a>
+        <a><button class="project-menu-button">SETTINGS</button></a>
     </div>
-
-    <table class="tableList">
-        <thead>
-        <tr>
-            <th class="empty-th"></th>
-            <th class="left-element">NAME</th>
-            <th class="center-element regular-cell">STATUS</th>
-            <th class="center-element regular-cell">DATE</th>
-            <th class="center-element regular-cell">PLAYERS</th>
-            <th class="center-element big-cell">DURATION</th>
-            <th class="center-element regular-cell">OPTIONS</th>
-            <th class="empty-th"></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (Session session in Model.Sessions)
-        {
-            string sessionStatusClass = session.s_status ? "session-status-active" : "session-status-finished";
-            
-            <tr>
-                <td class="empty-td"></td>
-                <td class="left-element">@session.s_name</td>
-                <td class="center-element regular-cell @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
-                <td class="center-element regular-cell">21.21.2121</td>
-                <td class="center-element regular-cell">@session.s_students.Count</td>
-                <td class="center-element big-cell">21 minutes</td>
-                <td class="center-element regular-cell">
-                    <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-projectId="@Model.Id" asp-route-sessionId="@session.s_id">
-                        <div class="actions-button">
-                            ENTER
-                        </div>
-                    </a>
-                </td>
-                <td class="empty-td"></td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
-
-<div class="modal fade" id="createSessionPanel" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content modalPanel">
-            <div class="modalHeader">
-                <label class="modalTitle" id="modalTitle">Create a new session</label>
-                <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label>
-            </div>
-            @{
-                // Generate a random ID
-                string randomSessionID = Guid.NewGuid().ToString();
-            }
-            <form asp-controller="Project" asp-action="CreateSession" method="post" asp-route-projectId="@Model.Id" asp-route-sessionId="@randomSessionID">
-                <div class="modalBody">
-                    <div class="modalBodyContentBlock">
-                        <label>Session ID</label>
-                        <input type="text" placeholder="@randomSessionID" id="sessionIdInput" class="form-control" readonly="readonly"/>
-                    </div>
-                    <div class="modalBodyContentBlock">
-                        <label>Session Name</label>
-                        <input type="text" id="sessionNameInput" name="sessionName" class="form-control"/>
-                    </div>
-                </div>
-                <div class="modalFooter">
-                    <a>
-                        <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
-                    </a>
-                    <button id="createNewSession" type="submit">
-                        <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
-                    </button>
-                </div>
-            </form>
+    
+    <div class="block" id="div1">
+        <div class="block-top">
+            <div class="block-name">Sessions</div>
+            <div style="flex-grow: 1;"></div>
+            <button class="block-option-button" onclick="makeFullscreen('div1')">[ ]</button>
+            <button class="block-option-button">}{</button>
         </div>
+        <div class="project-menu-panel">
+            <button id="activeSessionsBtn" class="project-menu-button active-menu-button" onclick="showActiveSessions()">ACTIVE SESSION</button>
+            <button id="finishedSessionsBtn" class="project-menu-button" onclick="showFinishedSessions()">FINISHED SESSIONS</button>
+            <div style="flex-grow: 1;"></div>
+            <button class="create-button">CREATE SESSION</button>
+        </div>
+        <table id="activeSessionsTable">
+            <thead>
+                <tr>
+                    <th class="left-element">NAME</th>
+                    <th class="centered-table-element regular-column">STATUS</th>
+                    <th class="centered-table-element regular-column">DATE</th>
+                    <th class="centered-table-element regular-column">PLAYERS</th>
+                    <th class="centered-table-element regular-column">DURATION</th>
+                    <th class="centered-table-element regular-column">OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Session session in Model.Sessions)
+                {
+                    if(!session.s_status)
+                        return;
+                    
+                    string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
+    
+                    <tr>
+                        <td class="left-element">@session.s_name</td>
+                        <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
+                        <td class="centered-table-element regular-column">21.21.2121</td>
+                        <td class="centered-table-element regular-column">@session.s_students.Count</td>
+                        <td class="centered-table-element regular-column">21 minutes</td>
+                        <td class="centered-table-element regular-column">
+                            <a id="sessionLink" asp-action="Index" asp-controller="Session" asp-route-projectId="@Model.Id" asp-route-sessionId="@session.s_id">
+                                <button class="table-more-option">Enter</button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table id="finishedSessionsTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th class="left-element">NAME</th>
+                    <th class="centered-table-element regular-column">STATUS</th>
+                    <th class="centered-table-element regular-column">DATE</th>
+                    <th class="centered-table-element regular-column">PLAYERS</th>
+                    <th class="centered-table-element regular-column">DURATION</th>
+                    <th class="centered-table-element regular-column">OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Session session in Model.Sessions)
+                {
+                    if (session.s_status)
+                    {
+                        return;
+                    }
+                    
+                    string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
+    
+                    <tr>
+                        <td class="left-element">@session.s_name</td>
+                        <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
+                        <td class="centered-table-element regular-column">21.21.2121</td>
+                        <td class="centered-table-element regular-column">@session.s_students.Count</td>
+                        <td class="centered-table-element regular-column">21 minutes</td>
+                        <td class="centered-table-element regular-column">
+                            <button class="table-more-option">Enter</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
+    
+@* </div> *@
+@* *@
+@* <div class="modal fade" id="createSessionPanel" role="dialog"> *@
+@*     <div class="modal-dialog"> *@
+@*         <div class="modal-content modalPanel"> *@
+@*             <div class="modalHeader"> *@
+@*                 <label class="modalTitle" id="modalTitle">Create a new session</label> *@
+@*                 <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label> *@
+@*             </div> *@
+@*             @{ *@
+@*                 // Generate a random ID *@
+@*                 string randomSessionID = Guid.NewGuid().ToString(); *@
+@*             } *@
+@*             <form asp-controller="Project" asp-action="CreateSession" method="post" asp-route-projectId="@Model.Id" asp-route-sessionId="@randomSessionID"> *@
+@*                 <div class="modalBody"> *@
+@*                     <div class="modalBodyContentBlock"> *@
+@*                         <label>Session ID</label> *@
+@*                         <input type="text" placeholder="@randomSessionID" id="sessionIdInput" class="form-control" readonly="readonly"/> *@
+@*                     </div> *@
+@*                     <div class="modalBodyContentBlock"> *@
+@*                         <label>Session Name</label> *@
+@*                         <input type="text" id="sessionNameInput" name="sessionName" class="form-control"/> *@
+@*                     </div> *@
+@*                 </div> *@
+@*                 <div class="modalFooter"> *@
+@*                     <a> *@
+@*                         <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div> *@
+@*                     </a> *@
+@*                     <button id="createNewSession" type="submit"> *@
+@*                         <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div> *@
+@*                     </button> *@
+@*                 </div> *@
+@*             </form> *@
+@*         </div> *@
+    @* </div> *@
 </div>
-
-<script>
-    // JavaScript to handle button click event and show modal
-    document.getElementById('createSessionButton').addEventListener('click', function () {
-        $('#createSessionPanel').modal('show');
-    });
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        $('#createSessionPanel').modal('hide');
-    });
-</script>

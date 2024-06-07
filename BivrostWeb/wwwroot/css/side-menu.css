@@ -1,148 +1,36 @@
-﻿.side-menu{
+﻿.side-projects-menu{
+    background-color: var(--color-side-menu);
+    width: var(--width-side-menu);
+    z-index: 10;
+    box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.14);
     height: 100%;
-    width: 56px;
-    z-index: 99;
-    background-color: var(--color-background-default);
-    border-right: 1px solid var(--color-separator);
-    transition: all .5s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: fixed;
+    align-items: flex-start;
+    padding: 10px;
 }
 
-.side-menu .menu-icon{
-    width: 100%;
-    height: 56px;
-    border-bottom: 1px solid var(--color-separator);
-}
-
-.side-menu .project-button{
-    width: 40px;
-    height: 40px;
+.side-projects-menu .project-button{
+    width: 42px;
+    height: 42px;
     background-color: transparent;
-    color: var(--color-text);
-    border: 1px solid #aaaaaa;
-    margin-top: 12px;
-    border-radius: 5px;
+    border: 1px solid var(--color-separator);
+    border-radius: 10px;
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 500;
+    margin-bottom: 28px;
 }
 
-.side-menu .project-button:hover{
+.side-projects-menu .project-button:first-child{
+    margin-top: 7px;
+}
+
+.side-projects-menu .project-button:last-child{
+    margin-bottom: 0;
+}
+
+.side-projects-menu .project-button:hover{
     border: 1px solid var(--color-unique);
-}
-
-.side-menu .add-project-button{
-    width: 38px;
-    height: 38px;
-    background-color: transparent;
-    color: var(--color-text);
-    border: 1px solid #aaaaaa;
-    margin-top: 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.side-menu .user-button{
-    position: fixed;
-    width: 38px;
-    height: 38px;
     background-color: var(--color-unique);
-    color: var(--color-text);
-    border: 1px solid #eeeeee;
-    bottom: 14px;
-    border-radius: 100%;
-    font-size: 14px;
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.user-button a{
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    text-decoration: none;
-    font-size: 12px;
-    text-underline: none;
-    display: flex;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.add-button{
-    width: 38px;
-    height: 38px;
-    background-color: transparent;
-    color: var(--color-text);
-    border: 1px solid #aaaaaa;
-    margin-top: 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.add-button a{
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    text-decoration: none;
-    font-size: 12px;
-    text-underline: none;
-    display: flex;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.hidden-menu{
-    height: 100%;
-    left: 56px;
-    width: 240px;
-    background-color: var(--color-background-second);
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    text-color: var(--color-text);
-    border-right: 1px solid var(--color-separator);
-}
-
-.hidden-menu .project-name{
-    width: 100%;
-    height:56px;
-    text-align: left;
-    padding-left: 14px;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    border-bottom: 1px solid var(--color-separator);
-    color: var(--color-text);
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.hidden-menu .menu-item{
-    width: 100%;
-    height: 56px;
-    padding-left: 14px;
-    border-bottom: 1px solid var(--color-separator);
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    color: var(--color-text);
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-}
-
-.hidden-menu a{
-    text-decoration: none;
-    transition: all .5s ease;
+    color: #FFFFFF
 }

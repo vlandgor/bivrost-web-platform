@@ -1,32 +1,12 @@
 ﻿@model SideMenuViewModel
 
-<div class="side-menu">
-    <div class="menu-icon"></div>
-    @foreach (var project in Model.Projects)
+<div class="side-projects-menu">
+    @foreach (Project project in Model.Projects)
     {
-        <button class="project-button" data-project-id="@project.Id" data-fullname="@project.FullName">@project.ShortName</button>
+        <a asp-controller="Project" asp-action="Index" asp-route-projectId="@project.Id" asp-route-projectName="@project.FullName">
+            <button class="project-button">@project.ShortName</button>
+        </a>
     }
-    <div class="add-button">
-        <a id="createProjectButton">+</a>
-    </div>
-    <div class="user-button">
-        <a asp-action="Logout" asp-controller="Account">VH</a>
-    </div>
-</div>
-
-<div class="hidden-menu" id="projectInfoPanel" style="display: none;">
-    <div class="project-name">
-        <text id="projectName">Project Name</text>
-    </div>
-    <a id="projectLink" asp-action="Index" asp-controller="Project" asp-route-projectID="">
-        <div class="menu-item">Sessions</div>
-    </a>
-    <a asp-action="" asp-controller="">
-        <div class="menu-item">Analytics</div>
-    </a>
-    <a asp-action="" asp-controller="">
-        <div class="menu-item">Settings</div>
-    </a>
 </div>
 
 <div class="modal fade" id="createProjectPanel" role="dialog">

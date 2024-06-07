@@ -1,12 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 :root{
-  --color-background-default: #242424;
-  --color-background-second: #141414;
-  --color-text: #ffffff;
-  --color-text-description: #aaaaaa;
+  --width-side-menu: 60px;
+  --color-side-menu: #FFFFFF;
+  --color-background: #EEEEEE;
+  --color-background-block: #FFFFFF;
+  --color-text: #333333;
   --color-unique: #F16436;
-  --color-separator: #474747;
+  --color-separator: #AAAAAA;
+  --color-session-status-active: #22ab1f;
+  --color-session-status-finished: #9e9e9e;
+  --color-player-status-connected: #22ab1f;
+  --color-player-status-disconnected: #ab1f1f;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+body{
+  background-color: var(--color-background);
+  color: var(--color-text);
+  height: 100%;
+}
+
+main{
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
 }
 
 /*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {*/
@@ -18,25 +44,3 @@
 /*  vertical-align: baseline;*/
 /*  background: transparent;*/
 /*}*/
-
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
-}
-
-body{
-  background-color: var(--color-background-second);
-  color: var(--color-text);
-  height: 100%;
-}
-
-main{
-  height: 100vh;
-}
-
-.content{
-  height: 100%;
-  display: flex;
-}

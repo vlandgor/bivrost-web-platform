@@ -1,16 +1,9 @@
 ﻿namespace WebApplication1.Models;
 
-public class Project
+public class Project(string id, string fullName, string shortName)
 {
-    public string Id { get; set; }
-    public string FullName { get; set; }
-    public string ShortName { get; set; }
+    public string Id { get; set; } = id;
+    public string FullName { get; set; } = fullName;
+    public string ShortName { get; set; } = shortName;
     public List<Session> Sessions { get; set; } = new List<Session>();
-    
-    public Project(string id, string fullName, string shortName)
-    {
-        Id = id;
-        FullName = fullName;
-        ShortName = shortName;
-    }
 }
