@@ -6,20 +6,14 @@
 }
 
 <div class="session-page">
-    <div class="project-menu-panel">
-        <text class="project-full-name">@Model.Project.Name</text>
-        <div style="flex-grow: 1;"></div>
-        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
-        <a class="project-menu-button">ANALYTICS</a>
-        <a class="project-menu-button">SETTINGS</a>
-    </div>
+    @await Html.PartialAsync("ProjectMenuPanel", Model.Project)
     
     <div class="block" id="div1">
             <div class="block-top">
                 <div class="block-name">@Model.Session.s_name</div>
                 <div style="flex-grow: 1;"></div>
-                <button class="block-option-button" onclick="makeFullscreen('div1')">[ ]</button>
-                <button class="block-option-button">x</button>
+                <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
+                <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
             </div>
             <div class="project-menu-panel">
                 <button class="project-menu-button active-menu-button" data-table="studentsTable" onclick="toggleTable(event)">Students</button>

@@ -9,16 +9,20 @@ namespace WebApplication1.Controllers;
 [Authorize]
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public async Task<IActionResult> Index()
     {
-        _logger = logger;
-    }
+        string? email = HttpContext.Session.GetString("Email");
 
-    public IActionResult Index()
-    {
-        return View();
+        // TODO: fix this cookie shit!!!!!
+        if (email == null)
+        {
+            email = "q";
+        }
+
+        List<Project> projects = await AwsConnectionService.GetProjectsList(email);
+        HomeViewModel model = new HomeViewModel(projects);
+        
+        return View(model);
     }
 
     public async Task<IActionResult> CreateProject(string projectId, string fullName, string shortName)
@@ -28,16 +32,5 @@ public class HomeController : Controller
         await AwsConnectionService.AddNewProject(project);
         
         return RedirectToAction("Project", "Project", new { projectId = projectId });
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

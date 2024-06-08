@@ -1,4 +1,54 @@
-﻿@{
+﻿@model HomeViewModel
+
+@{
     ViewData["Title"] = "HomePage";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool hasProjects = false;
 }
+
+<div class="block block-fullscreen" id="div1">
+        <div class="block-top">
+            <div class="block-name">Projects</div>
+            <div style="flex-grow: 1;"></div>
+            @* <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button> *@
+            <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+        <table id="activeSessionsTable">
+            <thead>
+                <tr>
+                    <th class="left-element">NAME</th>
+                    <th class="centered-table-element regular-column">SH. NAME</th>
+                    <th class="centered-table-element regular-column">SESSIONS</th>
+                    <th class="centered-table-element regular-column">OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                hasProjects = false;
+                
+                foreach (Project project in Model.Projects)
+                {
+                    hasProjects = true;  
+
+                    <tr>
+                        <td class="left-element">@project.Name</td>
+                        <td class="centered-table-element regular-column">@project.ShortName</td>
+                        <td class="centered-table-element regular-column">@project.Sessions.Count</td>
+                        <td class="centered-table-element regular-column">
+                            <a id="sessionLink" asp-action="Project" asp-controller="Project" asp-route-projectId="@project.Id">
+                                <button class="table-more-option">Enter</button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                
+                if (!hasProjects)
+                {
+                    <tr style="height: 112px;">
+                        <td class="centered-table-element" colspan="6" style="text-align: center;">No sessions found, please try again!</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>

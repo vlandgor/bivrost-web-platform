@@ -7,26 +7,20 @@
 }
 
 <div>
-    <div class="project-menu-panel">
-        <text class="project-full-name">@Model.Project.Name</text>
-        <div style="flex-grow: 1;"></div>
-        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
-        <a class="project-menu-button">ANALYTICS</a>
-        <a class="project-menu-button">SETTINGS</a>
-    </div>
+    @await Html.PartialAsync("ProjectMenuPanel", Model.Project)
     
     <div class="block" id="div1">
         <div class="block-top">
             <div class="block-name">Sessions</div>
             <div style="flex-grow: 1;"></div>
-            <button class="block-option-button" onclick="makeFullscreen('div1')">[ ]</button>
-            <button class="block-option-button">}{</button>
+            <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
+            <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
         </div>
         <div class="project-menu-panel">
             <button class="project-menu-button active-menu-button" data-table="activeSessionsTable" onclick="toggleTable(event)">Active</button>
             <button class="project-menu-button" data-table="completedSessionsTable" onclick="toggleTable(event)">Completed</button>
             <div style="flex-grow: 1;"></div>
-            <button class="create-button">CREATE SESSION</button>
+            <button id="createSessionButton" type="button" class="create-button">CREATE SESSION</button>
         </div>
         <table id="activeSessionsTable">
             <thead>
@@ -126,39 +120,35 @@
         </table>
     </div>
     
-@* </div> *@
-@* *@
-@* <div class="modal fade" id="createSessionPanel" role="dialog"> *@
-@*     <div class="modal-dialog"> *@
-@*         <div class="modal-content modalPanel"> *@
-@*             <div class="modalHeader"> *@
-@*                 <label class="modalTitle" id="modalTitle">Create a new session</label> *@
-@*                 <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label> *@
-@*             </div> *@
-@*             @{ *@
-@*                 // Generate a random ID *@
-@*                 string randomSessionID = Guid.NewGuid().ToString(); *@
-@*             } *@
-@*             <form asp-controller="Project" asp-action="CreateSession" method="post" asp-route-projectId="@Model.Id" asp-route-sessionId="@randomSessionID"> *@
-@*                 <div class="modalBody"> *@
-@*                     <div class="modalBodyContentBlock"> *@
-@*                         <label>Session ID</label> *@
-@*                         <input type="text" placeholder="@randomSessionID" id="sessionIdInput" class="form-control" readonly="readonly"/> *@
-@*                     </div> *@
-@*                     <div class="modalBodyContentBlock"> *@
-@*                         <label>Session Name</label> *@
-@*                         <input type="text" id="sessionNameInput" name="sessionName" class="form-control"/> *@
-@*                     </div> *@
-@*                 </div> *@
-@*                 <div class="modalFooter"> *@
-@*                     <a> *@
-@*                         <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div> *@
-@*                     </a> *@
-@*                     <button id="createNewSession" type="submit"> *@
-@*                         <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div> *@
-@*                     </button> *@
-@*                 </div> *@
-@*             </form> *@
-@*         </div> *@
-    @* </div> *@
+</div>
+
+<div class="modal fade" id="createSessionPanel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modalPanel">
+            <div class="modalHeader">
+                <label class="modalTitle" id="modalTitle">Create a new session</label>
+                <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label>
+            </div>
+            @{
+                // Generate a random ID
+                string randomSessionID = Guid.NewGuid().ToString();
+            }
+            <form asp-controller="Project" asp-action="CreateSession" method="post" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@randomSessionID">
+                <div class="modalBody">
+                    <div class="modalBodyContentBlock">
+                        <label>Session ID</label>
+                        <input type="text" placeholder="@randomSessionID" id="sessionIdInput" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="modalBodyContentBlock">
+                        <label>Session Name</label>
+                        <input type="text" id="sessionNameInput" name="sessionName" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modalFooter">
+                    <button type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</button>
+                    <button id="createNewSession" type="submit" class="footerButton continueButton">CREATE</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

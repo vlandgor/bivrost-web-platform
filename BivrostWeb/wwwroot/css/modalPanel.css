@@ -1,5 +1,5 @@
 ﻿.modalPanel{
-    background-color: var(--color-background-second);
+    background-color: var(--color-side-menu);
     border: 1px solid var(--color-separator);
     border-radius: 5px;
     width: 420px;
@@ -39,15 +39,15 @@
     font-size: 14px;
     font-weight: 400;
     flex: 1;
-    color: var(--color-text-description);
+    color: var(--color-text);
     text-align: left;
 }
 
 .modalPanel .footerButton{
     width: 168px;
     height: 40px;
-    border: 1px solid var(--color-separator);
     color: var(--color-text);
+    border: 1px solid var(--color-separator);
     border-radius: 5px;
     font-size: 14px;
     font-weight: 600;
@@ -63,6 +63,11 @@
 
 .modalPanel .continueButton{
     background-color: var(--color-unique);
+    border: 0;
+}
+
+.modalFooter button{
+    border: 0;
 }
 
 .modalPanel .modalBodyContentBlock{
@@ -89,7 +94,7 @@
 }
 
 .modalPanel .modalBodyContentBlock label{
-    color: var(--color-text-description);
+    color: var(--color-text);
     padding-bottom: 7px;
 }
 

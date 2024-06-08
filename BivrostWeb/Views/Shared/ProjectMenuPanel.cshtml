@@ -1,0 +1,9 @@
+﻿@model Project
+
+<div class="project-menu-panel">
+    <text class="project-full-name">@Model.Name</text>
+    <div style="flex-grow: 1;"></div>
+    <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Id" class="project-menu-button active-menu-button">PROJECT</a>
+    <a class="project-menu-button">ANALYTICS</a>
+    <a class="project-menu-button">SETTINGS</a>
+</div>
