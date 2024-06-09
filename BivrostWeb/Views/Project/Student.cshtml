@@ -1,0 +1,24 @@
+﻿@model StudentViewModel
+
+@{
+    ViewData["Title"] = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="session-page">
+    @await Html.PartialAsync("Components/ProjectMenuPanel", Model.Project)
+    
+    <div class="block" id="div1">
+        <div class="block-top">
+            <a class="back-button" asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id">
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+            </a>
+            <div class="block-name">@Model.Student.st_name</div>
+            <div style="flex-grow: 1;"></div>
+            <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
+            <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+    </div>
+</div>

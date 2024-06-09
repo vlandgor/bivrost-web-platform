@@ -21,9 +21,9 @@ function toggleTable(event) {
 }
 
 // JavaScript to handle button click event and show modal
-document.getElementById('createSessionButton').addEventListener('click', function () {
-    $('#createSessionPanel').modal('show');
+document.getElementById('createModalButton').addEventListener('click', function () {
+    $('#createModalPanel').modal('show');
 });
 document.getElementById('cancelButton').addEventListener('click', function () {
-    $('#createSessionPanel').modal('hide');
+    $('#createModalPanel').modal('hide');
 });

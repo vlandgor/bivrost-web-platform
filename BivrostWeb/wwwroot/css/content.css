@@ -201,9 +201,14 @@ td {
     width:42px;
     height:42px;
     background: transparent;
-    border: 1px solid #AAAAAA;
+    border: 0px solid #AAAAAA;
     border-radius: 0;
     font-size: 12px;
     flex-grow: 0;
     margin-right: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text);
 }
