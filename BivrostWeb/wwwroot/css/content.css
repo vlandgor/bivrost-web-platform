@@ -3,6 +3,7 @@
     height: 100%;
     width: 100%;
     display: flex;
+    margin-left: var(--width-side-menu);
     flex-direction: column;
     background-color: var(--color-background);
 }
