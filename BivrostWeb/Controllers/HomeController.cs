@@ -1,10 +1,10 @@
-﻿using System.Diagnostics;
+﻿using BivrostWeb.Models.ViewModels;
 using BivrostWeb.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
-namespace WebApplication1.Controllers;
+namespace BivrostWeb.Controllers;
 
 [Authorize]
 public class HomeController : Controller

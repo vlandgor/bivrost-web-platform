@@ -1,4 +1,4 @@
-﻿@model SideMenuViewModel
+﻿@model BivrostWeb.Models.ViewModels.SideMenuViewModel
 
 <div class="side-projects-menu">
     @foreach (Project project in Model.Projects)
@@ -7,45 +7,10 @@
             <button class="project-button">@project.ShortName</button>
         </a>
     }
-</div>
-
-<div class="modal fade" id="createProjectPanel" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content modalPanel">
-            <div class="modalHeader">
-                <label class="modalTitle" id="modalTitle">Create a new project</label>
-                <label class="modalTitleDescription" id="modalTitleDescription">Create a new project with new users</label>
-            </div>
-            @{
-                // Generate a random ID
-                string randomProjectID = Guid.NewGuid().ToString();
-            }
-            <form asp-controller="Home" asp-action="CreateProject" method="post" asp-route-projectId="@randomProjectID">
-                <div class="modalBody">
-                    <div class="modalBodyContentBlock">
-                        <label>Project ID</label>
-                        <input type="text" placeholder="@randomProjectID" class="form-control" readonly="readonly"/>
-                    </div>
-                    <div class="modalBodyContentBlock">
-                        <label>Project full Name</label>
-                        <input type="text" name="fullName" class="form-control"/>
-                    </div>
-                    <div class="modalBodyContentBlock">
-                        <label>Project short Name</label>
-                        <input type="text" name="shortName" class="form-control"/>
-                    </div>
-                </div>
-                <div class="modalFooter">
-                    <a>
-                        <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
-                    </a>
-                    <button id="createNewProject" type="submit">
-                        <div type="button" id="createButton" class="footerButton continueButton" data-dismiss="modal">CREATE</div>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <div class="side-menu-space-div"></div>
+    <a style="color: #ffffff">
+        <button class="user-button" >Q</button>
+    </a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

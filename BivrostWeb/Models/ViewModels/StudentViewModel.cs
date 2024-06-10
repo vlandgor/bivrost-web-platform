@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models;
+﻿using WebApplication1.Models;
+
+namespace BivrostWeb.Models.ViewModels;
 
 public class StudentViewModel(Project project, Session session, Student student)
 {

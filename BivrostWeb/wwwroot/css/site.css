@@ -12,6 +12,7 @@
   --color-session-status-finished: #9e9e9e;
   --color-player-status-connected: #22ab1f;
   --color-player-status-disconnected: #ab1f1f;
+  --color-delete-button: #c71a1a;
 }
 
 *{

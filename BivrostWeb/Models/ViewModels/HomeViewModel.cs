@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models;
+﻿using WebApplication1.Models;
+
+namespace BivrostWeb.Models.ViewModels;
 
 public class HomeViewModel(List<Project> projects)
 {

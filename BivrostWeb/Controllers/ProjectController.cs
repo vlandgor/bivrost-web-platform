@@ -1,4 +1,5 @@
-﻿using BivrostWeb.Services;
+﻿using BivrostWeb.Models.ViewModels;
+using BivrostWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
@@ -39,6 +40,14 @@ public class ProjectController : Controller
 
         StudentViewModel studentViewModel = new StudentViewModel(project, session, student);
         return View(studentViewModel);
+    }
+    
+    public async Task<IActionResult> Settings(string projectId)
+    {
+        Project project = await AwsConnectionService.GetProject(projectId);
+        
+        SettingsViewModel settingsViewModel = new SettingsViewModel(project);
+        return View(settingsViewModel);
     }
 
     [HttpPost]

@@ -1,0 +1,121 @@
+﻿@model BivrostWeb.Models.ViewModels.SettingsViewModel
+
+@{
+    ViewData["Title"] = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="settings-page">
+    @await Html.PartialAsync("Components/ProjectMenuPanel", Model.Project)
+    
+    <div class="settings-panel">
+        <div class="block" id="div1">
+            <div class="block-top">
+                <div class="block-name">Info</div>
+                <div style="flex-grow: 1;"></div>
+                @* <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button> *@
+                <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Full name
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    @Model.Project.Name
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Date of creation
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    21.04.2023
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Author
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Harry Potter
+                </div>
+            </div>
+        </div>
+        <div class="block" id="div2">
+            <div class="block-top">
+                <div class="block-name">Access</div>
+                <div style="flex-grow: 1;"></div>
+                <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Harry Potter
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Leader
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Back Black
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Instructor
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    John Sena
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Instructor
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Camila Blanca
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Instructor
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Will Smith
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Developer
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Harry Kane
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Developer
+                </div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <div class="initials-icon">
+                    PE
+                </div>
+                <div class="one-line-settings-button-text-left">
+                    Pablo Escobar
+                </div>
+                <div class="one-line-settings-button-text-right">
+                    Developer
+                </div>
+            </div>
+        </div>
+        <div class="block" id="div3">
+            <div class="one-line-settings-button-panel">
+                <div class="one-line-settings-button-text-left">
+                    Delete project
+                </div>
+                <div>
+                    <button class="delete-button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

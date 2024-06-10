@@ -3,11 +3,10 @@
     width: var(--width-side-menu);
     z-index: 10;
     box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.14);
-    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .side-projects-menu .project-button{
@@ -18,19 +17,36 @@
     border-radius: 10px;
     font-size: 12px;
     font-weight: 500;
-    margin-bottom: 28px;
+    margin-bottom: 14px;
 }
 
 .side-projects-menu .project-button:first-child{
-    margin-top: 7px;
+    margin-top: 14px;
 }
 
 .side-projects-menu .project-button:last-child{
-    margin-bottom: 0;
+    margin-bottom: 0px;
 }
 
 .side-projects-menu .project-button:hover{
     border: 1px solid var(--color-unique);
     background-color: var(--color-unique);
     color: #FFFFFF
+}
+
+.side-projects-menu .user-button{
+    width: 42px;
+    height: 42px;
+    background-color: var(--color-unique);
+    color: var(--color-side-menu);
+    border: 1px solid var(--color-separator);
+    border-radius: 100%;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    align-self: flex-end;
+}
+
+.side-menu-space-div{
+    flex-grow: 1;
 }

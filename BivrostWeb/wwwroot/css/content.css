@@ -12,6 +12,7 @@
     border-radius: 10px;
     background: #ffffff;
     padding: 28px;
+    margin-bottom: 28px;
 }
 
 .block-fullscreen {
@@ -25,6 +26,7 @@
 }
 
 .project-menu-panel {
+    width:100%;
     padding: 7px 0 7px 0;
     border-bottom: 1px solid #AAAAAA;
     margin-bottom: 28px;
@@ -211,4 +213,67 @@ td {
     align-items: center;
     text-decoration: none;
     color: var(--color-text);
+}
+
+.settings-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.settings-panel{
+    width: 60%;
+    text-align: center;
+}
+
+.one-line-settings-button-panel{
+    display: flex;
+    flex-direction: row;
+    height: 42px;
+    align-items: center;
+}
+
+.one-line-settings-button-text-left{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Inter;
+}
+
+.one-line-settings-button-text-right{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    text-align: right;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Inter;
+}
+
+.initials-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.delete-button{
+    width: 168px;
+    height: 40px;
+    background: var(--color-delete-button);
+    border: 1px solid #AAAAAA;
+    color: var(--color-background-block);
 }

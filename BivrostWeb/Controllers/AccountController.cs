@@ -1,11 +1,12 @@
 ﻿using System.Security.Claims;
+using BivrostWeb.Models.ViewModels;
 using BivrostWeb.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
-namespace WebApplication1.Controllers;
+namespace BivrostWeb.Controllers;
 
 public class AccountController : Controller
 {

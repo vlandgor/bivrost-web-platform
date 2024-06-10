@@ -1,4 +1,5 @@
-﻿using BivrostWeb.Services;
+﻿using BivrostWeb.Models.ViewModels;
+using BivrostWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
