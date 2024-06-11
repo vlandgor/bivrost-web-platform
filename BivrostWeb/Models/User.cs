@@ -1,10 +1,15 @@
-﻿namespace WebApplication1.Models;
+﻿using System.Drawing;
+using BivrostWeb.Models;
 
-public class User
+namespace WebApplication1.Models;
+
+public class User(string id, string username, string email, string password, List<string> projectsId, Role role, string accountColor)
 {
-    public string Id { get; set; }
-    public string Username { get;  set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public List<string> Projects_Id { get; set; }
+    public string Id { get; } = id;
+    public string Username { get; } = username;
+    public string Email { get; } = email;
+    public string Password { get; } = password;
+    public List<string> Projects_Id { get; } = projectsId;
+    public Role Role { get; } = role;
+    public string AccountColor { get; } = accountColor;
 }

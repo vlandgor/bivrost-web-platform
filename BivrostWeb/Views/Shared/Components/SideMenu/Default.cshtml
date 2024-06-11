@@ -9,7 +9,9 @@
     }
     <div class="side-menu-space-div"></div>
     <a style="color: #ffffff">
-        <button class="user-button" >Q</button>
+        <form asp-controller="Account" asp-action="Logout">
+            <button class="user-button" style="background-color: @Model.AccountColor">Q</button>
+        </form>
     </a>
 </div>
 

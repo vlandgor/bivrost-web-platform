@@ -39,7 +39,6 @@
 .side-projects-menu .user-button{
     width: 42px;
     height: 42px;
-    background-color: var(--color-unique);
     color: var(--color-side-menu);
     border: 1px solid var(--color-separator);
     border-radius: 100%;

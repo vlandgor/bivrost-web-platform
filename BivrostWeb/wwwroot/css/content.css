@@ -14,6 +14,7 @@
     background: #ffffff;
     padding: 28px;
     margin-bottom: 28px;
+    transition: all 0.3s ease-in-out;
 }
 
 .block-fullscreen {
@@ -24,34 +25,61 @@
     height: calc(100% - 56px);
     margin: 0;
     z-index: 1000;
+    transition: all 0.3s ease-in-out;
 }
 
 .project-menu-panel {
     width:100%;
-    padding: 7px 0 7px 0;
-    border-bottom: 1px solid #AAAAAA;
-    margin-bottom: 28px;
+    height: 42px;
+    margin-bottom: 14px;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .project-full-name {
-    font-size: 18px;
-    font-weight: 600;
-    font-family: Inter;
-    color: #444444;
+    width: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 1;
     text-align: center;
+    align-items: center;
+    background-color: transparent;
+    height: inherit;
+}
+
+.project-menu-text{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Inter;
+    text-decoration: none;
+    color: #999999;
+    text-transform: uppercase;
+}
+
+.project-menu-text a{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Inter;
+    text-decoration: none;
+    color: #999999;
+    text-transform: uppercase;
+}
+
+.project-menu-text .current-location{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Inter;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--color-text);
 }
 
 .project-menu-button {
     background: transparent;
     width: auto;
-    padding: 0px;
-    margin-right: 14px;
-    height: 42px;
+    padding: 0;
+    margin: 0 7px 0 7px;
+    height: inherit;
     border: 0;
     font-size: 14px;
     font-weight: 500;
@@ -59,6 +87,7 @@
     color: #444444;
     text-decoration: none;
     display: flex;
+    flex-grow: 0;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -92,8 +121,8 @@
 .block-top {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    text-align: center;
+    justify-content: left;
+    text-align: left;
     align-items: center;
     margin-bottom: 28px;
 }
@@ -204,7 +233,7 @@ td {
     width:42px;
     height:42px;
     background: transparent;
-    border: 0px solid #AAAAAA;
+    border: 0;
     border-radius: 0;
     font-size: 12px;
     flex-grow: 0;
@@ -233,6 +262,11 @@ td {
     flex-direction: row;
     height: 42px;
     align-items: center;
+    margin-bottom: 14px;
+}
+
+.one-line-settings-button-panel:last-child{
+    margin-bottom: 0;
 }
 
 .one-line-settings-button-text-left{
@@ -248,10 +282,11 @@ td {
 
 .one-line-settings-button-text-right{
     display: flex;
-    flex-grow: 1;
+    flex-grow: 0;
     flex-direction: column;
     text-align: right;
-    justify-content: center;
+    justify-content: right;
+    justify-self: right;
     font-size: 12px;
     font-weight: 400;
     font-family: Inter;
@@ -275,6 +310,36 @@ td {
     width: 168px;
     height: 40px;
     background: var(--color-delete-button);
+    border: 1px solid #AAAAAA;
+    color: var(--color-background-block);
+}
+
+.settings-role-button{
+    width: 168px;
+    height: 42px;
+    border: 1px solid var(--color-separator);
+    background-color: transparent;
+    text-align: center;
+    justify-content: right;
+}
+
+.invite-user-input{
+    display: flex;
+    flex-grow: 1;
+    width: auto;
+    height: 100%;
+    border: 1px solid var(--color-separator);
+    margin-right: 28px;
+}
+
+.invite-user-input::placeholder {
+    padding-left: 14px;
+}
+
+.submit-button{
+    width: 168px;
+    height: 40px;
+    background: var(--color-unique);
     border: 1px solid #AAAAAA;
     color: var(--color-background-block);
 }

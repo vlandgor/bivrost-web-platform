@@ -38,39 +38,6 @@ public static class AwsConnectionService
             return null; // Or throw an exception if necessary
         }
     }
-
-    public static async Task<List<Session>> GetSessionsList(string projectId)
-    {
-        string apiUrl = $"https://zkofr0zqnb.execute-api.us-east-2.amazonaws.com/dev?id={projectId}";
-    
-        try
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-
-                    // Deserialize JSON to List<Project>
-                    List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(json);
-
-                    return sessions;
-                }
-                else
-                {
-                    Console.WriteLine($"Failed to retrieve data. Status code: {response.StatusCode}");
-                    return null; // Or throw an exception if necessary
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
-            return null; // Or throw an exception if necessary
-        }
-    }
     
     public static async Task<bool> AddNewSession(string projectId, Session newSession)
     {
@@ -275,6 +242,38 @@ public static class AwsConnectionService
             using (HttpClient client = new HttpClient())
             {
                 string jsonContent = JsonConvert.SerializeObject(new { projectId, sessionId, studentData = newStudent });
+                HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to add new session. Status code: {response.StatusCode}");
+                    
+                    return false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return false;
+        }
+    }
+    
+    public static async Task<bool> SendUserInvite(string userId, string projectId)
+    {
+        string apiUrl = $"https://qx7t6wk1ze.execute-api.us-east-2.amazonaws.com/dev";
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = JsonConvert.SerializeObject(new { userId, projectId});
                 HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await client.PostAsync(apiUrl, content);

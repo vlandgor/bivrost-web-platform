@@ -7,15 +7,22 @@
 }
 
 <div>
-    @await Html.PartialAsync("Components/ProjectMenuPanel", Model.Project)
+    <div class="project-menu-panel">
+        <a class="back-button" asp-action="Index" asp-controller="Home">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <div class="project-full-name">
+            <span class="project-menu-text">
+                <span class="current-location">@Model.Project.Name</span>
+            </span>
+        </div>
+        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
+        <a class="project-menu-button">ANALYTICS</a>
+        <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a>
+    </div>
     
     <div class="block" id="div1">
         <div class="block-top">
-            <a class="back-button" asp-action="Index" asp-controller="Home">
-                <span class="material-symbols-outlined">
-                arrow_back
-                </span>
-            </a>
             <div class="block-name">Sessions</div>
             <div style="flex-grow: 1;"></div>
             <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
@@ -55,7 +62,7 @@
 
                     <tr>
                         <td class="left-element">@session.s_name</td>
-                        <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
+                        <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "COMPLETED")</td>
                         <td class="centered-table-element regular-column">21.21.2121</td>
                         <td class="centered-table-element regular-column">@session.s_students.Count</td>
                         <td class="centered-table-element regular-column">21 minutes</td>

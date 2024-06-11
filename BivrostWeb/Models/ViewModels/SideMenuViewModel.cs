@@ -2,7 +2,8 @@
 
 namespace BivrostWeb.Models.ViewModels;
 
-public class SideMenuViewModel
+public class SideMenuViewModel(List<Project> projects, string accountColor)
 {
-    public List<Project> Projects { get; set; }
+    public string AccountColor { get; } = accountColor;
+    public List<Project> Projects { get; } = projects;
 }

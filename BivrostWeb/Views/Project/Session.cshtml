@@ -6,16 +6,25 @@
 }
 
 <div class="session-page">
-    @await Html.PartialAsync("Components/ProjectMenuPanel", Model.Project)
+    <div class="project-menu-panel">
+        <a class="back-button" asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <div class="project-full-name">
+            <span class="project-menu-text">
+                <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id">@Model.Project.Name</a>
+                |
+                <span class="current-location">@Model.Session.s_name</span>
+            </span>
+        </div>
+        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
+        <a class="project-menu-button">ANALYTICS</a>
+        <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a>
+    </div>
     
     <div class="block" id="div1">
         <div class="block-top">
-            <a class="back-button" asp-action="Project" asp-controller="Project" asp-route-projectId="@Model.Project.Id">
-                <span class="material-symbols-outlined">
-                arrow_back
-                </span>
-            </a>
-            <div class="block-name">@Model.Session.s_name</div>
+            <div class="block-name">Progress</div>
             <div style="flex-grow: 1;"></div>
             <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
             <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>

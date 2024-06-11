@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Drawing;
+using System.Security.Claims;
+using BivrostWeb.Models;
 using BivrostWeb.Models.ViewModels;
 using BivrostWeb.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -31,12 +33,19 @@ public class AccountController : Controller
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 
                 HttpContext.Session.SetString("Email", data.Email);
+                HttpContext.Session.SetString("Role", data.Role.ToString());
+                
+                if (!string.IsNullOrEmpty(data.AccountColor))
+                {
+                    HttpContext.Session.SetString("AccountColor", data.AccountColor);
+                }
+                
                 await HttpContext.Session.CommitAsync();
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                TempData["errorPassword"] = "Invalid password!";
+                TempData["errorPassword"] = $"Invalid password!";
                 return View(model);
             }
         }
@@ -63,15 +72,8 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            var data = new User()
-            {
-                Id = model.Username,
-                Username = model.Username,
-                Email = model.Email,
-                Password = model.Password,
-                Projects_Id = new List<string>()
-            };
-
+            var data = new User(model.Username, model.Username, model.Email, model.Password, new List<string>(),
+                Role.Instructor, "#3357FF");
             await AwsConnectionService.RegisterNewUser(data);
             
             TempData["successMessage"] = $"You are eligible to login, Please fill own credential's then login!";

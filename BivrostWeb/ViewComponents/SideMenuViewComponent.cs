@@ -10,17 +10,22 @@ public class SideMenuViewComponent: ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         string? email = HttpContext.Session.GetString("Email");
+        string? accountColor = HttpContext.Session.GetString("AccountColor");
 
         // TODO: fix this cookie shit!!!!!
         if (email == null)
         {
             email = "q";
         }
-        
-        SideMenuViewModel model = new SideMenuViewModel()
+
+        if (accountColor == null)
         {
-            Projects = await AwsConnectionService.GetProjectsList(email)
-        };
+            accountColor = "#000000";
+        }
+        
+        List<Project> projects = await AwsConnectionService.GetProjectsList(email);
+
+        SideMenuViewModel model = new SideMenuViewModel(projects, accountColor);
         
         return View(model);
     }

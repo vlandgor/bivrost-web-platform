@@ -1,4 +1,5 @@
-﻿using BivrostWeb.Models.ViewModels;
+﻿using BivrostWeb.Models;
+using BivrostWeb.Models.ViewModels;
 using BivrostWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
@@ -42,11 +43,31 @@ public class ProjectController : Controller
         return View(studentViewModel);
     }
     
+    public async Task<IActionResult> InviteUser(string email, string projectId)
+    {
+        Project project = await AwsConnectionService.GetProject(projectId);
+
+        List<User> users = new List<User>()
+        {
+            new User("id", "Back Black", "jack.black@gmail.com", "8tfhikbvjhd", null, Role.Leader, "#3357FF"),
+            new User("girbh", "Barbara Cell", "h@gmail.com", "bdgsbf", null, Role.Developer, "#33FFF6")
+        };
+        
+        SettingsViewModel settingsViewModel = new SettingsViewModel(project, users);
+        return RedirectToAction("Project", new { projectId });
+    }
+    
     public async Task<IActionResult> Settings(string projectId)
     {
         Project project = await AwsConnectionService.GetProject(projectId);
+
+        List<User> users = new List<User>()
+        {
+            new User("id", "Back Black", "jack.black@gmail.com", "8tfhikbvjhd", null, Role.Leader, "#3357FF"),
+            new User("girbh", "Barbara Cell", "h@gmail.com", "bdgsbf", null, Role.Developer, "#33FFF6")
+        };
         
-        SettingsViewModel settingsViewModel = new SettingsViewModel(project);
+        SettingsViewModel settingsViewModel = new SettingsViewModel(project, users);
         return View(settingsViewModel);
     }
 

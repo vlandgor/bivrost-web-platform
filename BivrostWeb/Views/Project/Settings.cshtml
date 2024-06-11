@@ -1,12 +1,39 @@
-﻿@model BivrostWeb.Models.ViewModels.SettingsViewModel
+﻿@using BivrostWeb.Models
+@model BivrostWeb.Models.ViewModels.SettingsViewModel
 
 @{
     ViewData["Title"] = "Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@functions {
+    public string GetInitials(string username)
+    {
+        if (string.IsNullOrEmpty(username))
+            return string.Empty;
+
+        var parts = username.Split(' ');
+        if (parts.Length == 1)
+            return parts[0][0].ToString().ToUpper();
+
+        return (parts[0][0].ToString().ToUpper() + parts[1][0].ToString().ToUpper());
+    }
+}
+
 <div class="settings-page">
-    @await Html.PartialAsync("Components/ProjectMenuPanel", Model.Project)
+    <div class="project-menu-panel">
+        <a class="back-button" asp-action="Index" asp-controller="Home">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <div class="project-full-name">
+            <span class="project-menu-text">
+                <span class="current-location">@Model.Project.Name</span>
+            </span>
+        </div>
+        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
+        <a class="project-menu-button">ANALYTICS</a>
+        <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a>
+    </div>
     
     <div class="settings-panel">
         <div class="block" id="div1">
@@ -41,73 +68,46 @@
                 </div>
             </div>
         </div>
+        
+        <div class="block" id="div3">
+            <div class="block-top">
+                <div class="block-name">Invite user</div>
+            </div>
+            <div class="one-line-settings-button-panel">
+                <input class="invite-user-input" placeholder="Enter user e-mail or company domain..."/>
+                <form asp-controller="Project" asp-action="InviteUser"><button class="submit-button">Invite</button></form>
+            </div>
+        </div>
+        
         <div class="block" id="div2">
             <div class="block-top">
                 <div class="block-name">Access</div>
                 <div style="flex-grow: 1;"></div>
                 <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
             </div>
-            <div class="one-line-settings-button-panel">
-                <div class="one-line-settings-button-text-left">
-                    Harry Potter
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Leader
-                </div>
-            </div>
-            <div class="one-line-settings-button-panel">
-                <div class="one-line-settings-button-text-left">
-                    Back Black
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Instructor
-                </div>
-            </div>
-            <div class="one-line-settings-button-panel">
-                <div class="one-line-settings-button-text-left">
-                    John Sena
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Instructor
-                </div>
-            </div>
-            <div class="one-line-settings-button-panel">
-                <div class="one-line-settings-button-text-left">
-                    Camila Blanca
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Instructor
-                </div>
-            </div>
-            <div class="one-line-settings-button-panel">
-                <div class="one-line-settings-button-text-left">
-                    Will Smith
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Developer
-                </div>
-            </div>
-            <div class="one-line-settings-button-panel">
-                <div class="one-line-settings-button-text-left">
-                    Harry Kane
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Developer
-                </div>
-            </div>
-            <div class="one-line-settings-button-panel">
-                <div class="initials-icon">
-                    PE
-                </div>
-                <div class="one-line-settings-button-text-left">
-                    Pablo Escobar
-                </div>
-                <div class="one-line-settings-button-text-right">
-                    Developer
-                </div>
-            </div>
+            @{
+                foreach (User user in Model.Users)
+                {
+                    var initials = GetInitials(user.Username);
+        
+                    <div class="one-line-settings-button-panel">
+                        <div class="initials-icon" style="background-color:@user.AccountColor;">
+                            @initials
+                        </div>
+                        <div class="one-line-settings-button-text-left">
+                            @user.Username
+                        </div>
+                        <div class="one-line-settings-button-text-right">
+                            <div class="dropdown">
+                                <button class="settings-role-button">@user.Role.ToString()</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
-        <div class="block" id="div3">
+        
+        <div class="block" id="div4">
             <div class="one-line-settings-button-panel">
                 <div class="one-line-settings-button-text-left">
                     Delete project
