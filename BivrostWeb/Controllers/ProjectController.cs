@@ -45,16 +45,15 @@ public class ProjectController : Controller
     
     public async Task<IActionResult> InviteUser(string email, string projectId)
     {
-        Project project = await AwsConnectionService.GetProject(projectId);
-
-        List<User> users = new List<User>()
+        await AwsConnectionService.SendUserInvite(email, projectId);
+        if (email == "rt")
         {
-            new User("id", "Back Black", "jack.black@gmail.com", "8tfhikbvjhd", null, Role.Leader, "#3357FF"),
-            new User("girbh", "Barbara Cell", "h@gmail.com", "bdgsbf", null, Role.Developer, "#33FFF6")
-        };
-        
-        SettingsViewModel settingsViewModel = new SettingsViewModel(project, users);
-        return RedirectToAction("Project", new { projectId });
+            return RedirectToAction("Project", new { projectId });
+        }
+        else
+        {
+            return null;
+        }
     }
     
     public async Task<IActionResult> Settings(string projectId)

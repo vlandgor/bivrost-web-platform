@@ -265,15 +265,15 @@ public static class AwsConnectionService
         }
     }
     
-    public static async Task<bool> SendUserInvite(string userId, string projectId)
+    public static async Task<bool> SendUserInvite(string email, string projectId)
     {
-        string apiUrl = $"https://qx7t6wk1ze.execute-api.us-east-2.amazonaws.com/dev";
+        string apiUrl = $"https://t1mj2r46y8.execute-api.us-east-2.amazonaws.com/dev";
 
         try
         {
             using (HttpClient client = new HttpClient())
             {
-                string jsonContent = JsonConvert.SerializeObject(new { userId, projectId});
+                string jsonContent = JsonConvert.SerializeObject(new { email, projectId});
                 HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await client.PostAsync(apiUrl, content);

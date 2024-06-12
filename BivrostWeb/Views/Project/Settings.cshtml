@@ -73,10 +73,10 @@
             <div class="block-top">
                 <div class="block-name">Invite user</div>
             </div>
-            <div class="one-line-settings-button-panel">
-                <input class="invite-user-input" placeholder="Enter user e-mail or company domain..."/>
-                <form asp-controller="Project" asp-action="InviteUser"><button class="submit-button">Invite</button></form>
-            </div>
+            <form asp-controller="Project" asp-action="InviteUser" asp-route-projectId="@Model.Project.Id" method="post" class="one-line-settings-button-panel">
+                <input type="text" class="invite-user-input" name="email" placeholder="Enter user e-mail or company domain..."/>
+                <button class="submit-button">Invite</button>
+            </form>
         </div>
         
         <div class="block" id="div2">
