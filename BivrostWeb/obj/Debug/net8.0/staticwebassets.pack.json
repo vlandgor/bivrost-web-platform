@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\content.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\modalPanel.css",
       "PackagePath": "staticwebassets\\css\\modalPanel.css"
     },

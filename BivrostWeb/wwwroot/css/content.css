@@ -207,28 +207,6 @@ td {
     border: 1px solid #AAAAAA;
 }
 
-.login-page{
-    background-color: var(--color-side-menu);
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.signUp-page{
-    background-color: var(--color-side-menu);
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
 .back-button {
     width:42px;
     height:42px;

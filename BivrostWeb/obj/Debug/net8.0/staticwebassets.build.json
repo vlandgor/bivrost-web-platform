@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oEq2weNw6JLBqhhXzkeJl6Qyise4kwsArB3oijWGaO4=",
+  "Hash": "trKnSQpqduvdjMsYvtTau3N7FtIAFumek1QKoQzbCgI=",
   "Source": "BivrostWeb",
   "BasePath": "_content/BivrostWeb",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\content.css"
+    },
+    {
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\login.css",
+      "SourceId": "BivrostWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
+      "BasePath": "_content/BivrostWeb",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\modalPanel.css",
