@@ -31,36 +31,24 @@ namespace BivrostWeb.Server
             ServerHandle.OnStudentProgressUpdated += HandleStudentProgressUpdated;
 
             InitializeServerData();
-            TestSessionFlow();
         }
 
-        private async Task TestSessionFlow()
-        {
-            await CreateSession("s1");
-            await Task.Delay(2000);
-            
-            await AddStudentToSession("s1", new Student(student1Id, "Student 1"));
-            await Task.Delay(2000);
-            await AddStudentToSession("s1", new Student(student2Id, "Student 2"));
-            await Task.Delay(2000);
-            await UpdateStudentProgress("s1", student1Id, 45);
-            await Task.Delay(2000);
-            await UpdateStudentProgress("s1", student2Id, 45);
-        }
-
-        private async Task CreateSession(string sessionId)
+        public async Task AddSession(string sessionId)
         {
             Session session = new Session(sessionId);
+            
             sessions.Add(session);
         }
 
-        private async Task AddStudentToSession(string sessionId, Student student)
+        public async Task AddStudent(string sessionId, string studentId, string studentName)
         {
             Session session = GetSession(sessionId);
+            Student student = new Student(studentId, studentName);
+            
             session.students.Add(student);
-
-            await _hubContext.Clients.All.SendAsync("CreateStudent", student.studentLocked, student.studentId,
-                student.studentName, student.studentStatus, student.studentProgress);
+            
+            // await _hubContext.Clients.All.SendAsync("CreateStudent", student.studentLocked, student.studentId,
+            //     student.studentName, student.studentStatus, student.studentProgress);
         }
 
         public async Task LockStudent(string sessionId, string studentId)
