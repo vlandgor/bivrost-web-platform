@@ -6,7 +6,7 @@ using WebApplication1.Models;
 
 namespace BivrostWeb.Controllers;
 
-public class ProjectController : Controller
+public class ProjectController(ILogger<ProjectController> logger, Server.Server server) : Controller
 {
     public async Task<IActionResult> Project(string projectId)
     {
@@ -84,5 +84,12 @@ public class ProjectController : Controller
         await AwsConnectionService.AddNewStudent(projectId, sessionId, new Student(sessionId, studentName, 0, false));
         
         return RedirectToAction("Session", new { projectId, sessionId });
+    }
+    
+    [HttpPost("students/{sessionId}")]
+    public ActionResult<List<Student>> GetStudents(string sessionId)
+    {
+        var students = server.GetStudentsBySessionId(sessionId);
+        return Ok(students);
     }
 }
