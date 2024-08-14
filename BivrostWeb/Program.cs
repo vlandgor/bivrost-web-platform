@@ -15,7 +15,7 @@ builder.Services.AddSingleton<Server>(sp =>
     var webSocketService = sp.GetRequiredService<WebSocketService>();
     var hubContext = sp.GetRequiredService<IHubContext<SessionHub>>();
     return new Server(webSocketService, hubContext);
-});
+}); 
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -32,15 +32,12 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseWebSockets();
 
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -48,21 +45,16 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+WebSocketService webSocketService = app.Services.GetRequiredService<WebSocketService>();
 app.MapHub<SessionHub>("/sessionhub");
-
-app.MapGet("/messages", async context =>
-{
-    var webSocketService = app.Services.GetRequiredService<WebSocketService>();
-    var messages = webSocketService.GetMessages();
-    var json = System.Text.Json.JsonSerializer.Serialize(messages);
-    context.Response.ContentType = "application/json";
-    await context.Response.WriteAsync(json);
-});
 
 app.Use(async (context, next) =>
 {
-    var webSocketService = context.RequestServices.GetRequiredService<WebSocketService>();
-    await webSocketService.HandleWebSocketAsync(context);
+    if (context.WebSockets.IsWebSocketRequest)
+    {
+        await webSocketService.HandleWebSocketAsync(context);
+    }
+    
     await next(context);
 });
 

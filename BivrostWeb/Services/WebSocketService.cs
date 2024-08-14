@@ -1,10 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using System.Net.WebSockets;
+using BivrostWeb.Controllers;
 using BivrostWeb.Server.Packets;
 
 namespace BivrostWeb.Services
 {
-    public class WebSocketService
+    public class WebSocketService(ILogger<WebSocketService> logger)
     {
         private static readonly ConcurrentBag<string> _messages = new();
         
@@ -47,9 +48,6 @@ namespace BivrostWeb.Services
                             Console.WriteLine($"Unknown packet ID: {packetId}");
                         }
                     }
-
-                    // Optional: you can decide to send a response back to the client to acknowledge receipt
-                    // await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
                 }
             }
         }

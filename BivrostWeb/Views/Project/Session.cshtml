@@ -48,13 +48,13 @@
             <tbody>
                 @foreach (Student student in Model.Session.s_students)
                 {
-                    <tr>
+                    <tr data-student-id="@student.st_id">
                         <td class="left-element">@student.st_name</td>
                         <td class="centered-table-element regular-column">@student.st_status</td>
                         <td class="centered-table-element regular-column">26 minutes</td>
                         <td class="centered-table-element regular-column">@student.st_progress</td>
                         <td class="centered-table-element regular-column">
-                            <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id", asp-route-studentId="@student.st_id">
+                            <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id">
                                 <button class="table-more-option">More</button>
                             </a>
                         </td>
@@ -63,37 +63,7 @@
             </tbody>
         </table>
         <table id="instructors" style="display: none;">
-            @* <thead> *@
-            @*     <tr> *@
-            @*         <th class="left-element">NAME</th> *@
-            @*         <th class="centered-table-element regular-column">STATUS</th> *@
-            @*         <th class="centered-table-element regular-column">TIME</th> *@
-            @*         <th class="centered-table-element regular-column">PROGRESS</th> *@
-            @*         <th class="centered-table-element regular-column">OPTIONS</th> *@
-            @*     </tr> *@
-            @* </thead> *@
-            @* <tbody> *@
-            @*     @foreach (Session session in Model.Sessions) *@
-            @*     { *@
-            @*         if (session.s_status) *@
-            @*         { *@
-            @*             return; *@
-            @*         } *@
-            @*          *@
-            @*         string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished"; *@
-            @* *@
-            @*         <tr> *@
-            @*             <td class="left-element">@session.s_name</td> *@
-            @*             <td class="centered-table-element regular-column">Connected</td> *@
-            @*             <td class="centered-table-element regular-column">21.21.2121</td> *@
-            @*             <td class="centered-table-element regular-column">@session.s_students.Count</td> *@
-            @*             <td class="centered-table-element regular-column">21 minutes</td> *@
-            @*             <td class="centered-table-element regular-column"> *@
-            @*                 <button class="table-more-option">Join</button> *@
-            @*             </td> *@
-            @*         </tr> *@
-            @*     } *@
-            @* </tbody> *@
+            @* ... your instructor table code ... *@
         </table>
     </div>
 </div>
@@ -110,7 +80,7 @@
             }
             <form asp-controller="Project" asp-action="AddStudent" method="post" 
                   asp-route-projectId="@Model.Project.Id" 
-                  asp-route-sessionId="@Model.Session.s_id">
+                  asp-route-sessionId="@Model.Session.s_id"
                   asp-route-studentId="@randomStudentID">
                 <div class="modalBody">
                     <div class="modalBodyContentBlock">
@@ -130,3 +100,78 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        @Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@microsoft/signalr@6.0.0/dist/browser/signalr.min.js'></script>")
+        document.addEventListener('DOMContentLoaded', function() {
+            const sessionId = '@Model.Session.s_id'; // Use your session ID from the model
+    
+            fetch(`/api/session/students/${sessionId}`)
+                .then(response => response.json())
+                .then(students => {
+                    students.forEach(student => {
+                        createStudentRow(student.studentLocked, student.studentId, student.studentName, student.studentStatus, student.studentProgress);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error fetching students:', err);
+                });
+        });
+    
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/sessionhub")
+            .build();
+    
+        // Method to create a new student row in the table
+        function createStudentRow(locked, studentId, studentName, studentStatus, studentProgress) {
+            const studentsTable = document.getElementById("studentsTable").getElementsByTagName('tbody')[0];
+            
+            // Create a new row
+            const row = document.createElement("tr");
+            row.setAttribute('data-student-id', studentId);
+            
+            const idLocked = document.createElement("td");
+            idLocked.textContent = locked;
+            row.appendChild(idLocked);
+            
+            const nameCell = document.createElement("td");
+            nameCell.textContent = studentName;
+            row.appendChild(nameCell);
+        
+            const statusCell = document.createElement("td");
+            statusCell.textContent = studentStatus;
+            row.appendChild(statusCell);
+        
+            const progressCell = document.createElement("td");
+            progressCell.textContent = studentProgress;
+            row.appendChild(progressCell);
+        
+            // Append the row to the table
+            studentsTable.appendChild(row);
+        }
+    
+        // SignalR connection event handlers (for dynamic updates)
+        connection.on("CreateStudent", function(locked, studentId, studentName, studentStatus, studentProgress) {
+            createStudentRow(locked, studentId, studentName, studentStatus, studentProgress);
+        });
+    
+        connection.on("LockStudent", function(studentId) {
+            const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
+            
+            if (existingRow) {
+                existingRow.cells[0].textContent = true;
+            }
+        });
+    
+        connection.on("UpdateStudentProgress", function(studentId, studentProgress) {
+            const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
+            
+            if (existingRow) {
+                existingRow.cells[3].textContent = studentProgress;
+            }
+        });
+    
+        connection.start().catch(err => console.error(err.toString()));
+    </script>
+}
