@@ -2,27 +2,27 @@
 
 public class ServerHandle
 {
-    public static event Action<string, string> OnStudentLocked;
-    public static event Action<string, string, int> OnStudentProgressUpdated;
-    
     public static void LockStudent(Packet packet)
     {
-        string sessionId = packet.ReadString();
-        string studentId = packet.ReadString();
+        StudentData studentData = new StudentData();
         
-        Console.WriteLine("Server Handle | Lock Student | Method Called");
-        
-        OnStudentLocked?.Invoke(sessionId, studentId);
+        GetStudentData(packet, ref studentData);
     }
     
     public static void UpdateStudentProgress(Packet packet)
     {
-        string sessionId = packet.ReadString();
-        string studentId = packet.ReadString();
+        StudentData studentData = new StudentData();
+        
+        //GetStudentData(packet);
         int studentProgress = packet.ReadInt();
-        
-        Console.WriteLine("Server Handle | Lock Student | Method Called");
-        
-        OnStudentProgressUpdated?.Invoke(sessionId, studentId, studentProgress);
+    }
+
+    private static StudentData GetStudentData(Packet packet, ref StudentData studentData)
+    {
+        studentData.projectId = packet.ReadString(); 
+        studentData.sessionId = packet.ReadString();
+        studentData.studentId = packet.ReadString();
+
+        return studentData;
     }
 }

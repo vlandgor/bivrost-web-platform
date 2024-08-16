@@ -9,13 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
-builder.Services.AddSingleton<WebSocketService>();
-builder.Services.AddSingleton<Server>(sp =>
-{
-    var webSocketService = sp.GetRequiredService<WebSocketService>();
-    var hubContext = sp.GetRequiredService<IHubContext<SessionHub>>();
-    return new Server(webSocketService, hubContext);
-}); 
+builder.Services.AddSingleton<Server>();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -45,17 +39,12 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-WebSocketService webSocketService = app.Services.GetRequiredService<WebSocketService>();
 app.MapHub<SessionHub>("/sessionhub");
 
-app.Use(async (context, next) =>
-{
-    if (context.WebSockets.IsWebSocketRequest)
-    {
-        await webSocketService.HandleWebSocketAsync(context);
-    }
-    
-    await next(context);
-});
+Server server = app.Services.GetRequiredService<Server>();
+
+app.Use(async (context, next) => await server.HandleRequestAsync(context, next));
+
+server.Run(ServerType.Development);
 
 app.Run();

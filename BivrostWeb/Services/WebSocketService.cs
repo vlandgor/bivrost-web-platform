@@ -1,14 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using System.Net.WebSockets;
-using BivrostWeb.Controllers;
 using BivrostWeb.Server.Packets;
 
 namespace BivrostWeb.Services
 {
     public class WebSocketService(ILogger<WebSocketService> logger)
     {
-        private static readonly ConcurrentBag<string> _messages = new();
-        
         public async Task HandleWebSocketAsync(HttpContext context)
         {
             if (context.Request.Path == "/ws" && context.WebSockets.IsWebSocketRequest)
@@ -50,11 +47,6 @@ namespace BivrostWeb.Services
                     }
                 }
             }
-        }
-
-        public List<string> GetMessages()
-        {
-            return _messages.ToList();
         }
     }
 }

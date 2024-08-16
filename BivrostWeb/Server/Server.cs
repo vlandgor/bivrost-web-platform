@@ -6,31 +6,53 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace BivrostWeb.Server
 {
-    public class Server : IDisposable
+    public enum ServerType
+    {
+        Development,
+        Production
+    }
+    
+    public class Server
     {
         public const int MAX_SESSIONS_AMOUNT = 16;
         public const int MAX_STUDENTS_IN_SESSION = 16;
 
-        private WebSocketService webSocketService;
-        private readonly IHubContext<SessionHub> _hubContext;
-
+        public readonly IHubContext<SessionHub> _hubContext;
+        public readonly WebSocketService webSocketService;
+        
         private List<Session> sessions = new();
 
         public delegate void PacketHandler(Packet packet);
         public static Dictionary<int, PacketHandler> packetHandlers;
 
-        private string student1Id = Guid.NewGuid().ToString().Substring(0, 8);
-        private string student2Id = Guid.NewGuid().ToString().Substring(0, 8);
-
-        public Server(WebSocketService webSocketService, IHubContext<SessionHub> hubContext)
+        public Server(ILogger<WebSocketService> logger)
         {
-            this.webSocketService = webSocketService;
-            _hubContext = hubContext;
+            webSocketService = new WebSocketService(logger);
+        }
 
-            ServerHandle.OnStudentLocked += HandleStudentLocked;
-            ServerHandle.OnStudentProgressUpdated += HandleStudentProgressUpdated;
-
+        public async Task Run(ServerType serverType)
+        {
             InitializeServerData();
+            
+            switch (serverType)
+            {
+                case ServerType.Development:
+                    break;
+                case ServerType.Production:
+                    break;
+            }
+        }
+        
+        public async Task HandleRequestAsync(HttpContext context, Func<Task> next)
+        {
+            if (context.WebSockets.IsWebSocketRequest)
+            {
+                await webSocketService.HandleWebSocketAsync(context);
+            }
+            else
+            {
+                await next();
+            }
         }
 
         public async Task AddSession(string sessionId)
@@ -66,17 +88,6 @@ namespace BivrostWeb.Server
             
             await _hubContext.Clients.All.SendAsync("UpdateStudentProgress", student.studentId, student.studentProgress);
         }
-
-        #region Event Handlers
-        private void HandleStudentLocked(string sessionId, string studentId)
-        {
-            LockStudent(sessionId, studentId);
-        }
-
-        private void HandleStudentProgressUpdated(string sessionId, string studentId, int studentProgress)
-        {
-            UpdateStudentProgress(sessionId, studentId, studentProgress);
-        }
         
         private void InitializeServerData()
         {
@@ -86,7 +97,6 @@ namespace BivrostWeb.Server
                 { (int)ClientPackets.updateStudentProgress, ServerHandle.UpdateStudentProgress },
             };
         }
-        #endregion
 
         private Session GetSession(string sessionId)
         {
@@ -118,12 +128,6 @@ namespace BivrostWeb.Server
             }
 
             return session.students.AsReadOnly();
-        }
-        
-        public void Dispose()
-        {
-            ServerHandle.OnStudentLocked -= HandleStudentLocked;
-            ServerHandle.OnStudentProgressUpdated += HandleStudentProgressUpdated;
         }
     }
 }
