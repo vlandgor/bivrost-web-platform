@@ -2,7 +2,7 @@
 
 public class SessionHub : Microsoft.AspNetCore.SignalR.Hub
 {
-    public async Task CreateStudent(bool locked, string studentId, string studentName, bool studentStatus, int studentProgress)
+    public async Task CreateStudent(string studentId, bool locked, string studentName, bool studentStatus, int studentProgress)
     {
         
     }

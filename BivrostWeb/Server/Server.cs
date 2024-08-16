@@ -1,7 +1,6 @@
 ﻿using BivrostWeb.Hub;
 using BivrostWeb.Server.Models;
 using BivrostWeb.Server.Packets;
-using BivrostWeb.Services;
 using Microsoft.AspNetCore.SignalR;
 
 namespace BivrostWeb.Server
@@ -12,23 +11,20 @@ namespace BivrostWeb.Server
         Production
     }
     
-    public class Server
+    public class Server(ILogger<WebSocketService> logger, IHubContext<SessionHub> sessionHub)
     {
         public const int MAX_SESSIONS_AMOUNT = 16;
         public const int MAX_STUDENTS_IN_SESSION = 16;
 
-        public readonly IHubContext<SessionHub> _hubContext;
-        public readonly WebSocketService webSocketService;
+        private readonly WebSocketService webSocketService = new(logger);
         
-        private List<Session> sessions = new();
-
         public delegate void PacketHandler(Packet packet);
         public static Dictionary<int, PacketHandler> packetHandlers;
+        
+        private Dictionary<string, Session> sessions = new();
 
-        public Server(ILogger<WebSocketService> logger)
-        {
-            webSocketService = new WebSocketService(logger);
-        }
+        private ServerHandle serverHandle;
+        private ServerSend serverSend;
 
         public async Task Run(ServerType serverType)
         {
@@ -42,7 +38,7 @@ namespace BivrostWeb.Server
                     break;
             }
         }
-        
+
         public async Task HandleRequestAsync(HttpContext context, Func<Task> next)
         {
             if (context.WebSockets.IsWebSocketRequest)
@@ -55,79 +51,44 @@ namespace BivrostWeb.Server
             }
         }
 
-        public async Task AddSession(string sessionId)
+        public async Task AddSession(string sessionId, string sessionName)
         {
-            Session session = new Session(sessionId);
+            Session session = new Session(sessionName);
             
-            sessions.Add(session);
+            if (!sessions.TryAdd(sessionId, session))
+            {
+                Console.WriteLine($"A session with the ID {sessionId} already exists in this session.");
+            }
         }
 
         public async Task AddStudent(string sessionId, string studentId, string studentName)
         {
-            Session session = GetSession(sessionId);
-            Student student = new Student(studentId, studentName);
+            Session session = sessions.GetValueOrDefault(sessionId);
+            Student student = new Student(studentName);
             
-            session.students.Add(student);
+            session.AddStudent(studentId, student);
             
-            // await _hubContext.Clients.All.SendAsync("CreateStudent", student.studentLocked, student.studentId,
-            //     student.studentName, student.studentStatus, student.studentProgress);
+            await sessionHub.Clients.All.SendAsync("CreateStudent", studentId, student.studentLocked,
+                student.studentName, student.studentStatus, student.studentProgress);
         }
 
         public async Task LockStudent(string sessionId, string studentId)
         {
-            Student student = GetStudent(sessionId, studentId);
-            student.studentLocked = true;
+            Session session = sessions.GetValueOrDefault(sessionId);
+            Student student = session.GetStudent(studentId);
                 
-            await _hubContext.Clients.All.SendAsync("LockStudent", student.studentId);
-        }
-
-        public async Task UpdateStudentProgress(string sessionId, string studentId, int progress)
-        {
-            Student student = GetStudent(sessionId, studentId);
-            student.studentProgress = progress;
-            
-            await _hubContext.Clients.All.SendAsync("UpdateStudentProgress", student.studentId, student.studentProgress);
+            await sessionHub.Clients.All.SendAsync("LockStudent", studentId);
         }
         
         private void InitializeServerData()
         {
+            serverHandle = new ServerHandle(this);
+            serverSend = new ServerSend(this);
+            
             packetHandlers = new Dictionary<int, PacketHandler>()
             {
-                { (int)ClientPackets.lockStudent, ServerHandle.LockStudent },
-                { (int)ClientPackets.updateStudentProgress, ServerHandle.UpdateStudentProgress },
+                { (int)ClientPackets.lockStudent, serverHandle.LockStudent },
             };
-        }
-
-        private Session GetSession(string sessionId)
-        {
-            Session session = sessions.FirstOrDefault(s => s.sessionId == sessionId);
-
-            return session;
-        }
-        
-        private Student GetStudent(string sessionId, string studentId)
-        {
-            Session session = sessions.FirstOrDefault(s => s.sessionId == sessionId);
-            Student student = session.students.FirstOrDefault(s => s.studentId == studentId);
-
-            return student;
-        }
-        
-        public IReadOnlyList<Student> GetStudentsBySessionId(string sessionId)
-        {
-            if (string.IsNullOrEmpty(sessionId))
-            {
-                throw new ArgumentException("Session ID cannot be null or empty", nameof(sessionId));
-            }
-
-            var session = sessions.FirstOrDefault(s => s.sessionId == sessionId);
-    
-            if (session == null)
-            {
-                return new List<Student>().AsReadOnly(); // Return an empty read-only list if the session is not found
-            }
-
-            return session.students.AsReadOnly();
         }
     }
 }

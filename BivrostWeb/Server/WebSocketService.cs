@@ -1,22 +1,23 @@
-﻿using System.Collections.Concurrent;
-using System.Net.WebSockets;
+﻿using System.Net.WebSockets;
 using BivrostWeb.Server.Packets;
 
-namespace BivrostWeb.Services
+namespace BivrostWeb.Server
 {
     public class WebSocketService(ILogger<WebSocketService> logger)
     {
+        public const string REQUEST_PATH = "/wa";
+        
         public async Task HandleWebSocketAsync(HttpContext context)
         {
-            if (context.Request.Path == "/ws" && context.WebSockets.IsWebSocketRequest)
+            if (context.Request.Path == REQUEST_PATH)
             {
-                using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                using WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
                 Console.WriteLine("WebSocket connection established.");
-                var buffer = new byte[1024 * 4];
+                byte[] buffer = new byte[1024 * 4];
 
                 while (webSocket.State == WebSocketState.Open)
                 {
-                    var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
                     if (result.MessageType == WebSocketMessageType.Close)
                     {
@@ -35,10 +36,10 @@ namespace BivrostWeb.Services
                         int packetLength = packet.ReadInt();
                         int packetId = packet.ReadInt();
                         // Ensure the packet ID is valid and that the packet isn't a duplicate
-                        if (Server.Server.packetHandlers.ContainsKey(packetId))
+                        if (Server.packetHandlers.ContainsKey(packetId))
                         {
                             Console.WriteLine($"Key detected");
-                            Server.Server.packetHandlers[packetId](packet);
+                            Server.packetHandlers[packetId](packet);
                         }
                         else
                         {

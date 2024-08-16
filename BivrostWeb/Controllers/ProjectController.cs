@@ -74,7 +74,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
     public async Task<IActionResult> CreateSession(string projectId, string sessionId, string sessionName)
     {
         await AwsConnectionService.AddNewSession(projectId, new Session(sessionId, sessionName, true, new List<Student>()));
-        await server.AddSession(sessionId);
+        await server.AddSession(sessionId, sessionName);
         
         return RedirectToAction("Project", new { projectId });
     }
@@ -86,12 +86,5 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         await server.AddStudent(sessionId, studentId, studentName);
         
         return RedirectToAction("Session", new { projectId, sessionId });
-    }
-    
-    [HttpPost("students/{sessionId}")]
-    public ActionResult<List<Student>> GetStudents(string sessionId)
-    {
-        var students = server.GetStudentsBySessionId(sessionId);
-        return Ok(students);
     }
 }

@@ -1,28 +1,12 @@
 ﻿namespace BivrostWeb.Server.Packets;
 
-public class ServerHandle
+public class ServerHandle(Server server)
 {
-    public static void LockStudent(Packet packet)
+    public async void LockStudent(Packet packet)
     {
-        StudentData studentData = new StudentData();
-        
-        GetStudentData(packet, ref studentData);
-    }
-    
-    public static void UpdateStudentProgress(Packet packet)
-    {
-        StudentData studentData = new StudentData();
-        
-        //GetStudentData(packet);
-        int studentProgress = packet.ReadInt();
-    }
+        string sessionId = packet.ReadString();
+        string studentId = packet.ReadString();
 
-    private static StudentData GetStudentData(Packet packet, ref StudentData studentData)
-    {
-        studentData.projectId = packet.ReadString(); 
-        studentData.sessionId = packet.ReadString();
-        studentData.studentId = packet.ReadString();
-
-        return studentData;
+        await server.LockStudent(sessionId, studentId);
     }
 }

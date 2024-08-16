@@ -152,7 +152,7 @@
         }
     
         // SignalR connection event handlers (for dynamic updates)
-        connection.on("CreateStudent", function(locked, studentId, studentName, studentStatus, studentProgress) {
+        connection.on("CreateStudent", function(studentId, locked, studentName, studentStatus, studentProgress) {
             createStudentRow(locked, studentId, studentName, studentStatus, studentProgress);
         });
     

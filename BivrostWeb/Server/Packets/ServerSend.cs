@@ -1,6 +1,6 @@
 ﻿namespace BivrostWeb.Server.Packets;
 
-public class ServerSend
+public class ServerSend(Server server)
 {
     
 }
