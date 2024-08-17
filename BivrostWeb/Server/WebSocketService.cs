@@ -5,19 +5,17 @@ namespace BivrostWeb.Server
 {
     public class WebSocketService(ILogger<WebSocketService> logger)
     {
-        public const string REQUEST_PATH = "/wa";
-        
         public async Task HandleWebSocketAsync(HttpContext context)
         {
-            if (context.Request.Path == REQUEST_PATH)
+            if (context.Request.Path == "/ws" && context.WebSockets.IsWebSocketRequest)
             {
-                using WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
                 Console.WriteLine("WebSocket connection established.");
-                byte[] buffer = new byte[1024 * 4];
+                var buffer = new byte[1024 * 4];
 
                 while (webSocket.State == WebSocketState.Open)
                 {
-                    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                    var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
                     if (result.MessageType == WebSocketMessageType.Close)
                     {

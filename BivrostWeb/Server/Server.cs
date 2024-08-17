@@ -74,6 +74,8 @@ namespace BivrostWeb.Server
 
         public async Task LockStudent(string sessionId, string studentId)
         {
+            Console.WriteLine($"SessionId: {sessionId}. StudentId: {studentId}");
+            
             Session session = sessions.GetValueOrDefault(sessionId);
             Student student = session.GetStudent(studentId);
                 
