@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BivrostWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6d8c212c6615a47466c08a72d8b462fc08bd54c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1071c2a72063bec69e7fc0efd45bdba83e13e4a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BivrostWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BivrostWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

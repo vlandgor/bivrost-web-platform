@@ -17,12 +17,12 @@ namespace BivrostWeb.Server
                 {
                     var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
-                    if (result.MessageType == WebSocketMessageType.Close)
-                    {
-                        await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
-                        Console.WriteLine("WebSocket connection closed.");
-                        break;
-                    }
+                    // if (result.MessageType == WebSocketMessageType.Close)
+                    // {
+                    //     await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
+                    //     Console.WriteLine("WebSocket connection closed.");
+                    //     break;
+                    // }
 
                     // Extracting the exact byte array from the buffer
                     byte[] bytes = new byte[result.Count];

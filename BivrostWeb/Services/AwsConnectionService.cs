@@ -135,6 +135,78 @@ public static class AwsConnectionService
             return null; // Or throw an exception if necessary
         }
     }
+    
+    public static async Task<Dictionary<string, Server.Models.Session>> GetActiveSessions()
+    {
+        string apiUrl = $"https://bvrkm0qogg.execute-api.us-east-2.amazonaws.com/dev";
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Status success");
+
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    // Extract the body field from the JSON object
+                    var jsonObject = JsonConvert.DeserializeObject<dynamic>(json);
+                    string body = jsonObject.body;
+
+                    if (string.IsNullOrEmpty(body))
+                    {
+                        Console.WriteLine("The 'body' field is null or empty.");
+                        return null; // Handle this case appropriately
+                    }
+
+                    // Deserialize the body to List<Session>
+                    List<Server.Models.Session> sessionsList = JsonConvert.DeserializeObject<List<Server.Models.Session>>(body);
+
+                    if (sessionsList == null)
+                    {
+                        Console.WriteLine("Failed to deserialize the 'body' into a List<Session>.");
+                        return null; // Handle this case appropriately
+                    }
+
+                    Console.WriteLine($"Got session list");
+
+                    // Convert List<Session> to Dictionary<string, Session>
+                    Dictionary<string, Server.Models.Session> sessionsDictionary = sessionsList
+                        .Where(session => session.sessionName != null) // Filter out sessions with null sessionName
+                        .ToDictionary(
+                            session => session.sessionName,
+                            session => new Server.Models.Session(session.sessionName)
+                            {
+                                students = session.students != null ? session.students
+                                    .Where(student => student.Key != null) // Filter out students with null keys
+                                    .ToDictionary(
+                                        student => student.Key,
+                                        student => new Server.Models.Student(student.Value.studentName)
+                                        {
+                                            studentStatus = student.Value.studentStatus,
+                                            studentLocked = student.Value.studentLocked,
+                                            studentProgress = student.Value.studentProgress
+                                        }) : new Dictionary<string, Server.Models.Student>() // Handle case with no students
+                            });
+
+                    return sessionsDictionary;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to retrieve data. Status code: {response.StatusCode}");
+                    return null; // Or throw an exception if necessary
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return null; // Or throw an exception if necessary
+        }
+    }
 
     public static async Task<User> GetUserData(string email)
     {

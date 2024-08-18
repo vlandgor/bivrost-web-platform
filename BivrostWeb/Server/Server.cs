@@ -1,6 +1,7 @@
 ﻿using BivrostWeb.Hub;
 using BivrostWeb.Server.Models;
 using BivrostWeb.Server.Packets;
+using BivrostWeb.Services;
 using Microsoft.AspNetCore.SignalR;
 
 namespace BivrostWeb.Server
@@ -33,6 +34,17 @@ namespace BivrostWeb.Server
             switch (serverType)
             {
                 case ServerType.Development:
+                    sessions = await AwsConnectionService.GetActiveSessions();
+                    foreach (KeyValuePair<string,Session> session in sessions)
+                    {
+                        Console.WriteLine($"Session id: {session.Key}");
+                        
+                        foreach (KeyValuePair<string,Student> student in session.Value.students)
+                        {
+                            Console.WriteLine($"    Student id: {session.Key}");
+                        
+                        }
+                    }
                     break;
                 case ServerType.Production:
                     break;
@@ -77,7 +89,7 @@ namespace BivrostWeb.Server
             Console.WriteLine($"SessionId: {sessionId}. StudentId: {studentId}");
             
             Session session = sessions.GetValueOrDefault(sessionId);
-            Student student = session.GetStudent(studentId);
+            //Student student = session.GetStudent(studentId);
                 
             await sessionHub.Clients.All.SendAsync("LockStudent", studentId);
         }
