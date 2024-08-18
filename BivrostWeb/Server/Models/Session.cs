@@ -2,6 +2,7 @@
 
 public class Session(string sessionName)
 {
+    public string sessionId;
     public string sessionName = sessionName;
     
     public Dictionary<string, Student> students = new();

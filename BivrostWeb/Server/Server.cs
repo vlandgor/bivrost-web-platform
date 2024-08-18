@@ -12,12 +12,12 @@ namespace BivrostWeb.Server
         Production
     }
     
-    public class Server(ILogger<WebSocketService> logger, IHubContext<SessionHub> sessionHub)
+    public class Server(IHubContext<SessionHub> sessionHub)
     {
         public const int MAX_SESSIONS_AMOUNT = 16;
         public const int MAX_STUDENTS_IN_SESSION = 16;
 
-        private readonly WebSocketService webSocketService = new(logger);
+        private readonly WebSocketService webSocketService = new();
         
         public delegate void PacketHandler(Packet packet);
         public static Dictionary<int, PacketHandler> packetHandlers;
@@ -35,16 +35,6 @@ namespace BivrostWeb.Server
             {
                 case ServerType.Development:
                     sessions = await AwsConnectionService.GetActiveSessions();
-                    foreach (KeyValuePair<string,Session> session in sessions)
-                    {
-                        Console.WriteLine($"Session id: {session.Key}");
-                        
-                        foreach (KeyValuePair<string,Student> student in session.Value.students)
-                        {
-                            Console.WriteLine($"    Student id: {session.Key}");
-                        
-                        }
-                    }
                     break;
                 case ServerType.Production:
                     break;
@@ -87,10 +77,28 @@ namespace BivrostWeb.Server
         public async Task LockStudent(string sessionId, string studentId)
         {
             Console.WriteLine($"SessionId: {sessionId}. StudentId: {studentId}");
-            
+    
+            // Retrieve the session and student
             Session session = sessions.GetValueOrDefault(sessionId);
-            //Student student = session.GetStudent(studentId);
-                
+            if (session == null)
+            {
+                Console.WriteLine($"Session with ID {sessionId} not found.");
+                return;
+            }
+    
+            Student student = session.GetStudent(studentId);
+            if (student == null)
+            {
+                Console.WriteLine($"Student with ID {studentId} not found in session {sessionId}.");
+                return;
+            }
+
+            // Update the student's locked status
+            student.studentLocked = true;
+    
+            Console.WriteLine($"Student : {student.studentName} was locked");
+    
+            // Notify all clients about the change
             await sessionHub.Clients.All.SendAsync("LockStudent", studentId);
         }
         

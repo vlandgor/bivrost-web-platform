@@ -2,6 +2,7 @@
 
 public class Student(string studentName)
 {
+    public string studentId;
     public string studentName = studentName;
     
     public bool studentStatus;

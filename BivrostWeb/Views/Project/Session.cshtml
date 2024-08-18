@@ -160,7 +160,10 @@
             const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
             
             if (existingRow) {
-                existingRow.cells[0].textContent = true;
+                // Assuming the lock status is in the first column (index 1)
+                existingRow.cells[1].textContent = "Locked"; // Update the lock status text appropriately
+            } else {
+                console.error(`Student row with ID ${studentId} not found.`);
             }
         });
     

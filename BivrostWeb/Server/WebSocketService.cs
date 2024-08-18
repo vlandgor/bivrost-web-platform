@@ -3,7 +3,7 @@ using BivrostWeb.Server.Packets;
 
 namespace BivrostWeb.Server
 {
-    public class WebSocketService(ILogger<WebSocketService> logger)
+    public class WebSocketService()
     {
         public async Task HandleWebSocketAsync(HttpContext context)
         {

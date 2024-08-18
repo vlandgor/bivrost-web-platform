@@ -175,17 +175,19 @@ public static class AwsConnectionService
 
                     // Convert List<Session> to Dictionary<string, Session>
                     Dictionary<string, Server.Models.Session> sessionsDictionary = sessionsList
-                        .Where(session => session.sessionName != null) // Filter out sessions with null sessionName
+                        .Where(session => session.sessionId != null) // Filter out sessions with null sessionName
                         .ToDictionary(
-                            session => session.sessionName,
-                            session => new Server.Models.Session(session.sessionName)
+                            session => session.sessionId, // This should be sessionID if it exists
+                            session => new Server.Models.Session(session.sessionName) // This should be sessionID if it exists
                             {
+                                sessionId = session.sessionId,
                                 students = session.students != null ? session.students
-                                    .Where(student => student.Key != null) // Filter out students with null keys
+                                    .Where(student => student.Key != null) // Filter out students with null keys (studentId)
                                     .ToDictionary(
-                                        student => student.Key,
+                                        student => student.Key, // This should be studentId
                                         student => new Server.Models.Student(student.Value.studentName)
                                         {
+                                            studentId =  student.Value.studentId,
                                             studentStatus = student.Value.studentStatus,
                                             studentLocked = student.Value.studentLocked,
                                             studentProgress = student.Value.studentProgress

@@ -1,14 +1,18 @@
+using BivrostWeb;
 using BivrostWeb.Hub;
 using BivrostWeb.Server;
 using Microsoft.AspNetCore.SignalR;
-using WebApplication1;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
-builder.Services.AddSingleton<Server>();
+builder.Services.AddSingleton<Server>(serviceProvider =>
+{
+    var sessionHub = serviceProvider.GetRequiredService<IHubContext<SessionHub>>();
+    return new Server(sessionHub);
+});
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
