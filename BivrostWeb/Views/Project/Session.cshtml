@@ -101,80 +101,70 @@
     </div>
 </div>
 
-@section Scripts {
-    <script>
-        @Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@microsoft/signalr@6.0.0/dist/browser/signalr.min.js'></script>")
-        document.addEventListener('DOMContentLoaded', function() {
-            const sessionId = '@Model.Session.s_id'; // Use your session ID from the model
-    
-            fetch(`/api/session/students/${sessionId}`)
-                .then(response => response.json())
-                .then(students => {
-                    students.forEach(student => {
-                        createStudentRow(student.studentLocked, student.studentId, student.studentName, student.studentStatus, student.studentProgress);
-                    });
-                })
-                .catch(err => {
-                    console.error('Error fetching students:', err);
-                });
-        });
-    
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/sessionhub")
-            .build();
-    
-        // Method to create a new student row in the table
-        function createStudentRow(locked, studentId, studentName, studentStatus, studentProgress) {
-            const studentsTable = document.getElementById("studentsTable").getElementsByTagName('tbody')[0];
-            
-            // Create a new row
-            const row = document.createElement("tr");
-            row.setAttribute('data-student-id', studentId);
-            
-            const idLocked = document.createElement("td");
-            idLocked.textContent = locked;
-            row.appendChild(idLocked);
-            
-            const nameCell = document.createElement("td");
-            nameCell.textContent = studentName;
-            row.appendChild(nameCell);
+@Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@microsoft/signalr@6.0.0/dist/browser/signalr.min.js'></script>")
+<script>       
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/sessionhub")
+        .build();
+
+    // Method to create a new student row in the table
+    function createStudentRow(locked, studentId, studentName, studentStatus, studentProgress) {
+        const studentsTable = document.getElementById("studentsTable").getElementsByTagName('tbody')[0];
         
-            const statusCell = document.createElement("td");
-            statusCell.textContent = studentStatus;
-            row.appendChild(statusCell);
+        // Create a new row
+        const row = document.createElement("tr");
+        row.setAttribute('data-student-id', studentId);
         
-            const progressCell = document.createElement("td");
-            progressCell.textContent = studentProgress;
-            row.appendChild(progressCell);
+        const idLocked = document.createElement("td");
+        idLocked.textContent = locked;
+        row.appendChild(idLocked);
         
-            // Append the row to the table
-            studentsTable.appendChild(row);
+        const nameCell = document.createElement("td");
+        nameCell.textContent = studentName;
+        row.appendChild(nameCell);
+    
+        const statusCell = document.createElement("td");
+        statusCell.textContent = studentStatus;
+        row.appendChild(statusCell);
+    
+        const progressCell = document.createElement("td");
+        progressCell.textContent = studentProgress;
+        row.appendChild(progressCell);
+    
+        // Append the row to the table
+        studentsTable.appendChild(row);
+    }
+
+    // SignalR connection event handlers (for dynamic updates)
+    connection.on("CreateStudent", function(studentId, locked, studentName, studentStatus, studentProgress) {
+        createStudentRow(locked, studentId, studentName, studentStatus, studentProgress);
+    });
+
+    connection.on("LockStudent", function(studentId) {
+        const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
+        
+        if (existingRow) {
+            // Assuming the lock status is in the first column (index 1)
+            existingRow.cells[1].textContent = "Locked"; // Update the lock status text appropriately
+        } else {
+            console.error(`Student row with ID ${studentId} not found.`);
         }
-    
-        // SignalR connection event handlers (for dynamic updates)
-        connection.on("CreateStudent", function(studentId, locked, studentName, studentStatus, studentProgress) {
-            createStudentRow(locked, studentId, studentName, studentStatus, studentProgress);
+    });
+
+    connection.on("UpdateStudentProgress", function(studentId, studentProgress) {
+        const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
+        
+        if (existingRow) {
+            existingRow.cells[3].textContent = studentProgress;
+        }
+    });
+
+    connection.start()
+        .then(() => {
+            console.log("SignalR connection established successfully.");
+            // You can also display a UI message if needed
+        })
+        .catch(err => {
+            console.error("SignalR connection failed: ", err.toString());
         });
-    
-        connection.on("LockStudent", function(studentId) {
-            const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
-            
-            if (existingRow) {
-                // Assuming the lock status is in the first column (index 1)
-                existingRow.cells[1].textContent = "Locked"; // Update the lock status text appropriately
-            } else {
-                console.error(`Student row with ID ${studentId} not found.`);
-            }
-        });
-    
-        connection.on("UpdateStudentProgress", function(studentId, studentProgress) {
-            const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
-            
-            if (existingRow) {
-                existingRow.cells[3].textContent = studentProgress;
-            }
-        });
-    
-        connection.start().catch(err => console.error(err.toString()));
-    </script>
-}
+</script>
