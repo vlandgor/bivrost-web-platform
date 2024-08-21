@@ -101,13 +101,13 @@ table th, table td {
 }
 
 .link-column {
-    visibility: hidden;
+    opacity: 0;
     text-align: center;
     background-color: transparent;
 }
 
 tr:hover .link-column {
-    visibility: visible;
+    opacity: 1;
 }
 
 .link-column a {

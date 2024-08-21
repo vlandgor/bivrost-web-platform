@@ -54,7 +54,7 @@
         <div class="table-container">
             <div class="table-container__header">
                 <text class="header-title">Students</text>
-                <a class="header-button">Add new student</a>
+                <a id="createModalButton" class="header-button">Add new student</a>
             </div>
             <div class="table-container__search">
                 <button class="icon-container">
@@ -63,28 +63,30 @@
                 <input class="search-input" placeholder="Search for students"/>
             </div>
             <div class="projects-table">
-                <table>
+                <table id="studentsTable">
                     <thead>
                     <tr>
+                        <th><span class="material-icons">lock</span></th>
                         <th>Name</th>
                         <th>Status</th>
                         <th>Time</th>
                         <th>Progress</th>
-                        <th>Options</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach (Student student in Model.Session.s_students)
                     {
                         <tr data-student-id="@student.st_id">
+                            <td><span class="material-icons">lock</span></td>
                             <td>@student.st_name</td>
                             <td>@student.st_status</td>
                             <td>26 minutes</td>
                             <td>@student.st_progress</td>
-                            <td>
-                                @* <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id"> *@
-                                @*     <button class="table-more-option">More</button> *@
-                                @* </a> *@
+                            <td class="link-column">
+                                <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id">
+                                    Enter student page
+                                </a>
                             </td>
                         </tr>
                     }
@@ -94,69 +96,6 @@
         </div>
     </div>
 </div>
-
-@* <div class="session-page"> *@
-@*     <div class="project-menu-panel"> *@
-@*         <a class="back-button" asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id"> *@
-@*             <span class="material-symbols-outlined">arrow_back</span> *@
-@*         </a> *@
-@*         <div class="project-full-name"> *@
-@*             <span class="project-menu-text"> *@
-@*                 <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id">@Model.Project.Name</a> *@
-@*                 | *@
-@*                 <span class="current-location">@Model.Session.s_name</span> *@
-@*             </span> *@
-@*         </div> *@
-@*         <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a> *@
-@*         <a class="project-menu-button">ANALYTICS</a> *@
-@*         <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a> *@
-@*     </div> *@
-@*      *@
-@*     <div class="block" id="div1"> *@
-@*         <div class="block-top"> *@
-@*             <div class="block-name">Progress</div> *@
-@*             <div style="flex-grow: 1;"></div> *@
-@*             <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button> *@
-@*             <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button> *@
-@*         </div> *@
-@*         <div class="project-menu-panel"> *@
-@*             <button class="project-menu-button active-menu-button" data-table="studentsTable" onclick="toggleTable(event)">Students</button> *@
-@*             <button class="project-menu-button" data-table="instructorsTable" onclick="toggleTable(event)">Instructors</button> *@
-@*             <div style="flex-grow: 1;"></div> *@
-@*             <button id="createModalButton" class="create-button">ADD STUDENT</button> *@
-@*         </div> *@
-@*         <table id="studentsTable"> *@
-@*             <thead> *@
-@*                 <tr> *@
-@*                     <th class="left-element">NAME</th> *@
-@*                     <th class="centered-table-element regular-column">STATUS</th> *@
-@*                     <th class="centered-table-element regular-column">TIME</th> *@
-@*                     <th class="centered-table-element regular-column">PROGRESS</th> *@
-@*                     <th class="centered-table-element regular-column">OPTIONS</th> *@
-@*                 </tr> *@
-@*             </thead> *@
-@*             <tbody> *@
-@*                 @foreach (Student student in Model.Session.s_students) *@
-@*                 { *@
-@*                     <tr data-student-id="@student.st_id"> *@
-@*                         <td class="left-element">@student.st_name</td> *@
-@*                         <td class="centered-table-element regular-column">@student.st_status</td> *@
-@*                         <td class="centered-table-element regular-column">26 minutes</td> *@
-@*                         <td class="centered-table-element regular-column">@student.st_progress</td> *@
-@*                         <td class="centered-table-element regular-column"> *@
-@*                             <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id"> *@
-@*                                 <button class="table-more-option">More</button> *@
-@*                             </a> *@
-@*                         </td> *@
-@*                     </tr> *@
-@*                 } *@
-@*             </tbody> *@
-@*         </table> *@
-@*         <table id="instructors" style="display: none;"> *@
-@*             $1$ ... your instructor table code ... #1# *@
-@*         </table> *@
-@*     </div> *@
-@* </div> *@
 
 <div class="modal fade" id="createModalPanel" role="dialog">
     <div class="modal-dialog">
@@ -184,7 +123,7 @@
                 </div>
                 <div class="modalFooter">
                     <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
-                    <button type="submit" id="createNewStudent" class="footerButton continueButton">CREATE</button>
+                    <button type="submit" id="confirmButton" class="footerButton continueButton">CREATE</button>
                 </div>
             </form>
         </div>
@@ -197,45 +136,12 @@
         .withUrl("/sessionhub")
         .build();
 
-    // Method to create a new student row in the table
-    function createStudentRow(locked, studentId, studentName, studentStatus, studentProgress) {
-        const studentsTable = document.getElementById("studentsTable").getElementsByTagName('tbody')[0];
-        
-        // Create a new row
-        const row = document.createElement("tr");
-        row.setAttribute('data-student-id', studentId);
-        
-        const idLocked = document.createElement("td");
-        idLocked.textContent = locked;
-        row.appendChild(idLocked);
-        
-        const nameCell = document.createElement("td");
-        nameCell.textContent = studentName;
-        row.appendChild(nameCell);
-    
-        const statusCell = document.createElement("td");
-        statusCell.textContent = studentStatus;
-        row.appendChild(statusCell);
-    
-        const progressCell = document.createElement("td");
-        progressCell.textContent = studentProgress;
-        row.appendChild(progressCell);
-    
-        // Append the row to the table
-        studentsTable.appendChild(row);
-    }
-
-    // SignalR connection event handlers (for dynamic updates)
-    connection.on("CreateStudent", function(studentId, locked, studentName, studentStatus, studentProgress) {
-        createStudentRow(locked, studentId, studentName, studentStatus, studentProgress);
-    });
-
     connection.on("LockStudent", function(studentId) {
         const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
         
         if (existingRow) {
             // Assuming the lock status is in the first column (index 1)
-            existingRow.cells[1].textContent = "Locked"; // Update the lock status text appropriately
+            existingRow.cells[0].style.opacity = '1';
         } else {
             console.error(`Student row with ID ${studentId} not found.`);
         }
@@ -248,13 +154,12 @@
             existingRow.cells[3].textContent = studentProgress;
         }
     });
+</script>
 
-    connection.start()
-        .then(() => {
-            console.log("SignalR connection established successfully.");
-            // You can also display a UI message if needed
-        })
-        .catch(err => {
-            console.error("SignalR connection failed: ", err.toString());
-        });
+@Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@microsoft/signalr@6.0.0/dist/browser/signalr.min.js'></script>")
+<script>
+    const connection = initializeSignalRConnection("/sessionhub");
+    
+    handleLockStudentEvent(connection, "#studentsTable");
+    handleUpdateStudentProgressEvent(connection, "#studentsTable");
 </script>

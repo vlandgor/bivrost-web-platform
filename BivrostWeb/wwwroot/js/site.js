@@ -1,9 +1,4 @@
-﻿function makeFullscreen(divId) {
-    var element = document.getElementById(divId);
-    element.classList.toggle('block-fullscreen');
-}
-
-function toggleSection(element) {
+﻿function toggleSection(element) {
     const sectionContent = element.nextElementSibling;
     const arrow = element.querySelector('.query-arrow');
 
@@ -51,6 +46,7 @@ function toggleTable(event) {
 document.getElementById('createModalButton').addEventListener('click', function () {
     $('#createModalPanel').modal('show');
 });
+
 document.getElementById('cancelButton').addEventListener('click', function () {
     $('#createModalPanel').modal('hide');
 });

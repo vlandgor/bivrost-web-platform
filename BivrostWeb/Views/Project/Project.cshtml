@@ -6,7 +6,7 @@
     bool hasSessions = false;
 }
 
-<div>
+<div class="project-panel">
     
     @await Component.InvokeAsync("ProjectMenu", @Model)
 
@@ -56,7 +56,7 @@
                             <td>@session.s_students.Count</td>
                             <td>21 minutes</td>
                             <td class="link-column">
-                                <a id="sessionLink" asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@session.s_id">
+                                <a asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@session.s_id">
                                     Join session
                                 </a>
                             </td>
