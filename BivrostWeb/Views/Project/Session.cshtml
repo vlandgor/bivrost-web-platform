@@ -136,6 +136,15 @@
         .withUrl("/sessionhub")
         .build();
 
+    connection.start()
+            .then(() => {
+                console.log("SignalR connection established successfully.");
+                // You can also display a UI message if needed
+            })
+            .catch(err => {
+                console.error("SignalR connection failed: ", err.toString());
+            });
+
     connection.on("LockStudent", function(studentId) {
         const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
         
@@ -154,12 +163,4 @@
             existingRow.cells[3].textContent = studentProgress;
         }
     });
-</script>
-
-@Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@microsoft/signalr@6.0.0/dist/browser/signalr.min.js'></script>")
-<script>
-    const connection = initializeSignalRConnection("/sessionhub");
-    
-    handleLockStudentEvent(connection, "#studentsTable");
-    handleUpdateStudentProgressEvent(connection, "#studentsTable");
 </script>
