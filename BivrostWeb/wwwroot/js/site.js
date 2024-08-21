@@ -3,6 +3,33 @@
     element.classList.toggle('block-fullscreen');
 }
 
+function toggleSection(element) {
+    const sectionContent = element.nextElementSibling;
+    const arrow = element.querySelector('.query-arrow');
+
+    // Collapse all sections
+    const allSections = document.querySelectorAll('.panel-section .section-content');
+    allSections.forEach(content => {
+        if (content !== sectionContent) {
+            content.style.display = 'none';
+            content.style.maxHeight = '0';
+            content.previousElementSibling.querySelector('.query-arrow').style.transform = 'rotate(0deg)';
+        }
+    });
+
+    // Expand the clicked section
+    if (sectionContent.style.display === 'block') {
+        sectionContent.style.display = 'none';
+        sectionContent.style.maxHeight = '0';
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        sectionContent.style.display = 'block';
+        sectionContent.style.minHeight = '100vh';
+        sectionContent.style.maxHeight = '100vh'; /* Set max-height to allow full expansion */
+        arrow.style.transform = 'rotate(180deg)';
+    }
+}
+
 function toggleTable(event) {
     const allTables = document.querySelectorAll('table');
     const allButtons = document.querySelectorAll('.project-menu-button');

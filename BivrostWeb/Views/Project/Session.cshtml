@@ -5,68 +5,158 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="session-page">
-    <div class="project-menu-panel">
-        <a class="back-button" asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id">
-            <span class="material-symbols-outlined">arrow_back</span>
-        </a>
-        <div class="project-full-name">
-            <span class="project-menu-text">
-                <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id">@Model.Project.Name</a>
-                |
-                <span class="current-location">@Model.Session.s_name</span>
-            </span>
+<div class="session-panel">
+    <div class="control-panel">
+        <div class="operator-module">
+            <div class="title-block">
+                <button class="icon-button">
+                    <span class="material-icons">
+                        arrow_back
+                    </span>
+                </button>
+                @Model.Session.s_name
+            </div>
+            <div class="content-block">
+                <div class="panel-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span>Info</span>
+                        <span class="material-icons query-arrow">arrow_drop_down</span>
+                    </div>
+                    <div class="section-content">
+                        Info content
+                    </div>
+                </div>
+                <div class="panel-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span>Instructors</span>
+                        <span class="material-icons query-arrow">arrow_drop_down</span>
+                    </div>
+                    <div class="section-content">
+                        Instructors content
+                    </div>
+                </div>
+                <div class="panel-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span>Real time events</span>
+                        <span class="material-icons query-arrow">arrow_drop_down</span>
+                    </div>
+                    <div class="section-content">
+                        Real time events content
+                    </div>
+                </div>
+            </div>
+            <div class="footer-block">
+                <button class="finish-session-btn">Finish Session</button>
+            </div>
         </div>
-        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
-        <a class="project-menu-button">ANALYTICS</a>
-        <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a>
     </div>
-    
-    <div class="block" id="div1">
-        <div class="block-top">
-            <div class="block-name">Progress</div>
-            <div style="flex-grow: 1;"></div>
-            <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
-            <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
-        </div>
-        <div class="project-menu-panel">
-            <button class="project-menu-button active-menu-button" data-table="studentsTable" onclick="toggleTable(event)">Students</button>
-            <button class="project-menu-button" data-table="instructorsTable" onclick="toggleTable(event)">Instructors</button>
-            <div style="flex-grow: 1;"></div>
-            <button id="createModalButton" class="create-button">ADD STUDENT</button>
-        </div>
-        <table id="studentsTable">
-            <thead>
-                <tr>
-                    <th class="left-element">NAME</th>
-                    <th class="centered-table-element regular-column">STATUS</th>
-                    <th class="centered-table-element regular-column">TIME</th>
-                    <th class="centered-table-element regular-column">PROGRESS</th>
-                    <th class="centered-table-element regular-column">OPTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Student student in Model.Session.s_students)
-                {
-                    <tr data-student-id="@student.st_id">
-                        <td class="left-element">@student.st_name</td>
-                        <td class="centered-table-element regular-column">@student.st_status</td>
-                        <td class="centered-table-element regular-column">26 minutes</td>
-                        <td class="centered-table-element regular-column">@student.st_progress</td>
-                        <td class="centered-table-element regular-column">
-                            <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id">
-                                <button class="table-more-option">More</button>
-                            </a>
-                        </td>
+    <div class="content-panel">
+        <div class="table-container">
+            <div class="table-container__header">
+                <text class="header-title">Students</text>
+                <a class="header-button">Add new student</a>
+            </div>
+            <div class="table-container__search">
+                <button class="icon-container">
+                    <span class="material-icons">search</span>
+                </button>
+                <input class="search-input" placeholder="Search for students"/>
+            </div>
+            <div class="projects-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                        <th>Progress</th>
+                        <th>Options</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <table id="instructors" style="display: none;">
-            @* ... your instructor table code ... *@
-        </table>
+                    </thead>
+                    <tbody>
+                    @foreach (Student student in Model.Session.s_students)
+                    {
+                        <tr data-student-id="@student.st_id">
+                            <td>@student.st_name</td>
+                            <td>@student.st_status</td>
+                            <td>26 minutes</td>
+                            <td>@student.st_progress</td>
+                            <td>
+                                @* <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id"> *@
+                                @*     <button class="table-more-option">More</button> *@
+                                @* </a> *@
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+@* <div class="session-page"> *@
+@*     <div class="project-menu-panel"> *@
+@*         <a class="back-button" asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id"> *@
+@*             <span class="material-symbols-outlined">arrow_back</span> *@
+@*         </a> *@
+@*         <div class="project-full-name"> *@
+@*             <span class="project-menu-text"> *@
+@*                 <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id">@Model.Project.Name</a> *@
+@*                 | *@
+@*                 <span class="current-location">@Model.Session.s_name</span> *@
+@*             </span> *@
+@*         </div> *@
+@*         <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a> *@
+@*         <a class="project-menu-button">ANALYTICS</a> *@
+@*         <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a> *@
+@*     </div> *@
+@*      *@
+@*     <div class="block" id="div1"> *@
+@*         <div class="block-top"> *@
+@*             <div class="block-name">Progress</div> *@
+@*             <div style="flex-grow: 1;"></div> *@
+@*             <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button> *@
+@*             <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button> *@
+@*         </div> *@
+@*         <div class="project-menu-panel"> *@
+@*             <button class="project-menu-button active-menu-button" data-table="studentsTable" onclick="toggleTable(event)">Students</button> *@
+@*             <button class="project-menu-button" data-table="instructorsTable" onclick="toggleTable(event)">Instructors</button> *@
+@*             <div style="flex-grow: 1;"></div> *@
+@*             <button id="createModalButton" class="create-button">ADD STUDENT</button> *@
+@*         </div> *@
+@*         <table id="studentsTable"> *@
+@*             <thead> *@
+@*                 <tr> *@
+@*                     <th class="left-element">NAME</th> *@
+@*                     <th class="centered-table-element regular-column">STATUS</th> *@
+@*                     <th class="centered-table-element regular-column">TIME</th> *@
+@*                     <th class="centered-table-element regular-column">PROGRESS</th> *@
+@*                     <th class="centered-table-element regular-column">OPTIONS</th> *@
+@*                 </tr> *@
+@*             </thead> *@
+@*             <tbody> *@
+@*                 @foreach (Student student in Model.Session.s_students) *@
+@*                 { *@
+@*                     <tr data-student-id="@student.st_id"> *@
+@*                         <td class="left-element">@student.st_name</td> *@
+@*                         <td class="centered-table-element regular-column">@student.st_status</td> *@
+@*                         <td class="centered-table-element regular-column">26 minutes</td> *@
+@*                         <td class="centered-table-element regular-column">@student.st_progress</td> *@
+@*                         <td class="centered-table-element regular-column"> *@
+@*                             <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id"> *@
+@*                                 <button class="table-more-option">More</button> *@
+@*                             </a> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                 } *@
+@*             </tbody> *@
+@*         </table> *@
+@*         <table id="instructors" style="display: none;"> *@
+@*             $1$ ... your instructor table code ... #1# *@
+@*         </table> *@
+@*     </div> *@
+@* </div> *@
 
 <div class="modal fade" id="createModalPanel" role="dialog">
     <div class="modal-dialog">

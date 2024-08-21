@@ -1,0 +1,30 @@
+.session-panel{
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: transparent;
+}
+
+.session-panel .control-panel{
+    display: flex;
+    flex-direction: column;
+
+    width: 560px;
+
+    margin-right: 14px;
+
+    background-color: transparent;
+}
+
+.session-panel .content-panel{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: transparent;
+}
