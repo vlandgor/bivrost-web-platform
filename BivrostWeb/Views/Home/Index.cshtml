@@ -6,42 +6,50 @@
     bool hasProjects = false;
 }
 
-<div class="block" id="div1">
-        <div class="block-top">
-            <div class="block-name">Projects</div>
-            <div style="flex-grow: 1;"></div>
-            @* <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button> *@
-            <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
-        </div>
-        <table id="activeSessionsTable">
+<div class="content-title">
+    Organization Name
+</div>
+
+<div class="table-container">
+    <div class="table-container__header">
+        <text class="header-title">Projects</text>
+        <a class="header-button">Add new project</a>
+        <a class="header-button">Manage projects</a>
+    </div>
+    <div class="table-container__search">
+        <button class="icon-container">
+            <span class="material-icons">search</span>
+        </button>
+        <input class="search-input" placeholder="Search for projects"/>
+    </div>
+    <div class="projects-table">
+        <table>
             <thead>
-                <tr>
-                    <th class="left-element">NAME</th>
-                    <th class="centered-table-element regular-column">SH. NAME</th>
-                    <th class="centered-table-element regular-column">SESSIONS</th>
-                    <th class="centered-table-element regular-column">OPTIONS</th>
-                </tr>
+            <tr>
+                <th>Name</th>
+                <th>Sessions</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
             @{
                 hasProjects = false;
-                
+                    
                 foreach (Project project in Model.Projects)
                 {
                     hasProjects = true;  
-
-                    <tr>
-                        <td class="left-element">@project.Name</td>
-                        <td class="centered-table-element regular-column">@project.ShortName</td>
-                        <td class="centered-table-element regular-column">@project.Sessions.Count</td>
-                        <td class="centered-table-element regular-column">
-                            <a id="sessionLink" asp-action="Project" asp-controller="Project" asp-route-projectId="@project.Id">
-                                <button class="table-more-option">Enter</button>
-                            </a>
+    
+                    <tr class="main-row">
+                        <td>@project.Name</td>
+                        <td>@project.Sessions.Count</td>
+                        <td>
+                            @* <a id="sessionLink" asp-action="Project" asp-controller="Project" asp-route-projectId="@project.Id"> *@
+                            @*     <button class="table-more-option">Enter</button> *@
+                            @* </a> *@
                         </td>
                     </tr>
                 }
-                
+                    
                 if (!hasProjects)
                 {
                     <tr style="height: 112px;">
@@ -52,3 +60,4 @@
             </tbody>
         </table>
     </div>
+</div>

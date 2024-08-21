@@ -1,28 +1,82 @@
 ﻿@model BivrostWeb.Models.ViewModels.SideMenuViewModel
 
-<div class="side-projects-menu">
-    @foreach (Project project in Model.Projects)
-    {
-        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@project.Id" asp-route-projectName="@project.Name">
-            <button class="project-button">@project.ShortName</button>
-        </a>
-    }
-    <div class="side-menu-space-div"></div>
-    <a style="color: #ffffff">
-        <form asp-controller="Account" asp-action="Logout">
-            <button class="user-button" style="background-color: @Model.AccountColor">Q</button>
-        </form>
-    </a>
+<div class="full-side-menu">
+    <nav class="side-menu">
+        <div class="side-menu__group">
+            <ul>
+                <li class="side-menu__item">
+                    <a asp-controller="Home" asp-action="Index">
+                        <div class="side-menu__item-link-container">
+                            <button class="icon-button">
+                                <span class="material-icons">home</span>
+                            </button>
+                            <text>Home</text>
+                        </div>
+                    </a>
+                </li>
+                <li class="side-menu__item">
+                    <a asp-controller="" asp-action="">
+                        <div class="side-menu__item-link-container">
+                            <button class="icon-button">
+                                <span class="material-icons">dashboard</span>
+                            </button>
+                            <text>Dashboard</text>
+                        </div>
+                    </a>
+                </li>
+                <li class="side-menu__item">
+                    <a asp-controller="" asp-action="">
+                        <div class="side-menu__item-link-container">
+                            <button class="icon-button">
+                                <span class="material-icons">settings</span>
+                            </button>
+                            <text>Settings</text>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <hr class="side-menu__separator">
+
+        <div class="side-menu__group projects-group">
+            <div class="side-menu__item side-menu__group-title">
+                <a asp-controller="Home" asp-action="Index">
+                    <div class="side-menu__item-link-container">
+                        <text>Projects</text>
+                        <div class="icon-container">
+                            <span class="material-icons">navigate_next</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <ul class="projects-group">
+                @foreach (Project project in Model.Projects)
+                {
+                    <li class="side-menu__item">
+                        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@project.Id" asp-route-projectName="@project.Name">
+                            <div class="side-menu__item-link-container">
+                                <div class="item-short-name">
+                                    <text>@project.ShortName</text>
+                                </div>
+                                <text>@project.Name</text>
+                            </div>
+                        </a>
+                    </li>
+                    @* <a asp-controller="Project" asp-action="Project" asp-route-projectId="@project.Id" asp-route-projectName="@project.Name"> *@
+                    @*     <button class="project-button">@project.ShortName</button> *@
+                    @* </a> *@
+                }
+            </ul>
+        </div>
+
+        <hr class="side-menu__separator last-separator">
+
+        <div class="side-menu__group">
+            <div class="side-menu__footer">
+                © 2024 Lucidware
+            </div>
+        </div>
+    </nav>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-    // JavaScript to handle button click event and show modal
-    document.getElementById('createProjectButton').addEventListener('click', function () {
-        $('#createProjectPanel').modal('show');
-    });
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        $('#createProjectPanel').modal('hide');
-    });
-</script>

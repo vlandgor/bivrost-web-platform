@@ -7,120 +7,62 @@
 }
 
 <div>
-    <div class="project-menu-panel">
-        <a class="back-button" asp-action="Index" asp-controller="Home">
-            <span class="material-symbols-outlined">arrow_back</span>
-        </a>
-        <div class="project-full-name">
-            <span class="project-menu-text">
-                <span class="current-location">@Model.Project.Name</span>
-            </span>
-        </div>
-        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@Model.Project.Id" class="project-menu-button active-menu-button">PROJECT</a>
-        <a class="project-menu-button">ANALYTICS</a>
-        <a asp-controller="Project" asp-action="Settings" asp-route-projectId="@Model.Project.Id" class="project-menu-button">SETTINGS</a>
-    </div>
     
-    <div class="block" id="div1">
-        <div class="block-top">
-            <div class="block-name">Sessions</div>
-            <div style="flex-grow: 1;"></div>
-            <button class="block-option-button" onclick="makeFullscreen('div1')"><i class="bi bi-fullscreen"></i></button>
-            <button class="block-option-button"><i class="bi bi-arrow-clockwise"></i></button>
-        </div>
-        <div class="project-menu-panel">
-            <button class="project-menu-button active-menu-button" data-table="activeSessionsTable" onclick="toggleTable(event)">Active</button>
-            <button class="project-menu-button" data-table="completedSessionsTable" onclick="toggleTable(event)">Completed</button>
-            <div style="flex-grow: 1;"></div>
-            <button id="createModalButton" type="button" class="create-button">CREATE SESSION</button>
-        </div>
-        <table id="activeSessionsTable">
-            <thead>
-                <tr>
-                    <th class="left-element">NAME</th>
-                    <th class="centered-table-element regular-column">STATUS</th>
-                    <th class="centered-table-element regular-column">DATE</th>
-                    <th class="centered-table-element regular-column">PLAYERS</th>
-                    <th class="centered-table-element regular-column">DURATION</th>
-                    <th class="centered-table-element regular-column">OPTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-            @{
-                hasSessions = false;
-                
-                foreach (Session session in Model.Project.Sessions)
-                {
-                    if (!session.s_status)
-                    {
-                        continue;
-                    }
-                    
-                    hasSessions = true;  
+    @await Component.InvokeAsync("ProjectMenu", @Model)
 
-                    string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
-
-                    <tr>
-                        <td class="left-element">@session.s_name</td>
-                        <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "COMPLETED")</td>
-                        <td class="centered-table-element regular-column">21.21.2121</td>
-                        <td class="centered-table-element regular-column">@session.s_students.Count</td>
-                        <td class="centered-table-element regular-column">21 minutes</td>
-                        <td class="centered-table-element regular-column">
-                            <a id="sessionLink" asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@session.s_id">
-                                <button class="table-more-option">Join</button>
-                            </a>
-                        </td>
-                    </tr>
-                }
-                
-                if (!hasSessions)
-                {
-                    <tr style="height: 112px;">
-                        <td class="centered-table-element" colspan="6" style="text-align: center;">No sessions found, please try again!</td>
-                    </tr>
-                }
-            }
-            </tbody>
-        </table>
-        <table id="completedSessionsTable" style="display: none;">
-            <thead>
+    <div class="table-container">
+        <div class="table-container__header">
+            <text class="header-title">Sessions</text>
+            <a class="header-button">Add new session</a>
+            <a class="header-button">Manage sessions</a>
+        </div>
+        <div class="table-container__search">
+            <button class="icon-container">
+                <span class="material-icons">search</span>
+            </button>
+            <input class="search-input" placeholder="Search for sessions"/>
+        </div>
+        <div class="projects-table">
+            <table>
+                <thead>
                 <tr>
-                    <th class="left-element">NAME</th>
-                    <th class="centered-table-element regular-column">STATUS</th>
-                    <th class="centered-table-element regular-column">DATE</th>
-                    <th class="centered-table-element regular-column">PLAYERS</th>
-                    <th class="centered-table-element regular-column">DURATION</th>
-                    <th class="centered-table-element regular-column">OPTIONS</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Students</th>
+                    <th>Duration</th>
+                    <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @{
                     hasSessions = false;
-                    
+
                     foreach (Session session in Model.Project.Sessions)
                     {
-                        if (session.s_status)
+                        if (!session.s_status)
                         {
                             continue;
                         }
-                        
+
                         hasSessions = true;
 
                         string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
 
-                        <tr>
-                            <td class="left-element">@session.s_name</td>
-                            <td class="centered-table-element regular-column @sessionStatusClass">@(session.s_status ? "ACTIVE" : "FINISHED")</td>
-                            <td class="centered-table-element regular-column">21.21.2121</td>
-                            <td class="centered-table-element regular-column">@session.s_students.Count</td>
-                            <td class="centered-table-element regular-column">21 minutes</td>
-                            <td class="centered-table-element regular-column">
-                                <button class="table-more-option">Join</button>
+                        <tr class="main-row">
+                            <td>@session.s_name</td>
+                            <td class="@sessionStatusClass">@(session.s_status ? "ACTIVE" : "COMPLETED")</td>
+                            <td>21.21.2121</td>
+                            <td>@session.s_students.Count</td>
+                            <td>21 minutes</td>
+                            <td class="link-column">
+                                <a id="sessionLink" asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@session.s_id">
+                                    Join session
+                                </a>
                             </td>
                         </tr>
                     }
-                    
+
                     if (!hasSessions)
                     {
                         <tr style="height: 112px;">
@@ -128,10 +70,11 @@
                         </tr>
                     }
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-    
+
 </div>
 
 <div class="modal fade" id="createModalPanel" role="dialog">

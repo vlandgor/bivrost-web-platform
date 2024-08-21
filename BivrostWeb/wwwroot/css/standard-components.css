@@ -1,0 +1,37 @@
+.icon-button{
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: 0;
+    border-radius: 100%;
+
+    background-color: transparent;
+}
+
+.icon-container{
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 42px;
+
+    border: 0;
+    border-radius: 100%;
+
+    background-color: transparent;
+}
+
+.icon-button .material-icons{
+    color: #565656;
+}
+
+.icon-button:hover{
+    background-color: #f5f5f5;
+}

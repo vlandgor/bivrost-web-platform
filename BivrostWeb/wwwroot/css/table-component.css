@@ -1,0 +1,115 @@
+/* General table styling */
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    padding: 0 14px;
+}
+
+/* Projects table container */
+.projects-table {
+    flex-grow: 1;
+    overflow-y: auto;
+    position: relative; /* For positioning .additional-info-div absolutely within it */
+}
+
+/* Styling for table head */
+table thead {
+    width: 100%;
+    height: 56px;
+    border-bottom: 1px solid #d5d5d5;
+    background-color: #f5f5f5;
+}
+
+/* Styling for table body */
+table tbody {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+table tbody tr{
+    height: 56px;
+}
+
+/* Main row styling */
+table tbody tr.main-row {
+    padding: 28px;
+    border-bottom: 1px solid #d5d5d5;
+    position: relative;
+    z-index: 1; /* Ensures it's under the additional info div */
+}
+
+/* Change row background on hover */
+table tbody tr.main-row:hover {
+    background-color: #f5f5f5;
+}
+
+/* Cell padding */
+table th, table td {
+    padding: 0 28px;
+}
+
+/*!* Column width settings *!*/
+/*.projects-table thead th:nth-child(1) {*/
+/*    width: 20%;*/
+/*}*/
+
+/*.projects-table thead th:nth-child(2) {*/
+/*    width: 20%;*/
+/*}*/
+
+/*.projects-table thead th:nth-child(3) {*/
+/*    width: 60%;*/
+/*}*/
+
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 28px;
+    height: 56px;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.footer-left select {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 14px;
+
+    border: none;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.footer-right .pagination-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.footer-right .pagination-button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.link-column {
+    visibility: hidden;
+    text-align: center;
+    background-color: transparent;
+}
+
+tr:hover .link-column {
+    visibility: visible;
+}
+
+.link-column a {
+    color: #0b5ed7;
+}

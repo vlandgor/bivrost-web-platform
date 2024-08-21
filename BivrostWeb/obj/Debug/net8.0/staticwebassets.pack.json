@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\content.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\header-component.css",
+      "PackagePath": "staticwebassets\\css\\header-component.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
     },
@@ -17,12 +21,32 @@
       "PackagePath": "staticwebassets\\css\\modalPanel.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\project-menu-component.css",
+      "PackagePath": "staticwebassets\\css\\project-menu-component.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\side-menu-component.css",
+      "PackagePath": "staticwebassets\\css\\side-menu-component.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\side-menu.css",
       "PackagePath": "staticwebassets\\css\\side-menu.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\standard-components.css",
+      "PackagePath": "staticwebassets\\css\\standard-components.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\table-component.css",
+      "PackagePath": "staticwebassets\\css\\table-component.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\table-container-component.css",
+      "PackagePath": "staticwebassets\\css\\table-container-component.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\favicon.ico",
