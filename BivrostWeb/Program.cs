@@ -40,7 +40,7 @@ if (!app.Environment.IsDevelopment())
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Projects}/{id?}");
 
 app.MapHub<SessionHub>("/sessionhub");
 

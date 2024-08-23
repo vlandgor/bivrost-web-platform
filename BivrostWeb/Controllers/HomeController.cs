@@ -9,7 +9,7 @@ namespace BivrostWeb.Controllers;
 [Authorize]
 public class HomeController : Controller
 {
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Projects()
     {
         string? email = HttpContext.Session.GetString("Email");
 

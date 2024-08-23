@@ -5,24 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - BivrostWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/side-menu.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/session-page.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/project-page.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/tableList.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/generalElements.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/modalPanel.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/content.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/login.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/BivrostWeb.styles.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    @* <link rel="stylesheet" href="~/css/side-menu.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/session-page.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/project-page.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/tableList.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/generalElements.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/modalPanel.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/content.css" asp-append-version="true"/> *@
+    @* <link rel="stylesheet" href="~/css/login.css" asp-append-version="true"/> *@
+    
+    <link rel="stylesheet" href="~/css/basics/site_layout_login.css" asp-append-version="true"/>
+    
+    <link rel="stylesheet" href="~/css/components/header__component.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/components/autorization__component.css" asp-append-version="true"/>
+    
+    <link rel="stylesheet" href="~/css/pages/login__page.css" asp-append-version="true"/>
+    
+    <link rel="stylesheet" href="~/BivrostWeb.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
+
+<header>
+    <div class="header-block center">
+        <div class="title-name">
+            BIVROST
+        </div>
+    </div>
+</header>
 <body>
 
 <main>
-    <div class="contentAccount">
-        @RenderBody()
-    </div>
+    @RenderBody()
 </main>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

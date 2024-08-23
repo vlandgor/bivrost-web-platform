@@ -9,11 +9,11 @@
     <div class="control-panel">
         <div class="operator-module">
             <div class="title-block">
-                <button class="icon-button">
+                <a asp-action="Project" asp-controller="Project" asp-route-projectId="@Model.Project.Id" class="icon-button">
                     <span class="material-icons">
                         arrow_back
                     </span>
-                </button>
+                </a>
                 @Model.Session.s_name
             </div>
             <div class="content-block">

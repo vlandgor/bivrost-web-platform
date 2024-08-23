@@ -5,8 +5,12 @@
       "PackagePath": "staticwebassets\\BivrostWeb.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site.css",
-      "PackagePath": "staticwebassets\\css\\basics\\site.css"
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site_layout.css",
+      "PackagePath": "staticwebassets\\css\\basics\\site_layout.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site_layout_login.css",
+      "PackagePath": "staticwebassets\\css\\basics\\site_layout_login.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\standard__elements.css",
@@ -53,8 +57,16 @@
       "PackagePath": "staticwebassets\\css\\pages\\home__page.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\login__page.css",
+      "PackagePath": "staticwebassets\\css\\pages\\login__page.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\project__page.css",
       "PackagePath": "staticwebassets\\css\\pages\\project__page.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\projects__page.css",
+      "PackagePath": "staticwebassets\\css\\pages\\projects__page.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\session__page.css",

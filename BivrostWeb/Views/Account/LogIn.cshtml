@@ -5,53 +5,25 @@
     Layout = "~/Views/Shared/_Layout_Login.cshtml";
 }
 
-<div class="authorization-page">
-    <div class="centered-panel">
-        
-        <div class="info-block">
-            <label class="title-text">Sign in to Bivrost</label>
-            <label class="description-text">Send, spend and save smarter</label>
-        </div>
-
-        <div class="info-block login-options">
-            <button class="login-option">Sign in with Google</button>
-            <button class="login-option">Sign in with Facebook</button>
-        </div>
-
-        <div class="info-block separator-description">
-            <div class="separator-line"></div>
-            <label class="separator-text description-text">Or with email</label>
-            <div class="separator-line"></div>
-        </div>
-        
-        <form method="post" asp-action="LogIn">
-            <div class="info-block">
-                <div class="modalBodyContentBlock">
-                    <input type="text" asp-for="Email" placeholder="Enter email" class="input-form" autocomplete="off"/>
-                    <span class="text-danger">@TempData["errorUsername"]</span>
+<div class="login-panel">
+    <div class="authorization-panel">
+        <div class="authorization-panel__title">Welcome</div>
+        <form method="post" asp-controller="Account" asp-action="LogIn">
+            <div class="authorization-panel__body">
+                <input type="text" asp-for="Email" placeholder="Enter email" class="input-form" autocomplete="off"/>
+                <input type="password" asp-for="Password" placeholder="Enter password" class="input-form" autocomplete="off"/>
+                <div class="input-options">
+                    <a>Forgot Password?</a>
+                    <a>Show Password</a>
                 </div>
-                <div class="modalBodyContentBlock">
-                    <input type="password" asp-for="Password" placeholder="Enter password" class="input-form" autocomplete="off"/>
-                    <span class="text-danger">@TempData["errorPassword"]</span>
-                </div>
-                <div class="additional-options">
-                    <div class="remember-me-option">
-                        @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.LabelFor(m => m.RememberMe, "Remember me")
-                    </div>
-                    <div class="forgot-password-option">
-                        <text><a>Forgot password?</a></text>
-                    </div>
-                </div>
-                <div class="form-button">
-                    <input type="submit" value="Log In" class="login-button"/>
-                </div>
+                <input type="submit" value="Log In" class="confirm-button"/>
+                <span class="text-danger">@TempData["errorUsername"]</span>
+                <span class="text-danger">@TempData["errorPassword"]</span>
             </div>
         </form>
-        
-        <div class="info-block">
-            <text>Don't have an account? <a asp-controller="Account" asp-action="SignUp">Sign Up</a></text>
-        </div>
-        
+    </div>
+    <div class="">
+        <a>Forgot Password?</a>
+        <a>Show Password</a>
     </div>
 </div>
