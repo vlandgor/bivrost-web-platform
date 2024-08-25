@@ -82,6 +82,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-e5jejsmni5
 
-[C:/Users/RAZER/RiderProjects/BivrostWP/BivrostWeb/Views/Shared/_Layout_Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfTG9naW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-q56uo9l23b
+[C:/Users/RAZER/RiderProjects/BivrostWP/BivrostWeb/Views/Shared/_Layout_Authorization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfQXV0aG9yaXphdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-x9osre4tkj

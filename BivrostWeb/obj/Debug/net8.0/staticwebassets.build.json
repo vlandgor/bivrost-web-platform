@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4kvU0f9XwrNGzAyxAFYMrYusLPJDh2pZ80wdpI/v/GM=",
+  "Hash": "NhtQvbmC8xjDFdW6rxdeqCZoDiK39RHrtzX/mzBwWDo=",
   "Source": "BivrostWeb",
   "BasePath": "_content/BivrostWeb",
   "Mode": "Default",
@@ -55,12 +55,12 @@
       "OriginalItemSpec": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BivrostWeb.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site_layout_login.css",
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\layout_authorization.css",
       "SourceId": "BivrostWeb",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
       "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/basics/site_layout_login.css",
+      "RelativePath": "css/basics/layout_authorization.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -71,15 +71,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\basics\\site_layout_login.css"
+      "OriginalItemSpec": "wwwroot\\css\\basics\\layout_authorization.css"
     },
     {
-      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site_layout.css",
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\layout_site.css",
       "SourceId": "BivrostWeb",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
       "BasePath": "_content/BivrostWeb",
-      "RelativePath": "css/basics/site_layout.css",
+      "RelativePath": "css/basics/layout_site.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,7 +90,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\basics\\site_layout.css"
+      "OriginalItemSpec": "wwwroot\\css\\basics\\layout_site.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\standard__elements.css",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\basics\\table__elements.css"
+    },
+    {
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\authorization__component.css",
+      "SourceId": "BivrostWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
+      "BasePath": "_content/BivrostWeb",
+      "RelativePath": "css/components/authorization__component.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\components\\authorization__component.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\header__component.css",
@@ -376,6 +395,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\pages\\session__page.css"
+    },
+    {
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\signup__page.css",
+      "SourceId": "BivrostWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
+      "BasePath": "_content/BivrostWeb",
+      "RelativePath": "css/pages/signup__page.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\pages\\signup__page.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\student__page.css",

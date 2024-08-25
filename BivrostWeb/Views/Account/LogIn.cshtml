@@ -2,28 +2,30 @@
 
 @{
     ViewData["Title"] = "LogIn";
-    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout_Authorization.cshtml";
 }
 
 <div class="login-panel">
     <div class="authorization-panel">
-        <div class="authorization-panel__title">Welcome</div>
+        <div class="panel-block authorization__title">BIVROST</div>
+        <div class="panel-block authorization__header">Log in to continue</div>
         <form method="post" asp-controller="Account" asp-action="LogIn">
-            <div class="authorization-panel__body">
-                <input type="text" asp-for="Email" placeholder="Enter email" class="input-form" autocomplete="off"/>
-                <input type="password" asp-for="Password" placeholder="Enter password" class="input-form" autocomplete="off"/>
-                <div class="input-options">
-                    <a>Forgot Password?</a>
-                    <a>Show Password</a>
-                </div>
-                <input type="submit" value="Log In" class="confirm-button"/>
-                <span class="text-danger">@TempData["errorUsername"]</span>
-                <span class="text-danger">@TempData["errorPassword"]</span>
+            <span class="text-danger">@TempData["errorUsername"]</span>
+            <input type="text" asp-for="Email" placeholder="Enter email" autocomplete="off"/>
+            <span class="text-danger">@TempData["errorPassword"]</span>
+            <input type="password" asp-for="Password" placeholder="Enter password" autocomplete="off"/>
+            <input class="panel-block submit-button" type="submit" value="Log In"/>
+            <div class="panel-block input-options">
+                <a>Forgot Password?</a>
+                @* <a>Show Password</a> *@
             </div>
         </form>
-    </div>
-    <div class="">
-        <a>Forgot Password?</a>
-        <a>Show Password</a>
+        <div class="panel-block authorization__separator">
+            <hr/>
+            OR
+            <hr/>
+        </div>
+        <div class="panel-block other-option">Continue with Google</div>
+        <div class="panel-block authorization__footer">Don't have an account? &nbsp<a asp-controller="Account" asp-action="SignUp" style="color: var(--color__link)">Sign Up</a></div>
     </div>
 </div>

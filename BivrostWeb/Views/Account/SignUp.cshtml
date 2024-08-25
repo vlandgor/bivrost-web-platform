@@ -1,41 +1,34 @@
 ﻿@model BivrostWeb.Models.ViewModels.AccountSignUpViewModel
 
 @{
-    ViewData["Title"] = "SignUp";
-    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    ViewData["Title"] = "LogIn";
+    Layout = "~/Views/Shared/_Layout_Authorization.cshtml";
 }
 
-<div class="signUp-page">
-    <div class="modal-content modalPanel">
-        <div class="modalHeader">
-            <label class="modalTitle">Sign Up</label>
-            <label class="modalTitleDescription" id="modalTitleDescription">Please enter your details.</label>
-        </div>
-        <span class="text-danger text-center">@TempData["errorMessage"]</span>
-        <form method="post" asp-action="SignUp">
-            <div class="modalBody">
-                <div class="modalBodyContentBlock">
-                    <label asp-for="Email"></label>
-                    <input type="text" asp-for="Email" placeholder="Enter email" class="form-control" autocomplete="off"/>
-                </div>
-                <div class="modalBodyContentBlock">
-                    <label asp-for="Username"></label>
-                    <input type="text" asp-for="Username" placeholder="Enter username" class="form-control" autocomplete="off"/>
-                </div>
-                <div class="modalBodyContentBlock">
-                    <label asp-for="Password"></label>
-                    <input type="text" asp-for="Password" placeholder="Enter password" class="form-control" autocomplete="off"/>
-                </div>
-                <div class="modalBodyContentBlock">
-                    <label asp-for="ConfirmPassword">Confirm Password</label>
-                    <input type="text" asp-for="ConfirmPassword" placeholder="Confirm password" class="form-control" autocomplete="off"/>
-                </div>
-            </div>
-            <div class="modalFooter">
-                <div class="form-group">
-                    <input type="submit" value="Sign Up" class="footerButton continueButton"/>
-                </div>
-            </div>
+<div class="signup-panel">
+    <div class="authorization-panel">
+        <div class="panel-block authorization__title">BIVROST</div>
+        <div class="panel-block authorization__header">Sign up to continue</div>
+        <form method="post" asp-controller="Account" asp-action="SignUp">
+            <span class="text-danger">@TempData["errorUsername"]</span>
+            <input type="text" asp-for="Username" placeholder="Enter name" autocomplete="off"/>
+            <span class="text-danger">@TempData["errorUsername"]</span>
+            <input type="text" asp-for="Email" placeholder="Enter email" autocomplete="off"/>
+            <span class="text-danger">@TempData["errorPassword"]</span>
+            <input type="password" asp-for="Password" placeholder="Enter password" autocomplete="off"/>
+            <input type="password" asp-for="ConfirmPassword" placeholder="Confirm password" autocomplete="off"/>
+            <input class="panel-block submit-button" type="submit" value="Sign Up"/>
+            @* <div class="panel-block input-options"> *@
+            @*     <a>Forgot Password?</a> *@
+            @*     $1$ <a>Show Password</a> #1# *@
+            @* </div> *@
         </form>
+        <div class="panel-block authorization__separator">
+            <hr/>
+            OR
+            <hr/>
+        </div>
+        <div class="panel-block other-option">Continue with Google</div>
+        <div class="panel-block authorization__footer">Already have an account? &nbsp<a asp-controller="Account" asp-action="LogIn" style="color: var(--color__link)">Log In</a></div>
     </div>
 </div>

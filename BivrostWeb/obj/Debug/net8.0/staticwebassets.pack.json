@@ -5,12 +5,12 @@
       "PackagePath": "staticwebassets\\BivrostWeb.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site_layout.css",
-      "PackagePath": "staticwebassets\\css\\basics\\site_layout.css"
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\layout_authorization.css",
+      "PackagePath": "staticwebassets\\css\\basics\\layout_authorization.css"
     },
     {
-      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\site_layout_login.css",
-      "PackagePath": "staticwebassets\\css\\basics\\site_layout_login.css"
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\layout_site.css",
+      "PackagePath": "staticwebassets\\css\\basics\\layout_site.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\standard__elements.css",
@@ -19,6 +19,10 @@
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\basics\\table__elements.css",
       "PackagePath": "staticwebassets\\css\\basics\\table__elements.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\authorization__component.css",
+      "PackagePath": "staticwebassets\\css\\components\\authorization__component.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\header__component.css",
@@ -71,6 +75,10 @@
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\session__page.css",
       "PackagePath": "staticwebassets\\css\\pages\\session__page.css"
+    },
+    {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\signup__page.css",
+      "PackagePath": "staticwebassets\\css\\pages\\signup__page.css"
     },
     {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\pages\\student__page.css",

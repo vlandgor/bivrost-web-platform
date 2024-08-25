@@ -27,7 +27,6 @@ C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\staticwebasse
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.BivrostWeb.props
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
-C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout_Login.cshtml.rz.scp.css
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\scopedcss\bundle\BivrostWeb.styles.css
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\scopedcss\projectbundle\BivrostWeb.bundle.scp.css
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\BivrostWeb.csproj.CopyComplete
@@ -36,3 +35,4 @@ C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\refint\Bivros
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\BivrostWeb.pdb
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\BivrostWeb.genruntimeconfig.cache
 C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\ref\BivrostWeb.dll
+C:\Users\RAZER\RiderProjects\BivrostWP\BivrostWeb\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout_Authorization.cshtml.rz.scp.css

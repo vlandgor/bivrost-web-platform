@@ -51,7 +51,7 @@ public class AccountController : Controller
         }
         else
         {
-            TempData["errorUsername"] = $"Username not found! {model.Email} : email";
+            TempData["errorUsername"] = $"Username not found!";
             return View(model);
         }
     }
