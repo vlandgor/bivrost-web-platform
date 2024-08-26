@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NhtQvbmC8xjDFdW6rxdeqCZoDiK39RHrtzX/mzBwWDo=",
+  "Hash": "PYNF1suR6xz4jCbF6HSudlKi1m905Ozl1Gez1Q6oM6M=",
   "Source": "BivrostWeb",
   "BasePath": "_content/BivrostWeb",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\components\\header__component.css"
+    },
+    {
+      "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\modal-panel__component.css",
+      "SourceId": "BivrostWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\",
+      "BasePath": "_content/BivrostWeb",
+      "RelativePath": "css/components/modal-panel__component.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\components\\modal-panel__component.css"
     },
     {
       "Identity": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\project-menu__component.css",

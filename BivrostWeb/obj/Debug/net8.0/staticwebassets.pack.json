@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\css\\components\\header__component.css"
     },
     {
+      "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\modal-panel__component.css",
+      "PackagePath": "staticwebassets\\css\\components\\modal-panel__component.css"
+    },
+    {
       "Id": "C:\\Users\\RAZER\\RiderProjects\\BivrostWP\\BivrostWeb\\wwwroot\\css\\components\\project-menu__component.css",
       "PackagePath": "staticwebassets\\css\\components\\project-menu__component.css"
     },

@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Session";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string randomStudentID = Guid.NewGuid().ToString();
 }
 
 <div class="session-panel">
@@ -97,38 +98,41 @@
     </div>
 </div>
 
-<div class="modal fade" id="createModalPanel" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content modalPanel">
-            <div class="modalHeader">
-                <label class="modalTitle" id="modalTitle">Add a new student</label>
-                <label class="modalTitleDescription" id="modalTitleDescription">Add a new student to the session</label>
-            </div>
-            @{
-                string randomStudentID = Guid.NewGuid().ToString();
-            }
-            <form asp-controller="Project" asp-action="AddStudent" method="post" 
-                  asp-route-projectId="@Model.Project.Id" 
-                  asp-route-sessionId="@Model.Session.s_id"
-                  asp-route-studentId="@randomStudentID">
-                <div class="modalBody">
-                    <div class="modalBodyContentBlock">
-                        <label>Student ID</label>
-                        <input type="text" value="@randomStudentID" id="studentIdInput" class="form-control" readonly="readonly"/>
-                    </div>
-                    <div class="modalBodyContentBlock">
-                        <label>Student Name</label>
-                        <input type="text" id="studentNameInput" name="studentName" class="form-control"/>
-                    </div>
-                </div>
-                <div class="modalFooter">
-                    <div type="button" id="cancelButton" class="footerButton cancelButton" data-dismiss="modal">CANCEL</div>
-                    <button type="submit" id="confirmButton" class="footerButton continueButton">CREATE</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+ <form asp-controller="Project" asp-action="AddStudent" method="post"
+       asp-route-projectId="@Model.Project.Id"
+       asp-route-sessionId="@Model.Session.s_id"
+       asp-route-studentId="@randomStudentID">
+     <div class="modal fade" id="createModalPanel" role="dialog">
+         <div class="modal-dialog">
+             <div class="modal-content modal-panel">
+                 <div class="modal-panel__header">
+                     Add new student
+                 </div>
+                 <div class="modal-panel__body">
+                     <div class="body-item">
+                         <div class="modal-panel__section">Student ID</div>
+                         <div class="input-wrapper">
+                             <input class="input-text" type="text" value="@randomStudentID" id="studentIdInput" readonly="readonly"/>
+                             <button class="icon-button">
+                                 <span class="material-icons">
+                                     content_copy
+                                 </span>
+                             </button>
+                         </div>
+                     </div>
+                     <div class="body-item">
+                         <div class="modal-panel__section">Student name</div>
+                         <input class="input-text" type="text" id="studentNameInput" autocomplete="off" name="studentName"/>
+                     </div>
+                 </div>
+                 <div class="modal-panel__footer">
+                     <button type="reset" id="cancelButton" class="footer-button">Cancel</button>
+                     <button type="submit" id="confirmButton" class="footer-button confirm-button">Add Student</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </form>
 
 @Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@microsoft/signalr@6.0.0/dist/browser/signalr.min.js'></script>")
 <script>       
