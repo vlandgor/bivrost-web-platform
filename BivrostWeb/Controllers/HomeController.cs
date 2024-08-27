@@ -31,6 +31,6 @@ public class HomeController : Controller
 
         await AwsConnectionService.AddNewProject(project);
         
-        return RedirectToAction("Project", "Project", new { projectId = projectId });
+        return RedirectToAction("Projects", "Home");
     }
 }

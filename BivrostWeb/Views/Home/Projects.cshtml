@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "HomePage";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string randomProjectID = Guid.NewGuid().ToString();
 }
 
 <div class="projects-panel">
@@ -13,7 +14,7 @@
     <div class="table-container">
         <div class="table-container__header">
             <text class="header-title">Projects</text>
-            <a class="header-button">Add new project</a>
+            <a class="header-button" onclick="enableModalPanel('createProjectPanel', true)">Add new project</a>
         </div>
         <div class="table-container__search">
             <button class="icon-container">
@@ -22,11 +23,11 @@
             <input class="search-input" placeholder="Search for projects"/>
         </div>
         <div class="projects-table">
-            <table>
+            <table id="projectsTable">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Sessions</th>
+                    <th id="nameHeader" class="sortable-header">Name</th>
+                    <th id="sessionsHeader" class="sortable-header">Sessions</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -39,7 +40,7 @@
                         hasProjects = true;  
         
                         <tr class="main-row">
-                            <td>@project.Name</td>
+                            <td>@project.FullName</td>
                             <td>@project.Sessions.Count</td>
                             <td class="link-column">
                                 <a id="sessionLink" asp-action="Project" asp-controller="Project" asp-route-projectId="@project.Id">
@@ -61,3 +62,51 @@
         </div>
     </div>
 </div>
+
+<form asp-controller="Home" asp-action="CreateProject" method="post"
+      asp-route-projectId="@randomProjectID">
+    <div class="modal fade" id="createProjectPanel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content modal-panel">
+                <div class="modal-panel__header">
+                    Create new project
+                </div>
+                <div class="modal-panel__body">
+                    <div class="body-item">
+                        <div class="modal-panel__section">Project ID</div>
+                        <div class="input-wrapper">
+                            <input class="input-text" type="text" value="@randomProjectID" id="studentIdInput" readonly="readonly"/>
+                            <button class="icon-button">
+                                <span class="material-icons">
+                                    content_copy
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="body-item">
+                        <div class="modal-panel__section">Project name</div>
+                        <input class="input-text" type="text" id="projectsNameInput" autocomplete="off" name="fullName"/>
+                    </div>
+                    <div class="body-item">
+                        <div class="modal-panel__section">Project short name</div>
+                        <input class="input-text" type="text" id="sessionNameInput" maxlength="3" autocomplete="off" name="shortName"/>
+                    </div>
+                </div>
+                <div class="modal-panel__footer">
+                    <button type="reset" id="cancelButton" class="footer-button" onclick="enableModalPanel('createProjectPanel', false)">Cancel</button>
+                    <button type="submit" id="confirmButton" class="footer-button confirm-button">Add Student</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        makeTableSortable('projectsTable');
+        
+        document.querySelector('.search-input').addEventListener('input', function () {
+            filterTable('projectsTable', '.search-input', [0]);
+        });
+    });
+</script>

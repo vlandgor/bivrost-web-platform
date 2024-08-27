@@ -55,7 +55,7 @@
         <div class="table-container">
             <div class="table-container__header">
                 <text class="header-title">Students</text>
-                <a id="createModalButton" class="header-button">Add new student</a>
+                <a class="header-button" onclick="enableModalPanel('addStudentPanel', true)">Add new student</a>
             </div>
             <div class="table-container__search">
                 <button class="icon-container">
@@ -68,10 +68,10 @@
                     <thead>
                     <tr>
                         <th><span class="material-icons">lock</span></th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Time</th>
-                        <th>Progress</th>
+                        <th id="nameHeader" class="sortable-header">Name</th>
+                        <th id="nameStatus" class="sortable-header">Status</th>
+                        <th id="nameTime" class="sortable-header">Time</th>
+                        <th id="nameProgress" class="sortable-header">Progress</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -102,7 +102,7 @@
        asp-route-projectId="@Model.Project.Id"
        asp-route-sessionId="@Model.Session.s_id"
        asp-route-studentId="@randomStudentID">
-     <div class="modal fade" id="createModalPanel" role="dialog">
+     <div class="modal fade" id="addStudentPanel" role="dialog">
          <div class="modal-dialog">
              <div class="modal-content modal-panel">
                  <div class="modal-panel__header">
@@ -126,7 +126,7 @@
                      </div>
                  </div>
                  <div class="modal-panel__footer">
-                     <button type="reset" id="cancelButton" class="footer-button">Cancel</button>
+                     <button type="reset" id="cancelButton" class="footer-button" onclick="enableModalPanel('addStudentPanel', false)">Cancel</button>
                      <button type="submit" id="confirmButton" class="footer-button confirm-button">Add Student</button>
                  </div>
              </div>
@@ -166,5 +166,15 @@
         if (existingRow) {
             existingRow.cells[3].textContent = studentProgress;
         }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        makeTableSortable('studentsTable');
+        
+        document.querySelector('.search-input').addEventListener('input', function () {
+            filterTable('studentsTable', '.search-input', [1]);
+        });
     });
 </script>

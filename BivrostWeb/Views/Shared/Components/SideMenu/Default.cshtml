@@ -55,12 +55,12 @@
                 @foreach (Project project in Model.Projects)
                 {
                     <li class="side-menu__item">
-                        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@project.Id" asp-route-projectName="@project.Name">
+                        <a asp-controller="Project" asp-action="Project" asp-route-projectId="@project.Id" asp-route-projectName="@project.FullName">
                             <div class="side-menu__item-link-container">
                                 <div class="item-short-name">
                                     <text>@project.ShortName</text>
                                 </div>
-                                <text>@project.Name</text>
+                                <text>@project.FullName</text>
                             </div>
                         </a>
                     </li>

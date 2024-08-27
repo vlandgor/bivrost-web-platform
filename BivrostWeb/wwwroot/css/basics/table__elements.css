@@ -113,3 +113,7 @@ tr:hover .link-column {
 .link-column a {
     color: #0b5ed7;
 }
+
+.sortable-header{
+    cursor: pointer;
+}

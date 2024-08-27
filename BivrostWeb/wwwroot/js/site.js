@@ -42,11 +42,61 @@ function toggleTable(event) {
     event.currentTarget.classList.add('active-menu-button');
 }
 
-// JavaScript to handle button click event and show modal
-document.getElementById('createModalButton').addEventListener('click', function () {
-    $('#createModalPanel').modal('show');
-});
+function enableModalPanel(panelId, enable) {
+    if(enable) {
+        $('#' + panelId).modal('show');
+    }
+    else {
+        $('#' + panelId).modal('hide');
+    }
+}
 
-document.getElementById('cancelButton').addEventListener('click', function () {
-    $('#createModalPanel').modal('hide');
-});
+function makeTableSortable(tableId) {
+    const table = document.getElementById(tableId);
+    const headers = table.querySelectorAll('.sortable-header');
+    let isAscending = true;
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.rows);
+            const columnIndex = Array.from(header.parentNode.children).indexOf(header);
+            const isNumeric = header.classList.contains('numeric');
+
+            const sortedRows = rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].textContent.trim();
+                const cellB = b.cells[columnIndex].textContent.trim();
+
+                if (isNumeric) {
+                    return isAscending ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
+                } else {
+                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                }
+            });
+
+            isAscending = !isAscending;
+            sortedRows.forEach(row => tbody.appendChild(row));
+        });
+    });
+}
+
+function filterTable(tableId, inputSelector, searchableColumns = []) {
+    const input = document.querySelector(inputSelector);
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById(tableId);
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+        const cells = rows[i].getElementsByTagName('td');
+        let shouldDisplay = false;
+
+        searchableColumns.forEach(index => {
+            let cellText = cells[index].textContent || cells[index].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                shouldDisplay = true;
+            }
+        });
+
+        rows[i].style.display = shouldDisplay ? '' : 'none';
+    }
+}

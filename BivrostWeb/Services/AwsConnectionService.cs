@@ -103,6 +103,7 @@ public static class AwsConnectionService
             return null; // Or throw an exception if necessary
         }
     }
+    
     public static async Task<Session> GetSession(string projectId, string sessionId)
     {
         string apiUrl = $"https://0se6xxit83.execute-api.us-east-2.amazonaws.com/dev?id={projectId}&s_id={sessionId}";

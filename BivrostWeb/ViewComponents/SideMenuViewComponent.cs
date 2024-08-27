@@ -12,6 +12,8 @@ public class SideMenuViewComponent: ViewComponent
         string? email = HttpContext.Session.GetString("Email");
         string? accountColor = HttpContext.Session.GetString("AccountColor");
 
+        Console.WriteLine(email);
+        
         // TODO: fix this cookie shit!!!!!
         if (email == null)
         {

@@ -1,4 +1,6 @@
-﻿<div class="header-block left">
+﻿@model BivrostWeb.Models.ViewModels.HeaderViewModel
+
+<div class="header-block left">
     <button class="icon-button">
         <span class="material-icons">
         menu
@@ -26,7 +28,7 @@
     </button>
     
     <button class="icon-button">
-        <div class="icon-button__user-account">
+        <div class="icon-button__user-account" style="background-color: @Model.AccountColor">
             <a asp-controller="Account" asp-action="LogOut">V</a>
         </div>
     </button>
