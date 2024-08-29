@@ -73,7 +73,9 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
     [HttpPost]
     public async Task<IActionResult> CreateSession(string projectId, string sessionId, string sessionName)
     {
-        await AwsConnectionService.AddNewSession(projectId, new Session(sessionId, sessionName, true, new List<Student>()));
+        string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+        
+        await AwsConnectionService.AddNewSession(projectId, new Session(sessionId, sessionName, true, currentDate,new List<Student>(), 0));
         await server.AddSession(sessionId, sessionName);
         
         return RedirectToAction("Project", new { projectId });

@@ -195,6 +195,11 @@ public static class AwsConnectionService
                                         }) : new Dictionary<string, Server.Models.Student>() // Handle case with no students
                             });
 
+                    foreach (Server.Models.Session session in sessionsDictionary.Values)
+                    {
+                        Console.WriteLine(session.sessionName);
+                    }
+
                     return sessionsDictionary;
                 }
                 else

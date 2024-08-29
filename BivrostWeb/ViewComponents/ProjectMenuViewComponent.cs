@@ -5,7 +5,7 @@ namespace BivrostWeb.ViewComponents;
 
 public class ProjectMenuViewComponent : ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync(ProjectViewModel projectViewModel)
+    public async Task<IViewComponentResult> InvokeAsync(ProjectMenuViewModel projectViewModel)
     {
         return View(projectViewModel);
     }

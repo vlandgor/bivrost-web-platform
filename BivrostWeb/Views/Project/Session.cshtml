@@ -47,7 +47,9 @@
                 </div>
             </div>
             <div class="footer-block">
-                <button class="finish-session-btn">Finish Session</button>
+                @{
+                    <button class="finish-session-btn">Finish Session</button>
+                }
             </div>
         </div>
     </div>
@@ -67,7 +69,7 @@
                 <table id="studentsTable">
                     <thead>
                     <tr>
-                        <th><span class="material-icons">lock</span></th>
+                        <th><span class="material-icons">link</span></th>
                         <th id="nameHeader" class="sortable-header">Name</th>
                         <th id="nameStatus" class="sortable-header">Status</th>
                         <th id="nameTime" class="sortable-header">Time</th>
@@ -79,7 +81,7 @@
                     @foreach (Student student in Model.Session.s_students)
                     {
                         <tr data-student-id="@student.st_id">
-                            <td><span class="material-icons">lock</span></td>
+                            <td><span class="material-icons">link</span></td>
                             <td>@student.st_name</td>
                             <td>@student.st_status</td>
                             <td>26 minutes</td>

@@ -1,4 +1,5 @@
-﻿@model BivrostWeb.Models.ViewModels.ProjectViewModel
+﻿@using BivrostWeb.Models.ViewModels
+@model BivrostWeb.Models.ViewModels.ProjectViewModel
 
 @{
     ViewData["Title"] = "Project";
@@ -9,7 +10,10 @@
 
 <div class="project-panel">
     
-    @await Component.InvokeAsync("ProjectMenu", @Model)
+    @{
+        ProjectMenuViewModel projectMenuViewModel = new ProjectMenuViewModel(Model.Project.FullName);
+        await Component.InvokeAsync("ProjectMenu", projectMenuViewModel);
+    }
 
     <div class="table-container">
         <div class="table-container__header">
@@ -41,11 +45,6 @@
 
                     foreach (Session session in Model.Project.Sessions)
                     {
-                        if (!session.s_status)
-                        {
-                            continue;
-                        }
-
                         hasSessions = true;
 
                         string sessionStatusClass = session.s_status ? "project-status-active" : "project-status-finished";
@@ -53,9 +52,9 @@
                         <tr class="main-row">
                             <td>@session.s_name</td>
                             <td class="@sessionStatusClass">@(session.s_status ? "ACTIVE" : "COMPLETED")</td>
-                            <td>21.21.2121</td>
+                            <td>@session.s_date</td>
                             <td>@session.s_students.Count</td>
-                            <td>21 minutes</td>
+                            <td>@session.s_duration minutes</td>
                             <td class="link-column">
                                 <a asp-action="Session" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@session.s_id">
                                     Join session
