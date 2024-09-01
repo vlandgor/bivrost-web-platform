@@ -9,4 +9,13 @@ public class ServerHandle(Server server)
 
         await server.LockStudent(sessionId, studentId);
     }
+    
+    public async void UpdateStudentProgress(Packet packet)
+    {
+        string sessionId = packet.ReadString();
+        string studentId = packet.ReadString();
+        int progress = packet.ReadInt();
+
+        await server.UpdateStudentProgress(sessionId, studentId, progress);
+    }
 }

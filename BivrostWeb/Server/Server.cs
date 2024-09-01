@@ -102,6 +102,34 @@ namespace BivrostWeb.Server
             await sessionHub.Clients.All.SendAsync("LockStudent", studentId);
         }
         
+        public async Task UpdateStudentProgress(string sessionId, string studentId, int progress)
+        {
+            Console.WriteLine($"SessionId: {sessionId}. StudentId: {studentId}. Progress: {progress}");
+    
+            // Retrieve the session and student
+            Session session = sessions.GetValueOrDefault(sessionId);
+            if (session == null)
+            {
+                Console.WriteLine($"Session with ID {sessionId} not found.");
+                return;
+            }
+    
+            Student student = session.GetStudent(studentId);
+            if (student == null)
+            {
+                Console.WriteLine($"Student with ID {studentId} not found in session {sessionId}.");
+                return;
+            }
+
+            // Update the student's progress
+            student.studentProgress = progress;
+    
+            Console.WriteLine($"Student : {student.studentName} progress was updated to {progress}");
+    
+            // Notify all clients about the change
+            await sessionHub.Clients.All.SendAsync("UpdateStudentProgress", studentId, progress);
+        }
+        
         private void InitializeServerData()
         {
             serverHandle = new ServerHandle(this);
@@ -110,6 +138,7 @@ namespace BivrostWeb.Server
             packetHandlers = new Dictionary<int, PacketHandler>()
             {
                 { (int)ClientPackets.lockStudent, serverHandle.LockStudent },
+                { (int)ClientPackets.updateStudentProgress, serverHandle.UpdateStudentProgress }
             };
         }
     }
