@@ -73,7 +73,23 @@ namespace BivrostWeb.Server
             await sessionHub.Clients.All.SendAsync("CreateStudent", studentId, student.studentLocked,
                 student.studentName, student.studentStatus, student.studentProgress);
         }
+        public async Task RemoveStudents(string sessionId, string[] studentsId)
+        {
+            Session session = sessions.GetValueOrDefault(sessionId);
+            if (session == null)
+            {
+                Console.WriteLine($"Session with ID {sessionId} not found.");
+                return;
+            }
 
+            foreach (var studentId in studentsId)
+            {
+                session.RemoveStudent(studentId);
+            }
+
+            await sessionHub.Clients.All.SendAsync("RemoveStudents", sessionId, studentsId);
+        }
+        
         public async Task LockStudent(string sessionId, string studentId)
         {
             Console.WriteLine($"SessionId: {sessionId}. StudentId: {studentId}");

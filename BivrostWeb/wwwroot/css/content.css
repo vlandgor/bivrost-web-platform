@@ -192,13 +192,46 @@ td {
     flex-grow: 0;
 }
 
-.project-status-active {
-    color: var(--color-session-status-active);
+.project-status{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    
+    border: none;
+    border-radius: 28px;
+    
+    font-size: 0.9rem;
+    font-weight: 500;
+    
+    width: 112px;
+    height: 28px;
+}
+
+.project-status-active {    
+    width: 96px;
+    
+    color: #093303;
+    background-color: #C8F2C2;
 }
 
 .project-status-finished {
-    color: var(--color-session-status-finished);
+    width: 96px;
+    
+    color: #333333;
+    background-color: #F2F2F2;
 }
+
+.project-status-connected {
+    color: #093303;
+    background-color: #C8F2C2;
+}
+
+.project-status-disconnected {
+    color: #330803;
+    background-color: #F2C7C2;
+}
+
 
 .create-button {
     width: 168px;

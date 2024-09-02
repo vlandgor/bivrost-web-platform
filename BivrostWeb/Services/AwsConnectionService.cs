@@ -345,6 +345,37 @@ public static class AwsConnectionService
         }
     }
     
+    public static async Task<bool> RemoveStudents(string projectId, string sessionId, string[] studentsId)
+    {
+        string apiUrl = $"https://qx7t6wk1ze.execute-api.us-east-2.amazonaws.com/dev";
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = JsonConvert.SerializeObject(new { projectId, sessionId, studentsId });
+                HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to remove students. Status code: {response.StatusCode}");
+                    return false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return false;
+        }
+    }
+    
     public static async Task<bool> SendUserInvite(string email, string projectId)
     {
         string apiUrl = $"https://t1mj2r46y8.execute-api.us-east-2.amazonaws.com/dev";

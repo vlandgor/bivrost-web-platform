@@ -55,9 +55,17 @@
     </div>
     <div class="content-panel">
         <div class="table-container">
-            <div class="table-container__header">
+            <div class="table-container__header" id="mainHeader">
                 <text class="header-title">Students</text>
                 <a class="header-button" onclick="enableModalPanel('addStudentPanel', true)">Add new student</a>
+            </div>
+            <div class="table-container__header additional-header" id="additionalHeader" style="display: none;">
+                <a class="icon-button" id="closeButton">
+                    <span class="material-icons">
+                        close
+                    </span>
+                </a>
+                <a class="header-button">Remove selected students</a>
             </div>
             <div class="table-container__search">
                 <button class="icon-container">
@@ -70,6 +78,7 @@
                     <thead>
                     <tr>
                         <th><span class="material-icons">link</span></th>
+                        <th><input type="checkbox" id="selectAllCheckbox"/></th>
                         <th id="nameHeader" class="sortable-header">Name</th>
                         <th id="nameStatus" class="sortable-header">Status</th>
                         <th id="nameTime" class="sortable-header">Time</th>
@@ -80,11 +89,14 @@
                     <tbody>
                     @foreach (Student student in Model.Session.s_students)
                     {
+                        string sessionStatusClass = student.st_status ? "project-status-connected" : "project-status-disconnected";
+                        
                         <tr data-student-id="@student.st_id">
                             <td><span class="material-icons">link</span></td>
+                            <td><input type="checkbox"/></td>
                             <td>@student.st_name</td>
-                            <td>@student.st_status</td>
-                            <td>26 minutes</td>
+                            <td><div class="project-status @sessionStatusClass">@(student.st_status ? "Connected" : "Disconnected")</div></td>
+                            <td>26 min</td>
                             <td>@student.st_progress</td>
                             <td class="link-column">
                                 <a asp-action="Student" asp-controller="Project" asp-route-projectId="@Model.Project.Id" asp-route-sessionId="@Model.Session.s_id" asp-route-studentId="@student.st_id">
@@ -108,18 +120,18 @@
          <div class="modal-dialog">
              <div class="modal-content modal-panel">
                  <div class="modal-panel__header">
-                     Add new student
+                     Create new student
                  </div>
                  <div class="modal-panel__body">
                      <div class="body-item">
                          <div class="modal-panel__section">Student ID</div>
                          <div class="input-wrapper">
                              <input class="input-text" type="text" value="@randomStudentID" id="studentIdInput" readonly="readonly"/>
-                             <button class="icon-button">
+                             <a class="icon-button">
                                  <span class="material-icons">
                                      content_copy
                                  </span>
-                             </button>
+                             </a>
                          </div>
                      </div>
                      <div class="body-item">
@@ -129,7 +141,7 @@
                  </div>
                  <div class="modal-panel__footer">
                      <button type="reset" id="cancelButton" class="footer-button" onclick="enableModalPanel('addStudentPanel', false)">Cancel</button>
-                     <button type="submit" id="confirmButton" class="footer-button confirm-button">Add Student</button>
+                     <button type="submit" id="confirmButton" class="footer-button confirm-button">Create</button>
                  </div>
              </div>
          </div>
@@ -178,5 +190,43 @@
         document.querySelector('.search-input').addEventListener('input', function () {
             filterTable('studentsTable', '.search-input', [1]);
         });
+    });
+</script>
+
+<script>
+    document.getElementById('selectAllCheckbox').addEventListener('change', function () {
+        const isChecked = this.checked;
+        const checkboxes = document.querySelectorAll('#studentsTable tbody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = isChecked;
+        });
+
+        const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+        document.getElementById('mainHeader').style.display = anyChecked ? 'none' : 'flex';
+        document.getElementById('additionalHeader').style.display = anyChecked ? 'flex' : 'none';
+    });
+</script>
+
+<script>
+    document.querySelectorAll('#studentsTable tbody input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const anyChecked = Array.from(document.querySelectorAll('#studentsTable tbody input[type="checkbox"]'))
+                                    .some(cb => cb.checked);
+            
+            document.getElementById('mainHeader').style.display = anyChecked ? 'none' : 'flex';
+            document.getElementById('additionalHeader').style.display = anyChecked ? 'flex' : 'none';
+        });
+    });
+</script>
+
+<script>
+    document.getElementById('closeButton').addEventListener('click', function () {
+        const checkboxes = document.querySelectorAll('#studentsTable tbody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+        document.getElementById('mainHeader').style.display = 'flex';
+        document.getElementById('additionalHeader').style.display = 'none';
     });
 </script>

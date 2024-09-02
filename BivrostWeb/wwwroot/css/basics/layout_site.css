@@ -13,6 +13,19 @@
   --color-delete-button: #c71a1a;
 }
 
+:root{
+    --color-primary: #9629CC;
+    --color-secondary: #6c757d;
+    --color-success: #28a745;
+    --color-info: #17a2b8;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-light: #f8f9fa;
+    --color-dark: #343a40;
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }

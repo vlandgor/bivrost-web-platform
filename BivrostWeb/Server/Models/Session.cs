@@ -19,4 +19,10 @@ public class Session(string sessionName)
             Console.WriteLine($"A student with the ID {studentId} already exists in this session.");
         }
     }
+
+    public void RemoveStudent(string studentId)
+    {
+        students.Remove(studentId);
+    }
+    
 }

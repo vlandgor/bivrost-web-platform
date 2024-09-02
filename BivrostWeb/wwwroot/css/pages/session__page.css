@@ -33,6 +33,10 @@
     width: 56px;
 }
 
+.session-panel .projects-table thead th:nth-child(2) {
+    width: 56px;
+}
+
 .session-panel .projects-table tbody td:nth-child(1) {
     opacity: 0;
 }

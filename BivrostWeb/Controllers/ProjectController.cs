@@ -12,6 +12,8 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
     {
         Project project = await AwsConnectionService.GetProject(projectId);
         
+        Console.WriteLine(project.FullName);
+        
         ProjectViewModel projectViewModel = new ProjectViewModel(project);
         
         return View(projectViewModel);
@@ -88,5 +90,24 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         await server.AddStudent(sessionId, studentId, studentName);
         
         return RedirectToAction("Session", new { projectId, sessionId });
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> RemoveStudents(string projectId, string sessionId, string[] studentsId)
+    {
+        await AwsConnectionService.RemoveStudents(projectId, sessionId, studentsId);
+        await server.RemoveStudents(sessionId, studentsId);
+        
+        return RedirectToAction("Session", new { projectId, sessionId });
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> AddStudentAjax(string projectId, string sessionId, string studentId, string studentName)
+    {
+        var student = new Student(studentId, studentName, 0, false);
+        await AwsConnectionService.AddNewStudent(projectId, sessionId, student);
+        await server.AddStudent(sessionId, studentId, studentName);
+
+        return Json(new { success = true, student });
     }
 }

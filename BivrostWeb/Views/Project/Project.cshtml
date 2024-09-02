@@ -1,5 +1,4 @@
-﻿@using BivrostWeb.Models.ViewModels
-@model BivrostWeb.Models.ViewModels.ProjectViewModel
+﻿@model BivrostWeb.Models.ViewModels.ProjectViewModel
 
 @{
     ViewData["Title"] = "Project";
@@ -11,8 +10,7 @@
 <div class="project-panel">
     
     @{
-        ProjectMenuViewModel projectMenuViewModel = new ProjectMenuViewModel(Model.Project.FullName);
-        await Component.InvokeAsync("ProjectMenu", projectMenuViewModel);
+        @(await Component.InvokeAsync("ProjectMenu", Model.Project.ShortName))
     }
 
     <div class="table-container">
@@ -51,7 +49,7 @@
 
                         <tr class="main-row">
                             <td>@session.s_name</td>
-                            <td class="@sessionStatusClass">@(session.s_status ? "ACTIVE" : "COMPLETED")</td>
+                            <td><div class="project-status @sessionStatusClass">@(session.s_status ? "Active" : "Finished")</div></td>
                             <td>@session.s_date</td>
                             <td>@session.s_students.Count</td>
                             <td>@session.s_duration minutes</td>
@@ -105,7 +103,7 @@
                 </div>
                 <div class="modal-panel__footer">
                     <button type="reset" id="cancelButton" class="footer-button"  onclick="enableModalPanel('createSessionPanel', false)">Cancel</button>
-                    <button type="submit" id="confirmButton" class="footer-button confirm-button">Add Student</button>
+                    <button type="submit" id="confirmButton" class="footer-button confirm-button">Create</button>
                 </div>
             </div>
         </div>
