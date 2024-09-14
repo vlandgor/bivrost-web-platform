@@ -178,7 +178,29 @@
         const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
         
         if (existingRow) {
-            existingRow.cells[4].textContent = studentProgress;
+            existingRow.cells[5].textContent = studentProgress;
+        }
+    });
+    
+    connection.on("KeepAliveStudentUpdate", function(studentId, isAlive) {
+        const existingRow = document.querySelector(`#studentsTable tbody tr[data-student-id="${studentId}"]`);
+        
+        if (existingRow) {
+            // Get the status cell (cell[3])
+            const statusCell = existingRow.cells[3];
+            // Get the div inside the status cell
+            const statusDiv = statusCell.querySelector('.project-status');
+            
+            if (statusDiv) {
+                // Remove existing status classes
+                statusDiv.classList.remove('project-status-connected', 'project-status-disconnected');
+                // Add the new status class based on isAlive
+                statusDiv.classList.add(isAlive ? 'project-status-connected' : 'project-status-disconnected');
+                // Update the text content
+                statusDiv.textContent = isAlive ? 'Connected' : 'Disconnected';
+            }
+        } else {
+            console.error(`Student row with ID ${studentId} not found.`);
         }
     });
 </script>

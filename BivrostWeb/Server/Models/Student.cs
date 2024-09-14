@@ -2,10 +2,9 @@
 
 public class Student(string studentName)
 {
-    public string studentId;
-    public string studentName = studentName;
-    
-    public bool studentStatus;
-    public bool studentLocked;
-    public int studentProgress;
+    public string studentId { get; set; }
+    public string studentName { get; set; } = studentName;
+    public bool studentStatus { get; set; }
+    public bool studentLocked { get; set; }
+    public int studentProgress { get; set; }
 }

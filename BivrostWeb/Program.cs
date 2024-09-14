@@ -31,6 +31,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
 app.UseWebSockets();
+app.MapControllers();
 
 if (!app.Environment.IsDevelopment())
 {

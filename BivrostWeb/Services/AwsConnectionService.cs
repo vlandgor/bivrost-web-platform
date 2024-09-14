@@ -179,9 +179,10 @@ public static class AwsConnectionService
                         .Where(session => session.sessionId != null) // Filter out sessions with null sessionName
                         .ToDictionary(
                             session => session.sessionId, // This should be sessionID if it exists
-                            session => new Server.Models.Session(session.sessionName) // This should be sessionID if it exists
+                            session => new Server.Models.Session() // This should be sessionID if it exists
                             {
                                 sessionId = session.sessionId,
+                                sessionName = session.sessionName,
                                 students = session.students != null ? session.students
                                     .Where(student => student.Key != null) // Filter out students with null keys (studentId)
                                     .ToDictionary(

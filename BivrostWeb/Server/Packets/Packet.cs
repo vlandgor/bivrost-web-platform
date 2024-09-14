@@ -12,7 +12,8 @@ namespace BivrostWeb.Server.Packets
     public enum ClientPackets
     {
         lockStudent = 1,
-        updateStudentProgress = 2
+        updateStudentProgress = 2,
+        keepAliveUpdate = 3
     }
     
     public class Packet : IDisposable

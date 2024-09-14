@@ -1,9 +1,9 @@
 ﻿namespace BivrostWeb.Server.Models;
 
-public class Session(string sessionName)
+public class Session()
 {
-    public string sessionId;
-    public string sessionName = sessionName;
+    public string sessionId { get; set; }
+    public string sessionName { get; set; }
     
     public Dictionary<string, Student> students = new();
 
@@ -24,5 +24,14 @@ public class Session(string sessionName)
     {
         students.Remove(studentId);
     }
-    
+
+    public List<Student> GetStudents()
+    {
+        foreach (Student student in students.Values)
+        {
+            Console.WriteLine(student.studentId);
+        }
+        
+        return students.Values.ToList();
+    }
 }

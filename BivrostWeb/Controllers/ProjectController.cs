@@ -6,8 +6,11 @@ using WebApplication1.Models;
 
 namespace BivrostWeb.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class ProjectController(ILogger<ProjectController> logger, Server.Server server) : Controller
 {
+    [HttpGet("{projectId}")]
     public async Task<IActionResult> Project(string projectId)
     {
         Project project = await AwsConnectionService.GetProject(projectId);
@@ -19,6 +22,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return View(projectViewModel);
     }
     
+    [HttpGet("{projectId}/Session/{sessionId}")]
     public async Task<IActionResult> Session(string projectId, string sessionId)
     {
         Project project = await AwsConnectionService.GetProject(projectId);
@@ -28,6 +32,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return View(sessionViewModel);
     }
 
+    [HttpGet("{projectId}/Session/{sessionId}/Student/{studentId}")]
     public async Task<IActionResult> Student(string projectId, string sessionId, string studentId)
     {
         Project project = await AwsConnectionService.GetProject(projectId);
@@ -45,6 +50,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return View(studentViewModel);
     }
     
+    [HttpPost("{projectId}/InviteUser")]
     public async Task<IActionResult> InviteUser(string email, string projectId)
     {
         await AwsConnectionService.SendUserInvite(email, projectId);
@@ -58,6 +64,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         }
     }
     
+    [HttpGet("{projectId}/Settings")]
     public async Task<IActionResult> Settings(string projectId)
     {
         Project project = await AwsConnectionService.GetProject(projectId);
@@ -72,7 +79,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return View(settingsViewModel);
     }
 
-    [HttpPost]
+    [HttpPost("{projectId}/CreateSession")]
     public async Task<IActionResult> CreateSession(string projectId, string sessionId, string sessionName)
     {
         string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
@@ -83,7 +90,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return RedirectToAction("Project", new { projectId });
     }
     
-    [HttpPost]
+    [HttpPost("{projectId}/Session/{sessionId}/AddStudent")]
     public async Task<IActionResult> AddStudent(string projectId, string sessionId, string studentId,  string studentName)
     {
         await AwsConnectionService.AddNewStudent(projectId, sessionId, new Student(sessionId, studentName, 0, false));
@@ -92,7 +99,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return RedirectToAction("Session", new { projectId, sessionId });
     }
     
-    [HttpPost]
+    [HttpPost("{projectId}/Session/{sessionId}/RemoveStudents")]
     public async Task<IActionResult> RemoveStudents(string projectId, string sessionId, string[] studentsId)
     {
         await AwsConnectionService.RemoveStudents(projectId, sessionId, studentsId);
@@ -101,7 +108,7 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         return RedirectToAction("Session", new { projectId, sessionId });
     }
     
-    [HttpPost]
+    [HttpPost("{projectId}/Session/{sessionId}/AddStudentAjax")]
     public async Task<IActionResult> AddStudentAjax(string projectId, string sessionId, string studentId, string studentName)
     {
         var student = new Student(studentId, studentName, 0, false);
@@ -109,5 +116,21 @@ public class ProjectController(ILogger<ProjectController> logger, Server.Server 
         await server.AddStudent(sessionId, studentId, studentName);
 
         return Json(new { success = true, student });
+    }
+    
+    [HttpGet("sessions")]
+    public IActionResult GetActiveSessions()
+    {
+        List<Server.Models.Session> sessions = server.GetActiveSessions();
+        
+        return Ok(sessions);
+    }
+    
+    [HttpGet("{sessionId}/students")]
+    public IActionResult GetStudentsInSession(string sessionId)
+    {
+        List<Server.Models.Student> students = server.GetSession(sessionId).GetStudents();
+        
+        return Ok(students);
     }
 }

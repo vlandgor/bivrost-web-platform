@@ -35,6 +35,14 @@ namespace BivrostWeb.Server
             {
                 case ServerType.Development:
                     sessions = await AwsConnectionService.GetActiveSessions();
+                    foreach (KeyValuePair<string,Session> session in sessions)
+                    {
+                        Console.WriteLine($"Session Id : {session.Key}; Session Name : {session.Value.sessionName}");
+                        foreach (KeyValuePair<string, Student> student in session.Value.students)
+                        {
+                            Console.WriteLine($"Student Id : {student.Key}; Student Name : {student.Value.studentName}");
+                        }
+                    }
                     break;
                 case ServerType.Production:
                     break;
@@ -55,7 +63,7 @@ namespace BivrostWeb.Server
 
         public async Task AddSession(string sessionId, string sessionName)
         {
-            Session session = new Session(sessionName);
+            Session session = new Session();
             
             if (!sessions.TryAdd(sessionId, session))
             {
@@ -145,6 +153,45 @@ namespace BivrostWeb.Server
             // Notify all clients about the change
             await sessionHub.Clients.All.SendAsync("UpdateStudentProgress", studentId, progress);
         }
+
+        public async Task KeepAliveStudentUpdate(string sessionId, string studentId, bool isAlive)
+        {
+            Console.WriteLine($"SessionId: {sessionId}. StudentId: {studentId}. IsAlive: {isAlive}");
+
+            // Retrieve the session
+            Session session = sessions.GetValueOrDefault(sessionId);
+            if (session == null)
+            {
+                Console.WriteLine($"Session with ID {sessionId} not found.");
+                return;
+            }
+
+            // Retrieve the student
+            Student student = session.GetStudent(studentId);
+            if (student == null)
+            {
+                Console.WriteLine($"Student with ID {studentId} not found in session {sessionId}.");
+                return;
+            }
+
+            // Update the student's status
+            student.studentStatus = isAlive;
+
+            Console.WriteLine($"Student: {student.studentName} status updated to {(isAlive ? "Connected" : "Disconnected")}");
+
+            // Notify all clients about the change
+            await sessionHub.Clients.All.SendAsync("KeepAliveStudentUpdate", studentId, isAlive);
+        }
+        
+        public List<Session> GetActiveSessions()
+        {
+            return sessions.Values.ToList();
+        }
+        
+        public Session GetSession(string sessionId)
+        {
+            return sessions.GetValueOrDefault(sessionId);
+        }
         
         private void InitializeServerData()
         {
@@ -154,7 +201,8 @@ namespace BivrostWeb.Server
             packetHandlers = new Dictionary<int, PacketHandler>()
             {
                 { (int)ClientPackets.lockStudent, serverHandle.LockStudent },
-                { (int)ClientPackets.updateStudentProgress, serverHandle.UpdateStudentProgress }
+                { (int)ClientPackets.updateStudentProgress, serverHandle.UpdateStudentProgress },
+                { (int)ClientPackets.keepAliveUpdate, serverHandle.KeepAliveStudentUpdate }
             };
         }
     }

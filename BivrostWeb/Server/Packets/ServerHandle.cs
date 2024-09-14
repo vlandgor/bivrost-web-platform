@@ -9,6 +9,15 @@ public class ServerHandle(Server server)
 
         await server.LockStudent(sessionId, studentId);
     }
+
+    public async void KeepAliveStudentUpdate(Packet packet)
+    {
+        string sessionId = packet.ReadString();
+        string studentId = packet.ReadString();
+        bool isAlive = packet.ReadBool();
+
+        await server.KeepAliveStudentUpdate(sessionId, studentId, isAlive);
+    }
     
     public async void UpdateStudentProgress(Packet packet)
     {
